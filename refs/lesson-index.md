@@ -1,7 +1,8 @@
 # 教训索引（lesson-index）
 
-> **层级**：L3 入口。`refs/errors-ref.md` 命中 `[Exxx]` → 在本文件查对应**教训 ID（Lxxx）** → 到 `memory/lesson-root-causes.md` 读根因与修法。
+> **层级**：L3 入口。`refs/errors-ref.md` 命中 `[Exxx]` → 在本文件查对应**教训 ID（Lxxx）** → 到 `refs/lesson-root-causes.md` 读根因与修法。
 > **原则**：**现象（E）多条，根因（L）归并**——同一根因只留一条教训，避免索引膨胀。
+> **本文件是 skill 自带的只读基线**：运行期不写；本项目新增的教训写工作空间的 `.afsim-forge/lessons/`（同构）。
 
 ---
 
@@ -15,7 +16,7 @@ lesson-index.md  Lxxx
 lesson-root-causes.md  根因 + 修法 + 生成期预防
 ```
 
-**新增教训时**：① `errors-ref.md` 加 `[Exxx]`；② 本文件加行（能归并到已有 `Lxxx` 就**不新建**）；③ `lesson-root-causes.md` 补段落（若为已有教训的补充，只在其"案例"下追加一行）。
+**新增教训时**（写入**工作空间**的 `.afsim-forge/lessons/`，skill 目录只读）：① `errors-ref.md` 加 `[Exxx]`；② 本文件加行（能归并到已有 `Lxxx` 就**不新建**）；③ `lesson-root-causes.md` 补段落（若为已有教训的补充，只在其"案例"下追加一行）。
 
 ---
 

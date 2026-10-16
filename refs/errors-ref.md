@@ -1,6 +1,6 @@
 # 报错索引（errors-ref）
 
-> **用途**：L1 索引。校验失败时，用 `data.errors[].message`（或 `data.output` 中的 `***** FATAL/ERROR` 关键字）在本文检索，命中 `[Exxx]` 后进入 `memory/lesson-index.md` → `memory/lesson-root-causes.md` 取根因与修法。
+> **用途**：L1 索引。校验失败时，用 `data.errors[].message`（或 `data.output` 中的 `***** FATAL/ERROR` 关键字）在本文检索，命中 `[Exxx]` 后进入 `refs/lesson-index.md` → `refs/lesson-root-causes.md` 取根因与修法。
 > **未命中**时：查 `refs/knowledge/common_mistakes.md`、`refs/knowledge/script_syntax_critical.md`，修复后**回写本文件**新增条目（见 `workflows/debug.md` §4）。
 
 ---
@@ -9,7 +9,7 @@
 
 1. 取 `errors[].message` 原文（如 `Unknown command: this`）。
 2. 在本文件搜索**关键字**（上表「报错关键字」列，大小写不敏感）。
-3. 命中 `[Exxx]` → 按「修法」改文件；需要更细根因时读 `memory/lesson-root-causes.md`。
+3. 命中 `[Exxx]` → 按「修法」改文件；需要更细根因时读 `refs/lesson-root-causes.md`。
 4. **同时看 `errors[].file` / `line` / `column` 精确定位**——本索引给"是什么"，定位靠字段。
 
 ---
@@ -118,7 +118,7 @@
 - **根因**：子块（如 `aux_data`、`constant_pattern`）未闭合或层级错位。
 - **修法**：逐层缩进核对，确保**每层都有 `end_*`**。
 
-### [E027] `Unexpected End Of Data` → 出处：`memory/lesson-root-causes.md` L001　**【2026-10-16 实测】**
+### [E027] `Unexpected End Of Data` → 出处：`refs/lesson-root-causes.md` L001　**【2026-10-16 实测】**
 
 - **根因**：**块未闭合的另一种表现**。与 [E023] 同源，但报错位置不同——解析器把块内命令一路吃到**文件末尾**，发现数据耗尽即报此错。
 - **典型现象**：`errors[].file` 指向**入口文件**（或所在文件）的**最后一行**，`line` 等于文件总行数；`output` 含 `***** FATAL: Could not process input files.`。**报错位置与真正缺 `end_*` 的位置无关**，极易误导。
@@ -273,4 +273,5 @@
 - **示例**：<错 → 对>
 ```
 
-并同步在 `memory/lesson-index.md` 登记、`memory/lesson-root-causes.md` 写根因段落。
+并同步在 `.afsim-forge/lessons/lesson-index.md` 登记、`.afsim-forge/lessons/lesson-root-causes.md` 写根因段落。
+（skill 的 `refs/errors-ref.md` 与 `refs/lesson-*.md` 是**只读基线**，运行期不写；通用教训经用户确认后再回流。）

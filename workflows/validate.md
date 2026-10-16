@@ -85,7 +85,7 @@ mcp__afsim__validate_scenario({ "zip_path": "<ZIP 绝对路径>", "full_output":
 3. 在 `data.output` 中交叉印证 `***** FATAL` / `***** ERROR` 原文。
 4. **查教训库**：
    - `refs/errors-ref.md` —— 按报错关键字匹配 `[Exxx]` 条目
-   - 命中后 → `memory/lesson-index.md` → `memory/lesson-root-causes.md`（见 `workflows/debug.md`）
+   - 命中后 → `refs/lesson-index.md` → `refs/lesson-root-causes.md`（见 `workflows/debug.md`）
 5. 修复 → **重新打包** → 再校验。
 
 ### 若 `output` 不足以定位

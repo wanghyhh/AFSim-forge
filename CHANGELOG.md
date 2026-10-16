@@ -21,7 +21,8 @@
 - **工作流层** `workflows/`：`generate.md`、`validate.md`、`debug.md`、`archive.md`。
 - **知识层** `refs/knowledge/` —— 移植 AFSIM Script Generator（lookingforfeng）的 12 篇 references；`refs/examples/` —— 4 个完整场景范本；`refs/knowledge/SOURCE.md` 记录来源与许可。
 - **体系层** `refs/sos/`：`sos-concepts.md`、`task-taxonomy.md`、`command-chain.md`、`kill-chain.md`、`sensor-network.md`、`kpi-metrics.md`。
-- **记忆层** `refs/quick-ref.md`、`refs/errors-ref.md`、`memory/lesson-index.md`、`memory/lesson-root-causes.md`。
+- **记忆层** `refs/quick-ref.md`、`refs/errors-ref.md`、`memory/lesson-index.md`、`memory/lesson-root-causes.md`
+  （后于「运行时状态外置」改造移至 `refs/lesson-*.md`，见下）。
 - **产出区** `output/staging/`、`output/verified/{scenario,component,template}/`。
 
 ### Notes
@@ -58,3 +59,22 @@
 - **文档边界标注**：`实施方案.md`（设计记录）与 `验收报告.md`（测试报告）保留实现细节，
   但已标注**非运行依赖**；同步修正实施方案 §4.1 命令入口（多命令 → 单入口 + 意图路由）
   与 §4.2 配置示例、文档状态（待评审 → 已实施）。
+
+### Changed — 运行时状态外置（2026-10-16）
+
+**问题**：原设计让运行期写入 skill 目录（`output/` 产出区、`memory/` 教训库、`refs/errors-ref.md`）。
+这混淆了「**只读资产**」与「**运行时状态**」—— skill 可被多个项目共享，写 skill 目录会串味，且 skill 升级会丢失积累。
+
+**原则**：**skill 目录 = 只读资产；运行时状态 = 工作空间 `<cwd>/.afsim-forge/`。**
+
+- **改名去歧义**：`memory/` → `refs/lesson-index.md` + `refs/lesson-root-causes.md`
+  （避免与智能体的"记忆功能"重名；且明确其为**只读基线**）。
+- **删除 skill 内的 `output/`**：产出区外移；`output/README.md` 的说明并入 `SKILL.md`「成果闭环与写入边界」。
+- **运行时状态新位置**（`config.yaml` 新增 `runtime` 段）：
+  - `.afsim-forge/output/staging/`、`.afsim-forge/output/verified/{scenario,component,template}/`
+  - `.afsim-forge/lessons/`（本项目运行时新增教训，与 skill 基线同构）
+- **写入边界写进 SKILL.md**：「黄金法则」加"skill 目录只读"；「成果闭环」扩为「成果闭环与写入边界」。
+- **教训回流改为显式动作**：通用教训经**用户确认**后才合并回 skill 的 `refs/`，AI 不自动改 skill。
+- **`.gitignore`**：`afsim-forge/output/*` 规则废弃，改为 `**/.afsim-forge/`。
+- **同步**：`workflows/{generate,validate,debug,archive}.md`、`refs/errors-ref.md`、
+  `refs/lesson-*.md` 的全部路径引用。

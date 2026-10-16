@@ -101,8 +101,26 @@ project:
     - "扩展名 .wsf"
     - "数值不带单位"
 
-# ── 产出区 ────────────────────────────────────────────────────
-paths:
-  staging: "output/staging"
-  verified: "output/verified"
-  verified_subdirs: [scenario, component, template]
+# ── 运行时状态（★ 写入工作空间，绝不写入 skill 目录）────────────
+# 原则：skill 目录是**只读资产**（本文件、SKILL.md、refs/、workflows/、templates/），
+#      运行期一律不写；一切运行时产出写入**当前工作空间**下的状态目录。
+runtime:
+  # 状态根目录 —— 相对**当前工作空间**（cwd），而非 skill 安装目录。
+  # 理由：skill 可能被多个项目共享，写 skill 目录会串味、且 skill 升级会丢失积累。
+  state_dir: ".afsim-forge"
+
+  # 产出区（成果闭环）
+  output:
+    staging: ".afsim-forge/output/staging"              # 已生成、待校验
+    verified: ".afsim-forge/output/verified"            # 已过校验 + 用户认可，只进不出
+    verified_subdirs: [scenario, component, template]
+
+  # 本项目运行时积累的教训（新报错 → 新增条目）
+  # 注意：skill 的 refs/lesson-*.md 是**只读基线**，二者同构；
+  #      查教训时先看本项目 lessons/，再看 skill 基线。
+  lessons: ".afsim-forge/lessons"
+
+  # 写入边界
+  write_policy:
+    skill_dir: "read-only"        # skill 目录运行期只读
+    state_dir: "read-write"       # 运行时状态一律写这里

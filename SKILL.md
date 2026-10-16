@@ -21,6 +21,7 @@ metadata:
 >
 > 工程**结构**只认 `refs/structure/`；**语法**查 `refs/knowledge/`；**范本**看 `refs/examples/`。
 > 生成 → **必须调用语法校验** → 通过才归档。**未过校验的工程，不得交付。**
+> **skill 目录只读**：所有运行时产出写工作空间的 `.afsim-forge/`。
 
 ---
 
@@ -123,13 +124,16 @@ metadata:
 | **L2**（命中后） | `refs/knowledge/*.md` | 查具体语法 / API / 参数时 |
 | | `refs/sos/*.md` | 查体系仿真知识时 |
 | | `refs/examples/*.txt` | 找完整场景范本时 |
-| **L3**（激活后） | `memory/lesson-root-causes.md` | `errors-ref` 命中 `[Exxx]` 时 |
+| **L3**（激活后） | `refs/lesson-index.md` → `refs/lesson-root-causes.md` | `errors-ref` 命中 `[Exxx]` 时 |
 
 **工作流**：`workflows/generate.md` · `validate.md` · `debug.md` · `archive.md`
 
 ---
 
-## 成果闭环
+## 成果闭环与写入边界
+
+> **写入边界（铁律）**：skill 目录是**只读资产** —— 运行期**一律不写**。
+> 一切运行时产出（工程、ZIP、教训）写入**当前工作空间**的状态目录 `.afsim-forge/`（见 `config.yaml` 的 `runtime`）。
 
 ```
 需求 → 生成（staging）→ MCP 校验 → [未通过] → 修复 → 再校验
@@ -137,14 +141,17 @@ metadata:
                           用户认可 → 归档（verified）
 ```
 
-- `output/staging/` —— 临时成果：已生成、待校验。
-- `output/verified/` —— 成熟成果：**已过校验 + 用户认可**，只进不出。
+| 位置（均在工作空间下） | 含义 |
+| :-- | :-- |
+| `.afsim-forge/output/staging/` | 临时成果：已生成、待校验 |
+| `.afsim-forge/output/verified/` | 成熟成果：**已过校验 + 用户认可**，只进不出 |
+| `.afsim-forge/lessons/` | 本项目运行时新增的教训（skill 的 `refs/lesson-*.md` 是只读基线） |
 
-**铁律**：**未通过 `validate_scenario`（`data.valid=true`）的工程，禁止归档到 `output/verified/`。**
+**铁律**：**未通过 `validate_scenario`（`data.valid=true`）的工程，禁止归档到 `verified/`。**
 
 ---
 
 ## 配置
 
-- MCP 工具契约与工程结构约定：见 `config.yaml`（**单点维护**）。
+- MCP 工具契约、工程结构约定、**运行时状态目录（`.afsim-forge/`）**：见 `config.yaml`（**单点维护**）。
 - 工具名前缀随 DSH 的 `serverName` 变化，只需改 `config.yaml` 一处。
