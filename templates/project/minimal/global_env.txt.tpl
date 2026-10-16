@@ -1,0 +1,2 @@
+global_environment
+end_global_environment

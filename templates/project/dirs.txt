@@ -1,0 +1,21 @@
+# 需创建的目录清单（14 个）+ output/ 占位文件
+# 生成工程时按此创建；缺失目录按需取舍（用不到的可不建），
+# 但 output/ 必须存在并含 blank_empty.txt 占位。
+
+config
+common
+output
+medium
+comm
+mover
+network
+platform
+processor
+sensor
+side
+signatures
+weapon
+weapon_effects
+
+# 占位文件（必须创建，内容为空）
+output/blank_empty.txt

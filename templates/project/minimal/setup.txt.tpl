@@ -1,0 +1,1 @@
+include_once platform/EXAMPLE_PLATFORM.txt

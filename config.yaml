@@ -1,0 +1,111 @@
+# afsim-forge 配置 —— 单点维护
+# 修改本文件即可调整 AFSIM 路径、MCP 契约与工程结构约定，无需改动 workflows/ 与 SKILL.md。
+
+# ── AFSIM 安装 ────────────────────────────────────────────────
+afsim:
+  install_dir: "D:\\Work\\afsim-2.9.0-win64"
+  # 说明：本 skill 不直接调用 exe；校验一律经 MCP。
+  # 此处仅作参考与排障用。
+  mission_exe: "D:\\Work\\afsim-2.9.0-win64\\bin\\mission.exe"
+
+# ── MCP 校验工具（唯一校验通道）────────────────────────────────
+mcp:
+  # DSH 中 mcp-client 的 serverName；决定工具前缀 mcp__<server_name>__
+  server_name: afsim
+  prefix: "mcp__afsim__"
+
+  # 白名单：本 skill 允许调用的工具
+  allow:
+    - selftest            # MCP 链路自检（不访问 AFSIM 服务）
+    - health              # AFSIM 代理服务健康检查
+    - validate_scenario   # ★ 语法校验（核心）
+
+  # 黑名单：明确禁止（本 skill 不跑仿真、不回放、不下载结果）
+  deny:
+    - upload_zip
+    - submit_simulation
+    - get_simulation
+    - list_results
+    - download_result
+    - replay
+
+  # 校验调用规范
+  validate:
+    tool: "mcp__afsim__validate_scenario"
+    params:
+      zip_path: "<ZIP 绝对路径，需为 MCP 服务所在机器可读>"
+      full_output: false      # true 时返回 mission.exe 完整 stdout
+    # 判据：只看 data.valid；语法对错都返回 HTTP 200
+    judge: "data.valid"
+    # 失败定位字段
+    error_fields: [severity, message, file, line, column]
+    # 修复循环上限
+    max_repair_rounds: 3
+    # 升级取全文的阈值：output 不足以定位时改用 full_output=true
+    escalate_on_insufficient_output: true
+
+  # 返回契约：{ok, code, msg, data}，任何情况都不抛异常
+  response:
+    ok_field: ok
+    code_field: code
+    msg_field: msg
+    data_field: data
+    # 错误码语义
+    codes:
+      0: "下游 AFSIM 服务不可达"
+      400: "参数或 ZIP 不合规（多为缺同名启动文件）"
+      404: "想定/任务/结果文件不存在"
+      409: "任务尚未完成"
+      503: "仿真队列已满 —— 稍后重试，不是故障"
+
+# ── 工程结构约定 ──────────────────────────────────────────────
+project:
+  # 结构权威说明（取自《样例工程规范》）
+  structure_ref: "refs/structure/project-layout.md"
+  spec_source: "docs/体系工程文件说明-20260922/样例工程规范.md"
+
+  # 入口文件规则
+  entry_file: "<想定名>.txt"          # 严格同名，且与 ZIP 同名
+  entry_path_variable: "define_path_variable CASE <想定名>"
+
+  # 必建目录（14 个）
+  required_dirs:
+    - config
+    - common
+    - output
+    - medium
+    - comm
+    - mover
+    - network
+    - platform
+    - processor
+    - sensor
+    - side
+    - signatures
+    - weapon
+    - weapon_effects
+
+  # 根文件（9 个）
+  root_files:
+    required: ["<想定名>.txt", setup.txt, event_pipe.txt, global_env.txt]
+    optional: [global_route.txt, global_script.txt, global_struct.txt, group.txt, zone.txt]
+
+  # output/ 占位文件（ZIP 不保留空目录，必须占位）
+  output_placeholder: "output/blank_empty.txt"
+
+  # 命名约束
+  naming:
+    scenario_name: "字母/数字/下划线，无中文、无空格"
+    instance_name: "<类型名>_<业务code>"
+
+  # 禁止项
+  forbidden:
+    - "中文路径"
+    - "扩展名 .wsf"
+    - "数值不带单位"
+
+# ── 产出区 ────────────────────────────────────────────────────
+paths:
+  staging: "output/staging"
+  verified: "output/verified"
+  verified_subdirs: [scenario, component, template]
