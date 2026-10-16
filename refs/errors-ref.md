@@ -235,8 +235,8 @@
 
 ### [E100] `ok=false, code=0` → 出处：`workflows/validate.md` §6
 
-- **根因**：下游 AFSIM 代理服务不可达。
-- **修法**：请用户启动 `afsim-server`（`python run.py`）；可先调 `mcp__afsim__health` 复核。
+- **根因**：校验服务不可达（MCP 后端未启动或不通）。
+- **修法**：请用户确认校验服务已启动；可先调 `mcp__afsim__health` 复核。**不要**继续尝试校验。
 
 ### [E101] `ok=false, code=400` → 出处：`workflows/validate.md` §6
 
@@ -245,13 +245,13 @@
 
 ### [E102] `ok=false, code=404` → 出处：`workflows/validate.md` §6
 
-- **根因**：想定/任务/结果文件不存在。
-- **修法**：检查路径拼写与文件是否存在。
+- **根因**：`zip_path` 指向的文件不存在。
+- **修法**：检查路径拼写；确认 ZIP 已生成且为绝对路径。
 
-### [E103] `ok=false, code=503` → 出处：`workflows/validate.md` §6
+### [E103] `ok=false`，其他未列出的 `code` → 出处：`workflows/validate.md` §6
 
-- **根因**：仿真队列已满。
-- **修法**：**稍后重试**——这是限流，不是故障。
+- **根因**：未预期的链路异常。
+- **修法**：读 `msg` 原文向用户报告；**不要**用 `code` 判断语法对错（判语法只认 `data.valid`）。
 
 ### [E104] 用 HTTP 200 判成"通过" → 出处：`workflows/validate.md` §3
 

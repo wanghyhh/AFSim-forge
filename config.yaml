@@ -1,26 +1,22 @@
 # afsim-forge 配置 —— 单点维护
-# 修改本文件即可调整 AFSIM 路径、MCP 契约与工程结构约定，无需改动 workflows/ 与 SKILL.md。
-
-# ── AFSIM 安装 ────────────────────────────────────────────────
-afsim:
-  install_dir: "D:\\Work\\afsim-2.9.0-win64"
-  # 说明：本 skill 不直接调用 exe；校验一律经 MCP。
-  # 此处仅作参考与排障用。
-  mission_exe: "D:\\Work\\afsim-2.9.0-win64\\bin\\mission.exe"
+# 修改本文件即可调整 MCP 契约与工程结构约定，无需改动 workflows/ 与 SKILL.md。
+#
+# 边界说明：本 skill 只通过 MCP 工具完成校验，**不接触 AFSIM 本体**。
+# AFSIM 的安装位置、可执行文件、命令行参数等均属 MCP 服务端职责，本文件不体现。
 
 # ── MCP 校验工具（唯一校验通道）────────────────────────────────
 mcp:
-  # DSH 中 mcp-client 的 serverName；决定工具前缀 mcp__<server_name>__
-  server_name: afsim
+  # 工具名前缀由 DSH 中 mcp-client 的 serverName 决定：mcp__<server_name>__
+  # 若 DSH 侧改了 serverName，只需同步此处与下方 tool 字段。
   prefix: "mcp__afsim__"
 
   # 白名单：本 skill 允许调用的工具
   allow:
-    - selftest            # MCP 链路自检（不访问 AFSIM 服务）
-    - health              # AFSIM 代理服务健康检查
+    - selftest            # MCP 链路自检
+    - health              # 校验服务健康检查
     - validate_scenario   # ★ 语法校验（核心）
 
-  # 黑名单：明确禁止（本 skill 不跑仿真、不回放、不下载结果）
+  # 负向防御：以下工具属服务端其他能力，本 skill 一律不用
   deny:
     - upload_zip
     - submit_simulation
@@ -34,7 +30,7 @@ mcp:
     tool: "mcp__afsim__validate_scenario"
     params:
       zip_path: "<ZIP 绝对路径，需为 MCP 服务所在机器可读>"
-      full_output: false      # true 时返回 mission.exe 完整 stdout
+      full_output: false      # true 时返回完整校验输出（默认截断）
     # 判据：只看 data.valid；语法对错都返回 HTTP 200
     judge: "data.valid"
     # 失败定位字段
@@ -50,18 +46,19 @@ mcp:
     code_field: code
     msg_field: msg
     data_field: data
-    # 错误码语义
+    # 链路错误码 —— 与语法对错无关，仅用于兜底话术
     codes:
-      0: "下游 AFSIM 服务不可达"
+      0: "校验服务不可达 —— 请用户确认校验服务已启动"
       400: "参数或 ZIP 不合规（多为缺同名启动文件）"
-      404: "想定/任务/结果文件不存在"
-      409: "任务尚未完成"
-      503: "仿真队列已满 —— 稍后重试，不是故障"
+      404: "zip_path 指向的文件不存在"
+    # 未列出的 code：读 msg 原文向用户报告，不得据此判断语法对错
+    fallback: "读 msg 原文，向用户报告；不要用 code 判断语法对错"
 
 # ── 工程结构约定 ──────────────────────────────────────────────
 project:
-  # 结构权威说明（取自《样例工程规范》）
+  # 结构权威说明（运行依赖）
   structure_ref: "refs/structure/project-layout.md"
+  # 溯源：本规范的来源文档（仅记录出处，非运行依赖，移植后可能失效）
   spec_source: "docs/体系工程文件说明-20260922/样例工程规范.md"
 
   # 入口文件规则

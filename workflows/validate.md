@@ -1,6 +1,6 @@
 # 工作流：语法校验（validate）
 
-> **本 skill 的唯一校验通道**是自研 MCP 的 `mcp__afsim__validate_scenario`。
+> **本 skill 的唯一校验通道**是 MCP 的 `mcp__afsim__validate_scenario` 工具。
 > 本工作流**不跑仿真**、不回放、不下载结果。
 
 ---
@@ -8,9 +8,9 @@
 ## 0. 前置检查（可选，建议做）
 
 ```
-mcp__afsim__health        → 确认 AFSIM 代理服务在线
+mcp__afsim__health        → 确认校验服务在线
 ```
-若 `ok=false, code=0` → 下游服务不可达，**先请用户启动 afsim-server**，不要继续。
+若 `ok=false, code=0` → 校验服务不可达，**先请用户确认校验服务已启动**，不要继续。
 
 ---
 
@@ -90,7 +90,7 @@ mcp__afsim__validate_scenario({ "zip_path": "<ZIP 绝对路径>", "full_output":
 
 ### 若 `output` 不足以定位
 
-改用 `full_output: true` 重取完整 `mission.exe` 标准输出：
+改用 `full_output: true` 重取完整校验输出：
 
 ```
 mcp__afsim__validate_scenario({ "zip_path": "<...>", "full_output": true })
@@ -108,13 +108,14 @@ mcp__afsim__validate_scenario({ "zip_path": "<...>", "full_output": true })
 
 ## 6. 链路异常兜底（`ok = false`）
 
+> 以下都是**链路层**错误，与语法对错**无关** —— 判语法只认 `data.valid`。
+
 | `code` | 含义 | 处理 |
 | :-: | :-- | :-- |
-| `0` | 下游 AFSIM 服务不可达 | 提示用户启动 afsim-server；可先调 `health` 复核 |
+| `0` | 校验服务不可达 | 提示用户确认校验服务已启动；可先调 `health` 复核 |
 | `400` | 参数或 ZIP 不合规 | **多为缺同名启动文件** → 检查 ZIP 名与包内 `<想定名>.txt` |
-| `404` | 想定/任务/结果不存在 | 检查路径 |
-| `409` | 任务尚未完成 | 本 skill 不涉及 |
-| `503` | 队列已满 | **稍后重试，不是故障** |
+| `404` | `zip_path` 指向的文件不存在 | 检查路径拼写 |
+| 其他 | 未列出的异常 | 读 `msg` 原文向用户报告；**不要**用 `code` 判断语法对错 |
 
 ---
 

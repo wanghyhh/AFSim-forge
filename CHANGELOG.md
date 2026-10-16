@@ -41,3 +41,20 @@
   - 补强 `[E040]`，增收实测关键字 `Bad value for: <参数名>`。
   - 同步更新 `memory/lesson-index.md`（L001）与 `memory/lesson-root-causes.md`（L001）。
 - 修正：实施方案 §9 目录数口径 `17` → `14`；§10.3「仍需确认」→「已全部闭环」。
+
+### Changed — 边界收敛（2026-10-16）
+
+**原则**：本 skill 只经 MCP 工具工作，**不接触 AFSIM 本体**；服务端实现细节（装在哪、怎么起、什么端口）一律不进入 skill。
+
+- **移除 AFSIM 实现细节**：`config.yaml` 删除 `afsim:` 整段（`install_dir` / `mission_exe`）。
+  理由：skill 只调 MCP，路径属服务端职责；保留只会造成耦合与误导。
+- **收敛服务端耦合**：不再出现服务名、启动命令（`python run.py`）、服务地址与端口；
+  服务不可达统一表述为"请用户确认校验服务已启动"。
+- **精简错误码表**：删除与本 skill 无关的 `409`（任务未完成）、`503`（仿真队列已满）；
+  改为"未列出的 `code` → 读 `msg` 原文报告，不要据此判断语法对错"。
+  涉及 `config.yaml`、`workflows/validate.md`、`workflows/debug.md`、`refs/errors-ref.md`、`memory/lesson-root-causes.md`。
+- **单点维护**：工具名前缀不再在 `SKILL.md` 硬编码，统一指向 `config.yaml` 的 `mcp.prefix`。
+- **措辞中性化**：`full_output` 注释与说明不再点名底层可执行文件（"完整校验输出"）。
+- **文档边界标注**：`实施方案.md`（设计记录）与 `验收报告.md`（测试报告）保留实现细节，
+  但已标注**非运行依赖**；同步修正实施方案 §4.1 命令入口（多命令 → 单入口 + 意图路由）
+  与 §4.2 配置示例、文档状态（待评审 → 已实施）。

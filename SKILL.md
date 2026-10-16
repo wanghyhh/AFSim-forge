@@ -94,15 +94,16 @@ metadata:
 
 ## MCP 校验（唯一校验通道）
 
-**工具前缀**：`mcp__afsim__`（DSH 中 `serverName=afsim`）。
+> 本 skill **只通过 MCP 工具工作**，不接触 AFSIM 本体（安装位置、可执行文件、命令行等均属服务端职责）。
+> 工具名前缀由 DSH 的 `serverName` 决定，**单点维护在 `config.yaml`**（`mcp.prefix`）。
 
 | 允许 | 用途 |
 | :-- | :-- |
-| `mcp__afsim__validate_scenario` | **核心**：语法校验（无状态，不跑仿真），参数 `zip_path`、`full_output` |
-| `mcp__afsim__health` | 可选：确认 AFSIM 代理服务在线 |
-| `mcp__afsim__selftest` | 可选：MCP 链路自检 |
+| `validate_scenario` | **核心**：语法校验（无状态，不跑仿真），参数 `zip_path`、`full_output` |
+| `health` | 可选：确认校验服务在线 |
+| `selftest` | 可选：MCP 链路自检 |
 
-**禁止**（本 skill 不跑仿真）：`upload_zip`、`submit_simulation`、`get_simulation`、`list_results`、`download_result`、`replay`。
+**禁止**（服务端其他能力，本 skill 一概不用）：`upload_zip`、`submit_simulation`、`get_simulation`、`list_results`、`download_result`、`replay`。
 
 **判据铁律**：**只看 `data.valid`**。语法对错**都返回 HTTP 200**，禁止用状态码或 `ok` 判断。
 
@@ -145,5 +146,5 @@ metadata:
 
 ## 配置
 
-- AFSIM 安装路径、MCP 工具契约、工程结构约定：见 `config.yaml`（**单点维护**）。
-- 若 AFSIM 安装路径变更，改 `config.yaml` 一处即可。
+- MCP 工具契约与工程结构约定：见 `config.yaml`（**单点维护**）。
+- 工具名前缀随 DSH 的 `serverName` 变化，只需改 `config.yaml` 一处。
