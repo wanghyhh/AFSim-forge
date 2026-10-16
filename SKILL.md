@@ -19,7 +19,7 @@ metadata:
 
 > **不要凭空自造 AFSIM 语法，要基于模板与已验证样例输出。**
 >
-> 工程**结构**只认 `refs/structure/`；**语法**查 `refs/knowledge/`；**范本**看 `refs/examples/`。
+> 工程**结构**只认 `refs/structure/`；**语法**查 `refs/knowledge/`；**单文件范本**看 `refs/examples/`；**完整工程案例**看 `refs/demos/`。
 > 生成 → **必须调用语法校验** → 通过才归档。**未过校验的工程，不得交付。**
 > **skill 目录只读**：所有运行时产出写工作空间的 `.afsim-forge/`。
 
@@ -123,7 +123,8 @@ metadata:
 | | `refs/errors-ref.md` | 出现报错时 |
 | **L2**（命中后） | `refs/knowledge/*.md` | 查具体语法 / API / 参数时 |
 | | `refs/sos/*.md` | 查体系仿真知识时 |
-| | `refs/examples/*.txt` | 找完整场景范本时 |
+| | `refs/examples/*.txt` | 找单文件语法范本时 |
+| | `refs/demos/*.md` | 找**完整工程案例**（结构 + 逐文件全文）时 |
 | **L3**（激活后） | `refs/lesson-index.md` → `refs/lesson-root-causes.md` | `errors-ref` 命中 `[Exxx]` 时 |
 
 **工作流**：`workflows/generate.md` · `validate.md` · `debug.md` · `archive.md`
