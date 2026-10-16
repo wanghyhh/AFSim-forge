@@ -78,3 +78,9 @@
 - **`.gitignore`**：`afsim-forge/output/*` 规则废弃，改为 `**/.afsim-forge/`。
 - **同步**：`workflows/{generate,validate,debug,archive}.md`、`refs/errors-ref.md`、
   `refs/lesson-*.md` 的全部路径引用。
+
+### Added — 模板层总说明（2026-10-16）
+
+- 新增 `templates/README.md`：显式说明**模板（骨架）与样例工程（实例）的关系** ——
+  结构**逐项对齐**（可验证：`entry.txt.tpl` 与样例入口 `bhkTest_FDCJ_To10s.txt` 逐行同构），
+  内容**有意不同**（命名 / 数值 / 自动 ID / 天线数量 / 业务脚本 / `common/` 数据表 / 缩进 共 7 项，逐条给出理由）。
