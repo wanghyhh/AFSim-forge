@@ -84,3 +84,18 @@
 - 新增 `templates/README.md`：显式说明**模板（骨架）与样例工程（实例）的关系** ——
   结构**逐项对齐**（可验证：`entry.txt.tpl` 与样例入口 `bhkTest_FDCJ_To10s.txt` 逐行同构），
   内容**有意不同**（命名 / 数值 / 自动 ID / 天线数量 / 业务脚本 / `common/` 数据表 / 缩进 共 7 项，逐条给出理由）。
+
+### Fixed — 模板职责修正（2026-10-16）
+
+对照样例工程逐文件核对模板时发现 3 处问题，已修正：
+
+- `project/global_script.txt.tpl`：**删除误含的 `script_struct` 段** —— 结构体定义归
+  `global_struct.txt.tpl`（样例中二者分工明确；入口先 include struct 再 include script）。
+- `project/global_struct.txt.tpl`：补充**成员函数**可选段（样例结构体含 `Construct` / `clear` 等成员函数）。
+- `fragments/processor/track_processor.txt.tpl`：信息流变量（`InformationInputFlow` / `InformationOutputFlow`）
+  改标注为**体系工程统一约定**，并说明"工程不用信息流机制则整段删掉"（原误作通用结构）。
+- `fragments/{medium,network}/*.txt.tpl`：汇总文件的 `include_once` 补注释，明确
+  **不带目录前缀**（相对本文件，如 `include_once MediumAABBCC.txt`）。
+
+**措辞修正**：`skill 的产出区` → **`运行时产出区`**。消除歧义 —— 产出区位于**工作空间**
+`.afsim-forge/output/`，**不在 skill 目录内**；skill 目录运行期只读，其中并无产出区。

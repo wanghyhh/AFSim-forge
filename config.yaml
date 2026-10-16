@@ -109,7 +109,7 @@ runtime:
   # 理由：skill 可能被多个项目共享，写 skill 目录会串味、且 skill 升级会丢失积累。
   state_dir: ".afsim-forge"
 
-  # 产出区（成果闭环）
+  # 运行时产出区（成果闭环）—— 位于工作空间，不在 skill 目录内
   output:
     staging: ".afsim-forge/output/staging"              # 已生成、待校验
     verified: ".afsim-forge/output/verified"            # 已过校验 + 用户认可，只进不出

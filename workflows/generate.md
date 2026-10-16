@@ -32,7 +32,7 @@
 
 1. 复制 `templates/project/` 到 `.afsim-forge/output/staging/<想定名>/`。
 2. 按 `templates/project/dirs.txt` 创建所需目录。
-3. **必须创建工程内的** `output/blank_empty.txt`（空文件）—— ⚠️ 这是**想定工程自己的** `output/` 目录（AFSIM 输出落点，ZIP 不保留空目录），与 skill 的产出区**无关**。
+3. **必须创建工程内的** `output/blank_empty.txt`（空文件）—— ⚠️ 这是**想定工程自己的** `output/` 目录（AFSIM 输出落点，ZIP 不保留空目录），与**运行时产出区**（`.afsim-forge/output/`）**无关**。
 4. 生成根文件，替换占位符：
    - `<想定名>.txt`（入口）
    - `setup.txt` / `event_pipe.txt` / `global_env.txt`
