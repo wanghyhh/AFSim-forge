@@ -44,7 +44,7 @@ afsim-forge/
 >
 > **结构**只认 `blueprints/layout/layout.md`；**骨架/片段**取 `blueprints/skeleton/`、`blueprints/fragments/`；
 > **完整案例**看 `blueprints/cases/`（结构 + 逐文件全文，最可靠的正例）；**语法**查 `knowledge/language/`、`knowledge/blocks/`。
-> 生成 → **必须调用语法校验** → 通过才归档。**未过校验的工程，不得交付。**
+> 生成 → **先 AI 自检（格式、结构、时间）→ 再调用语法校验** → 通过才归档。**未过校验的工程，不得交付。**
 > **skill 目录只读**：所有运行时产出写工作空间的 `.afsim-forge/`。
 
 ---
@@ -99,6 +99,7 @@ afsim-forge/
 11. **新增平台必须登记进 `setup.txt`**。
 12. **禁止中文路径**（AFSIM 中文路径缺陷）。
 13. **禁止**编造 `common/` 数据表内容（见「缺省值」§3）。
+14. **生成完成后、语法校验前，必须执行 AI 自检**：装配链完整性、配置语义一致性、仿真时长充分性（见 `workflows/generate.md` Step 4.5）。
 
 ---
 

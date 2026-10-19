@@ -147,5 +147,8 @@ end_time / start_date / start_time     ← ⑥ 仿真控制
 - [ ] `side/*.txt` 实例含 `position`，阵营与文件一致
 - [ ] `network` 的 `member` 用实例名
 - [ ] `output/` 存在且含 `blank_empty.txt`
+- [ ] `config/run.json` 的 `scenariosTime` 与入口文件 `start_date`/`start_time`/`end_time` 完全一致
+- [ ] `setup.txt` 包含所有 `platform/*.txt` 和 `side/*.txt` 的 `include_once`（装配中心完整性）
+- [ ] `end_time` 不小于任务结束时间 + 缓冲（缓冲 = max(任务时间 × 0.2, 2 m)）
 - [ ] 无中文路径
-- [ ] `config/run.json` 的 `scenariosTime` 与入口文件一致，`scenariosId` 留空
+- [ ] `config/run.json` 的 `scenariosId` 留空（JSON 给了才照抄）

@@ -11,7 +11,7 @@
 | :-- | :-- | :-- |
 | 想定名 | `<主题拼音>_<日期>` | 无中文、无空格 |
 | `file_path` | `.` | 入口文件，**必须在第一个 `include_once` 之前** |
-| `end_time` | `10 m` | 入口文件；单位必带 |
+| `end_time` | `10 m`（缺省）或 **任务结束时间 + 缓冲** | 入口文件；单位必带；缓冲 = max(任务时间 × 0.2, 2 m) |
 | `start_date` | 当前日期 | 与 `run.json` 的 `scenariosTime.startDate` 一致 |
 | `start_time` | `00:00:00` | 与 `run.json` 的 `scenariosTime.startTime` 一致 |
 | `event_output` | `enable all` | 后期可收敛为逐项 `enable` |

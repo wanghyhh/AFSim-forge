@@ -79,6 +79,42 @@
 
 → 走 `workflows/validate.md`。
 
+## Step 4.5：AI 自检（语法校验前必做）
+
+> **目的**：在调用校验服务前，用规则检查排除风格偏离、配置语义不一致、仿真时长不足等**非语法问题**。  
+> 这些错误校验服务也能报，但 AI 自检可以提前发现、定位更精确、修复更快。
+
+### 4.5.1 结构自检（逐条核对）
+
+| # | 检查项 | 判定标准 | 不通过处理 |
+| :-: | :-- | :-- | :-- |
+| 1 | **装配中心完整性** | `setup.txt` 必须包含**所有** `platform/*.txt` 和 `side/*.txt` 的 `include_once` | 补全缺失的 `include_once` 行 |
+| 2 | **入口文件装配链** | 入口文件只 `include_once` `setup.txt`（以及按需的 `event_pipe.txt`、`global_env.txt` 等根文件），**不直接 include `side/*.txt`** | 把 `side/*.txt` 的 include 移到 `setup.txt` |
+| 3 | **`log_file` 位置** | `log_file` 必须在 `file_path .` **之后**（推荐紧跟 `event_output`） | 调整顺序 |
+| 4 | **配置语义一致性** | `config/run.json` 的 `scenariosTime` 与入口文件的 `start_date`/`start_time`/`end_time` **完全一致** | 同步修正 |
+| 5 | **记录开关一致性** | `event_pipe.txt` 中 `enable` 的类别，与 `run.json` 的 `recordAer`/`recordEvent`/`recordLog` 语义匹配 | 按需调整（如 `enable` 了事件但 `recordEvent=0`，则改为 `1`） |
+| 6 | **时间一致性** | `run.json` 的 `continueTime`（分钟）≥ `end_time` 换算后的分钟数 | 同步修正 |
+
+### 4.5.2 仿真时长自检（任务 vs 仿真时间）
+
+**规则**：
+
+1. 从实验筹划 / 想定编辑中提取**任务时间线**（飞行航程、作战持续时间、机动到位时间等）。
+2. 计算**任务结束时间** `T_task`（分钟）。
+3. `end_time` 必须满足：`end_time ≥ T_task + 缓冲时间`。
+   - **缓冲时间** = max(T_task × 0.2, 2 m)（至少 20% 余量，最少 2 分钟）。
+4. 若 `end_time` 不足，**自动延长**并更新 `run.json` 的 `continueTime`，同时在交付说明中标注。
+
+**示例**：
+
+- 任务：F22 从洛杉矶飞纽约，巡航速度 500 knots，航程约 2,400 nm，预计飞行时间 ≈ 288 m（4.8 h）。
+- 计算：`T_task = 288 m`，缓冲 = max(288 × 0.2, 2) = 57.6 m → 取整 60 m。
+- `end_time` 应设为 `348 m`（≈ 5.8 h），而非缺省 `10 m`。
+
+> ⚠️ **若实验筹划未给出明确任务时间线**，按缺省 `10 m` 生成，并在交付说明中标注「任务时长未明确，采用缺省值，请用户确认」。
+
+**自检通过标准**：上述 6 项全部通过，且仿真时长自检无告警。
+
 ---
 
 ## Step 5：【校验点 T3】终校验
