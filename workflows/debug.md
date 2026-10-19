@@ -19,18 +19,18 @@
 ```
 报错
   ↓
-① refs/errors-ref.md              按报错关键字匹配 [Exxx]
+① knowledge/lessons/errors.md              按报错关键字匹配 [Exxx]
   ↓ 命中 [Exxx]
-② refs/lesson-index.md            查该报错对应的教训 ID
+② knowledge/lessons/index.md            查该报错对应的教训 ID
   ↓ 命中教训 ID
-③ refs/lesson-root-causes.md      加载教训段落（根因 + 修法）
+③ knowledge/lessons/root-causes.md      加载教训段落（根因 + 修法）
   ↓
 输出修正方案 + 教训提醒
 ```
 
-**未命中**时：查 `refs/knowledge/common_mistakes.md` 与 `refs/knowledge/script_syntax_critical.md`。
+**未命中**时：查 `knowledge/blocks/pitfalls.md` 与 `knowledge/language/script-syntax.md`。
 
-> `refs/lesson-*.md` 是 skill 自带的**只读基线**；本项目运行时新增的教训在工作空间的 `.afsim-forge/lessons/`（同构），**查找时先看后者**。
+> `knowledge/lessons/*.md` 是 skill 自带的**只读基线**；本项目运行时新增的教训在工作空间的 `.afsim-forge/lessons/`（同构），**查找时先看后者**。
 
 ---
 
@@ -51,10 +51,10 @@
    ```text
    ## [E0xx] <报错关键字> → <根因> → <修法> → <出处>
    ```
-2. 在 `.afsim-forge/lessons/lesson-index.md` 登记教训 ID。
-3. 在 `.afsim-forge/lessons/lesson-root-causes.md` 写根因与修法段落。
+2. 在 `.afsim-forge/lessons/index.md` 登记教训 ID。
+3. 在 `.afsim-forge/lessons/root-causes.md` 写根因与修法段落。
 
-> **回流（可选，需用户确认）**：若某条教训有**通用价值**，可建议用户将其合并回 skill 的 `refs/errors-ref.md` 与 `refs/lesson-*.md`。
+> **回流（可选，需用户确认）**：若某条教训有**通用价值**，可建议用户将其合并回 skill 的 `knowledge/lessons/errors.md` 与 `knowledge/lessons/*.md`。
 > 这是**显式动作** —— AI **不自动**改 skill 目录。
 >
 > 这是"**越用越准**"的途径 —— 本项目内每次修复都让下一次更快。
@@ -72,7 +72,7 @@
 | `打不开输出文件` | `output/` 目录缺失 | 建目录 + `blank_empty.txt` |
 | 找不到文件 | `include_once` 路径错 / 未登记 `setup.txt` | 核对路径与登记 |
 
-> 完整索引见 `refs/errors-ref.md`。
+> 完整索引见 `knowledge/lessons/errors.md`。
 
 ---
 

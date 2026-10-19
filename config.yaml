@@ -56,17 +56,27 @@ mcp:
 
 # ── 工程结构约定 ──────────────────────────────────────────────
 project:
-  # 结构权威说明（运行依赖）
-  structure_ref: "refs/structure/project-layout.md"
-  # 溯源：本规范的来源文档（仅记录出处，非运行依赖，移植后可能失效）
+  # 结构权威说明（运行依赖）—— 与本文件冲突时以它为准
+  structure_ref: "blueprints/layout/layout.md"
+  # 装配规则（include 顺序、include vs include_once、命名约定）
+  assembly_ref: "blueprints/layout/assembly.md"
+  # 缺省值清单
+  defaults_ref: "blueprints/layout/defaults.md"
+  # 溯源：本规范的来源文档（**skill 外路径，仅记录出处，非运行依赖**；随 skill 分发时该文件不存在属正常）
   spec_source: "docs/体系工程文件说明-20260922/样例工程规范.md"
+  # 更可靠的实测正例（5 个工程，全部 valid=true）
+  verified_cases: "blueprints/cases"
 
   # 入口文件规则
   entry_file: "<想定名>.txt"          # 严格同名，且与 ZIP 同名
   entry_path_variable: "define_path_variable CASE <想定名>"
+  # 路径基准：必须存在，且在第一个 include_once 之前（AFSIM 按它搜索 include 目标）
+  entry_file_path: "file_path ."
 
-  # 必建目录（14 个）
-  required_dirs:
+  # 规范定义的全量目录（14 个）
+  # 注意：**并非全部必建** —— 只建实际用到的；但 config/ output/ side/ 与 4 个必建根文件必须有。
+  #      入口文件里不得 include_once 不存在的文件。
+  all_dirs:
     - config
     - common
     - output
@@ -102,7 +112,7 @@ project:
     - "数值不带单位"
 
 # ── 运行时状态（★ 写入工作空间，绝不写入 skill 目录）────────────
-# 原则：skill 目录是**只读资产**（本文件、SKILL.md、refs/、workflows/、templates/），
+# 原则：skill 目录是**只读资产**（本文件、SKILL.md、workflows/、blueprints/、knowledge/），
 #      运行期一律不写；一切运行时产出写入**当前工作空间**下的状态目录。
 runtime:
   # 状态根目录 —— 相对**当前工作空间**（cwd），而非 skill 安装目录。
@@ -116,7 +126,7 @@ runtime:
     verified_subdirs: [scenario, component, template]
 
   # 本项目运行时积累的教训（新报错 → 新增条目）
-  # 注意：skill 的 refs/lesson-*.md 是**只读基线**，二者同构；
+  # 注意：skill 的 knowledge/lessons/*.md 是**只读基线**，二者同构；
   #      查教训时先看本项目 lessons/，再看 skill 基线。
   lessons: ".afsim-forge/lessons"
 

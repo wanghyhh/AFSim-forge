@@ -84,8 +84,8 @@ mcp__afsim__validate_scenario({ "zip_path": "<ZIP 绝对路径>", "full_output":
 2. 用 `file` + `line` + `column` **精确定位**到具体文件的具体行。
 3. 在 `data.output` 中交叉印证 `***** FATAL` / `***** ERROR` 原文。
 4. **查教训库**：
-   - `refs/errors-ref.md` —— 按报错关键字匹配 `[Exxx]` 条目
-   - 命中后 → `refs/lesson-index.md` → `refs/lesson-root-causes.md`（见 `workflows/debug.md`）
+   - `knowledge/lessons/errors.md` —— 按报错关键字匹配 `[Exxx]` 条目
+   - 命中后 → `knowledge/lessons/index.md` → `knowledge/lessons/root-causes.md`（见 `workflows/debug.md`）
 5. 修复 → **重新打包** → 再校验。
 
 ### 若 `output` 不足以定位

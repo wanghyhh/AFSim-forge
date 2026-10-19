@@ -45,7 +45,7 @@
 
 ## 4. 归档后
 
-- 后续生成新工程时，**优先从 `verified/` 找同类案例作为参考**（仅次于 `templates/` 与 `refs/examples/`）。
+- 后续生成新工程时，**优先从 `verified/` 找同类案例作为参考**（仅次于 `blueprints/cases/` 与 `blueprints/fragments/`）。
 - 若归档后发现错误 → **不得直接改 `verified/`**，应回到 `staging` 重做、重新校验、再归档。
 
 ---

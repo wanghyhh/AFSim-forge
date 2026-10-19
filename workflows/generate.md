@@ -1,7 +1,7 @@
 # 工作流：生成工程（generate）
 
 > 自然语言需求 → AFSIM 标准工程 → 通过语法校验。
-> 结构依据 `refs/structure/project-layout.md`；模板取自 `templates/`；缺省值见 `SKILL.md`「缺省值」与 `refs/structure/defaults.md`。
+> 结构依据 `blueprints/layout/layout.md`；模板取自 `blueprints/`；缺省值见 `SKILL.md`「缺省值」与 `blueprints/layout/defaults.md`。
 
 ---
 
@@ -30,8 +30,8 @@
 
 > **工作目录**：`.afsim-forge/output/staging/<想定名>/`（工作空间下，见 `config.yaml` 的 `runtime`）。
 
-1. 复制 `templates/project/` 到 `.afsim-forge/output/staging/<想定名>/`。
-2. 按 `templates/project/dirs.txt` 创建所需目录。
+1. 复制 `blueprints/skeleton/` 到 `.afsim-forge/output/staging/<想定名>/`。
+2. 按 `blueprints/skeleton/dirs.txt` 创建所需目录。
 3. **必须创建工程内的** `output/blank_empty.txt`（空文件）—— ⚠️ 这是**想定工程自己的** `output/` 目录（AFSIM 输出落点，ZIP 不保留空目录），与**运行时产出区**（`.afsim-forge/output/`）**无关**。
 4. 生成根文件，替换占位符：
    - `<想定名>.txt`（入口）
@@ -65,7 +65,7 @@
 ⑦ 网络/媒介汇总 network/network.txt · medium/medium.txt
 ```
 
-**每个文件从 `templates/fragments/` 取对应片段改写**，不要凭空写语法；语法细节查 `refs/knowledge/`。
+**每个文件从 `blueprints/fragments/` 取对应片段改写**，不要凭空写语法；语法细节查 `knowledge/`。
 
 ---
 
@@ -105,14 +105,15 @@
 7. 组件文件头部先 include 依赖；8. 新平台登记进 `setup.txt`；
 9. 无中文路径；10. 不编造 `common/` 数据表与 `scenariosId`。
 
-> 完整自检清单见 `refs/structure/project-layout.md` §5。
+> 完整自检清单见 `blueprints/layout/layout.md` §5。
 
 ---
 
 ## 参考
 
-- 结构：`refs/structure/project-layout.md`、`assembly-rules.md`、`run-json.md`、`defaults.md`
-- 语法：`refs/knowledge/`（按需加载）
-- 范本：`refs/examples/`
-- 速查：`refs/quick-ref.md`
-- 体系知识：`refs/sos/`
+- 结构：`blueprints/layout/layout.md`、`assembly.md`、`run-json.md`、`defaults.md`
+- 骨架：`blueprints/skeleton/`（含 `minimal/` 最小可跑工程）
+- 片段：`blueprints/fragments/`
+- 完整案例：`blueprints/cases/`
+- 语法：`knowledge/language/`、`knowledge/blocks/`（按需加载）
+- 体系知识：`knowledge/system-of-systems/`

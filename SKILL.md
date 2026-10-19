@@ -15,11 +15,34 @@ metadata:
 
 ---
 
+## 目录结构（4 层）
+
+```
+afsim-forge/
+├── SKILL.md · config.yaml · NOTICE.md   ← ① 入口层：本文件是唯一入口，知识一律外链
+├── workflows/                            ← ② 流程层：generate / validate / debug / archive
+├── blueprints/                           ← ③ 骨架层：要"照抄/填空"的东西
+│   ├── layout/       结构与装配规则（权威）
+│   ├── skeleton/     9 根文件 + run.json 的可填骨架（含 minimal/ 最小可跑工程）
+│   ├── fragments/    11 类组件片段（.tpl）
+│   └── cases/        5 个完整工程案例（一案例一文档：说明 + 逐文件全文）
+└── knowledge/                            ← ④ 知识层：要"读懂/查阅"的东西
+    ├── language/         AFSIM 语言与脚本（语法、API、消息、类型）
+    ├── blocks/           块级参数参考（命令、mover、sensor、常见坑）
+    ├── system-of-systems/ 体系仿真方法论（指挥链、杀伤链、传感器网、指标）
+    └── lessons/          教训库（报错现象 → 归类 → 根因与修法）
+```
+
+> **一句话分工**：`blueprints/` 回答"**该长什么样**"（可复制），`knowledge/` 回答"**为什么这样写**"（可查阅）。
+
+---
+
 ## 黄金法则
 
-> **不要凭空自造 AFSIM 语法，要基于模板与已验证样例输出。**
+> **不要凭空自造 AFSIM 语法，要基于骨架与已验证案例输出。**
 >
-> 工程**结构**只认 `refs/structure/`；**语法**查 `refs/knowledge/`；**单文件范本**看 `refs/examples/`；**完整工程案例**看 `refs/demos/`。
+> **结构**只认 `blueprints/layout/layout.md`；**骨架/片段**取 `blueprints/skeleton/`、`blueprints/fragments/`；
+> **完整案例**看 `blueprints/cases/`（结构 + 逐文件全文，最可靠的正例）；**语法**查 `knowledge/language/`、`knowledge/blocks/`。
 > 生成 → **必须调用语法校验** → 通过才归档。**未过校验的工程，不得交付。**
 > **skill 目录只读**：所有运行时产出写工作空间的 `.afsim-forge/`。
 
@@ -47,11 +70,14 @@ metadata:
 3. **每个块必须有 `end_*`**；`platform_type` 必须写基类型 `WSF_PLATFORM`。
 4. **坐标用冒号分隔** `d:m:s`（`38:44:52.3n`），不是 `38.44.52.3n`。
 5. **入口文件严格同名**：`<想定名>.txt`，且与 ZIP 同名。
-6. **`output/` 目录必须存在**，用 `output/blank_empty.txt` 占位（否则 `log_file` 产生报错噪音）。
-7. **组件文件头部先 `include_once` 自己的全部依赖**，再写块定义。
-8. **新增平台必须登记进 `setup.txt`**。
-9. **禁止中文路径**（AFSIM 中文路径缺陷）。
-10. **禁止**编造 `common/` 数据表内容（见「缺省值」§3）。
+6. **入口文件必须写 `file_path .`**，且在**第一个 `include_once` 之前**（AFSIM 按它搜索 include 目标）。
+7. **`include_once` 路径一律相对工程根**（`include_once sensor/X.txt`），不是相对当前文件。
+8. **`output/` 目录必须存在**，用 `output/blank_empty.txt` 占位（否则 `log_file` 产生报错噪音）。
+9. **组件文件头部先 `include_once` 自己的全部依赖**，再写块定义。
+10. **顶层装配用 `include_once`；块体内联裸片段用 `include`**（用错会让第二处静默跳过）。
+11. **新增平台必须登记进 `setup.txt`**。
+12. **禁止中文路径**（AFSIM 中文路径缺陷）。
+13. **禁止**编造 `common/` 数据表内容（见「缺省值」§3）。
 
 ---
 
@@ -64,6 +90,7 @@ metadata:
 | 参数 | 缺省值 | 说明 |
 | :-- | :-- | :-- |
 | 想定名 | `<主题拼音>_<日期>` | 无中文、无空格；由需求自动生成 |
+| `file_path` | `.` | 入口文件，**必须在第一个 `include_once` 之前** |
 | `end_time` | `10 m` | 入口文件；单位必带 |
 | `start_date` / `start_time` | 当前日期 / `00:00:00` | 与 `config/run.json` 的 `scenariosTime` **保持一致** |
 | `event_output` | `enable all` | 后期可收敛为逐项 `enable` |
@@ -114,20 +141,27 @@ metadata:
 
 ## 渐进披露（按需加载）
 
+> **原则**：本文件（L0）**只放规则与索引，不放知识**。往下每一层都是"命中才读"，避免上下文被大文件占满。
+
 | 层级 | 文件 | 何时加载 |
 | :-- | :-- | :-- |
-| **L0**（常驻） | 本文件 | 默认 |
-| **L1**（按需） | `refs/quick-ref.md` | 要最小可跑骨架时 |
-| | `refs/structure/project-layout.md` | 要建工程结构时 |
-| | `refs/structure/defaults.md` | 要查缺省值时 |
-| | `refs/errors-ref.md` | 出现报错时 |
-| **L2**（命中后） | `refs/knowledge/*.md` | 查具体语法 / API / 参数时 |
-| | `refs/sos/*.md` | 查体系仿真知识时 |
-| | `refs/examples/*.txt` | 找单文件语法范本时 |
-| | `refs/demos/*.md` | 找**完整工程案例**（结构 + 逐文件全文）时 |
-| **L3**（激活后） | `refs/lesson-index.md` → `refs/lesson-root-causes.md` | `errors-ref` 命中 `[Exxx]` 时 |
+| **L0**（常驻） | `SKILL.md`（本文件） | 默认；含硬约束、缺省值、判据铁律 |
+| **L1**（起步必读） | `blueprints/README.md` | 想知道"该去哪个目录找东西"时 |
+| | `blueprints/layout/layout.md` | 要建工程结构（哪个文件放哪、必建哪些）时 |
+| | `blueprints/skeleton/README.md` → `skeleton/minimal/` | 要**立刻**搭一个能过校验的最小骨架时 |
+| **L2**（命中后） | `blueprints/layout/defaults.md` · `assembly.md` | 查缺省值 / 装配顺序与 include 规则时 |
+| | `blueprints/fragments/README.md` | 要按组件类型取填空片段时 |
+| | `blueprints/cases/README.md` → `<案例>.md` | 找**同类完整工程**照结构时（5 个案例，含全文） |
+| | `knowledge/README.md` | 要查语法 / 参数 / 体系知识时的总索引 |
+| | `knowledge/language/*.md` | 脚本语法、API、消息、类型 |
+| | `knowledge/blocks/*.md` | 命令、mover、sensor 参数、常见坑 |
+| | `knowledge/system-of-systems/*.md` | 体系设计（指挥链、杀伤链、传感器网、指标） |
+| **L3**（报错后） | `knowledge/lessons/errors.md` | 拿到校验报错，按关键字找 `[Exxx]` |
+| | `knowledge/lessons/index.md` → `root-causes.md` | `[Exxx]` 命中后查归类与根因修法 |
 
-**工作流**：`workflows/generate.md` · `validate.md` · `debug.md` · `archive.md`
+**工作流**（流程性内容全在这，不重复写进本文件）：`workflows/generate.md` · `validate.md` · `debug.md` · `archive.md`
+
+**加载顺序建议**：`L0 → workflows/<意图>.md → L1 → L2 → L3`。**同一轮不要把所有 L2 文件都读进来**，按需逐个加载。
 
 ---
 
@@ -146,7 +180,7 @@ metadata:
 | :-- | :-- |
 | `.afsim-forge/output/staging/` | 临时成果：已生成、待校验 |
 | `.afsim-forge/output/verified/` | 成熟成果：**已过校验 + 用户认可**，只进不出 |
-| `.afsim-forge/lessons/` | 本项目运行时新增的教训（skill 的 `refs/lesson-*.md` 是只读基线） |
+| `.afsim-forge/lessons/` | 本项目运行时新增的教训（skill 的 `knowledge/lessons/*.md` 是只读基线） |
 
 **铁律**：**未通过 `validate_scenario`（`data.valid=true`）的工程，禁止归档到 `verified/`。**
 
