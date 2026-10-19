@@ -1,6 +1,7 @@
 # 工作流：语法校验（validate）
 
-> **本 skill 的唯一校验通道**是 MCP 的 `mcp__afsim__validate_scenario` 工具。
+> **本 skill 的首选校验通道**是 MCP 的 `mcp__afsim__validate_scenario` 工具。
+> **备用通道**：当 MCP 不可用时，按 `workflows/local-exec.md` 询问用户本地 AFSIM 安装路径，直接调用 `mission.exe` 完成校验。
 > 本工作流**不跑仿真**、不回放、不下载结果。
 
 ---
@@ -10,7 +11,13 @@
 ```
 mcp__afsim__health        → 确认校验服务在线
 ```
-若 `ok=false, code=0` → 校验服务不可达，**先请用户确认校验服务已启动**，不要继续。
+
+若 `ok=false, code=0` → 校验服务不可达，**进入备用通道**：
+1. 询问用户 AFSIM 本地安装路径（如 `C:\Program Files\afsim-2.9.0-win64`）。
+2. 按 `workflows/local-exec.md` §1 执行本地 `mission.exe -sm -list-variables` 校验。
+3. **不要**在没有校验通道的情况下继续生成或归档。
+
+> 备用通道的判据、错误解析、output 截取规则与 MCP 服务**完全一致**，只是执行环境从服务端换到本地。
 
 ---
 
@@ -112,10 +119,12 @@ mcp__afsim__validate_scenario({ "zip_path": "<...>", "full_output": true })
 
 | `code` | 含义 | 处理 |
 | :-: | :-- | :-- |
-| `0` | 校验服务不可达 | 提示用户确认校验服务已启动；可先调 `health` 复核 |
+| `0` | 校验服务不可达 | 进入**备用通道**：询问用户本地 AFSIM 安装路径，按 `workflows/local-exec.md` §1 执行本地校验 |
 | `400` | 参数或 ZIP 不合规 | **多为缺同名启动文件** → 检查 ZIP 名与包内 `<想定名>.txt` |
 | `404` | `zip_path` 指向的文件不存在 | 检查路径拼写 |
 | 其他 | 未列出的异常 | 读 `msg` 原文向用户报告；**不要**用 `code` 判断语法对错 |
+
+> **禁止**在无校验通道的情况下继续生成或交付。
 
 ---
 

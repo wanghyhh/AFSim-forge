@@ -21,7 +21,7 @@ metadata:
 ```
 afsim-forge/
 ├── SKILL.md · config.yaml · README.md · NOTICE.md   ← ① 入口层：本文件是唯一入口，知识一律外链
-├── workflows/                            ← ② 流程层：intake / generate / validate / debug / archive
+├── workflows/                            ← ② 流程层：intake / generate / validate / debug / archive / local-exec
 ├── blueprints/                           ← ③ 骨架层：要"照抄/填空"的东西
 │   ├── layout/       结构与装配规则（权威）
 │   ├── skeleton/     9 根文件 + run.json 的可填骨架（含 minimal/ 最小可跑工程）
@@ -60,7 +60,7 @@ afsim-forge/
 | **归档** | "归档 / 确认 / 可以了" | `workflows/archive.md` |
 | **帮助** | "怎么用 / 有哪些能力" | 本文件「能力概览」 |
 
-**能力概览**：① 解析两类输入（实验筹划 + 想定编辑 JSON）；② 按标准工程结构生成 AFSIM 工程；③ 调用 MCP 做语法校验并闭环修复；④ 提供 AFSIM 语法与体系仿真知识；⑤ 成果 staging → verified 闭环管理。
+**能力概览**：① 解析两类输入（实验筹划 + 想定编辑 JSON）；② 按标准工程结构生成 AFSIM 工程；③ 调用 MCP 或本地 `mission.exe` 做语法校验并闭环修复；④ 提供 AFSIM 语法与体系仿真知识；⑤ 成果 staging → verified 闭环管理。
 **不做**：跑仿真、回放、下载仿真结果（见下方「MCP 边界」）。
 
 ---
@@ -141,10 +141,11 @@ afsim-forge/
 
 ---
 
-## MCP 校验（唯一校验通道）
+## MCP 校验（首选通道）
 
-> 本 skill **只通过 MCP 工具工作**，不接触 AFSIM 本体（安装位置、可执行文件、命令行等均属服务端职责）。
+> 本 skill **默认通过 MCP 工具完成校验**。当 MCP 不可用时，AI 应主动询问用户本地 AFSIM 安装路径，通过直接调用 `mission.exe` 完成校验 —— **不固化任何安装路径到 skill 文档中**，每次临时询问。
 > 工具名前缀由宿主环境的 `serverName` 决定，**单点维护在 `config.yaml`**（`mcp.prefix`）。
+> 本地调用方案的完整命令、判据与错误解析见 `workflows/local-exec.md`。
 
 | 允许 | 用途 |
 | :-- | :-- |
@@ -181,7 +182,7 @@ afsim-forge/
 | **L3**（报错后） | `knowledge/lessons/errors.md` | 拿到校验报错，按关键字找 `[Exxx]` |
 | | `knowledge/lessons/index.md` → `root-causes.md` | `[Exxx]` 命中后查归类与根因修法 |
 
-**工作流**（流程性内容全在这，不重复写进本文件）：`workflows/intake.md` · `generate.md` · `validate.md` · `debug.md` · `archive.md`
+**工作流**（流程性内容全在这，不重复写进本文件）：`workflows/intake.md` · `generate.md` · `validate.md` · `debug.md` · `archive.md` · `local-exec.md`
 
 **加载顺序建议**：`L0 → workflows/intake.md（生成类意图必走）→ workflows/<意图>.md → L1 → L2 → L3`。**同一轮不要把所有 L2 文件都读进来**，按需逐个加载。
 

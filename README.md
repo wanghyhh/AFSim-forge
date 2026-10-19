@@ -157,7 +157,7 @@ afsim-forge/
 
 ### 1. 前置条件
 
-- 一个提供 `validate_scenario` 能力的 **MCP 校验服务**（本 skill 只经 MCP 工具工作，不接触 AFSIM 本体，也不需要知道它的安装位置）
+- 一个提供 `validate_scenario` 能力的 **MCP 校验服务**（默认方式；无服务时可切换为本地 `mission.exe` 直接调用）
 - 支持 skill 的宿主环境
 
 ### 2. 安装

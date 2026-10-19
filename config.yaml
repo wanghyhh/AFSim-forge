@@ -1,10 +1,14 @@
 # afsim-forge 配置 —— 单点维护
 # 修改本文件即可调整 MCP 契约与工程结构约定，无需改动 workflows/ 与 SKILL.md。
 #
-# 边界说明：本 skill 只通过 MCP 工具完成校验，**不接触 AFSIM 本体**。
+# 边界说明：本 skill 默认通过 MCP 工具完成校验，**不接触 AFSIM 本体**。
 # AFSIM 的安装位置、可执行文件、命令行参数等均属 MCP 服务端职责，本文件不体现。
+# 
+# 备用方案：当 MCP 工具不可用时，AI 应主动询问用户本地 AFSIM 安装路径，
+# 直接调用 mission.exe / mystic.exe 完成校验。详见 workflows/local-exec.md。
+# 安装路径**不得固化到本文件**，每次临时询问用户。
 
-# ── MCP 校验工具（唯一校验通道）────────────────────────────────
+# ── MCP 校验工具（首选校验通道）────────────────────────────────
 mcp:
   # 工具名前缀由宿主环境中 mcp-client 的 serverName 决定：mcp__<server_name>__
   # 若宿主环境侧改了 serverName，只需同步此处与下方 tool 字段。
@@ -25,7 +29,7 @@ mcp:
     - download_result
     - replay
 
-  # 校验调用规范
+  # 校验调用规范（首选通道：MCP 服务）
   validate:
     tool: "mcp__afsim__validate_scenario"
     params:
@@ -39,6 +43,16 @@ mcp:
     max_repair_rounds: 3
     # 升级取全文的阈值：output 不足以定位时改用 full_output=true
     escalate_on_insufficient_output: true
+
+  # 备用通道：本地可执行文件（MCP 不可用时启用）
+  # 安装路径不固化在此，每次由 AI 询问用户获取
+  fallback:
+    enabled: "ask_user_on_mcp_unavailable"  # MCP 不可用时询问用户本地安装路径
+    ref: "workflows/local-exec.md"          # 完整命令、判据、错误解析见该文档
+    executable:
+      mission: "<用户提供的安装路径>\\bin\\mission.exe"
+      mystic: "<用户提供的安装路径>\\bin\\mystic.exe"
+    # 本地调用与 MCP 服务的判据完全一致：exit 0 = valid true, exit 1 = valid false
 
   # 返回契约：{ok, code, msg, data}，任何情况都不抛异常
   response:
