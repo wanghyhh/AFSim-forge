@@ -116,7 +116,7 @@ end_time / start_date / start_time     ← ⑥ 仿真控制
 ### `side/`
 要素顺序：`platform <实例名> <类型名>` → `side` → `heading` → `position`（**必填**，高度可选）→ `aux_data` → 可选 `edit <组件>` 覆写参数 → `command_chain` / `commander` 指挥关系 → `track` 预置航迹。
 
-> **实例名 = 类型名 + `_` + 业务 code**，如 `GBI_LAUNCHER_322857`。
+> **实例名 = 类型名 + `_` + 业务 code**，如 `INTERCEPTOR_LAUNCHER_322857`。
 > `edit` 是实例化关键：类型给默认值，实例局部覆写。
 
 ### `sensor/`

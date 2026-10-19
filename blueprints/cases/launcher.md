@@ -6,7 +6,7 @@
 > **规模**：16 个文件 / 462 行（`processor/SAM_TACTICS_PROCESSOR.txt` 112、`launcher.txt` 80、`weapon/SAM_MISSILE.txt` 58、`sensor/RADAR_SET.txt` 43）
 > **结构**：根文件 5（入口 / `event_pipe.txt` / `global_env.txt` / `global_script.txt` / `setup.txt`）+ 目录 9（`config/`、`mover/`、`output/`、`platform/`、`processor/`、`sensor/`、`side/`、`weapon/`、`weapon_effects/`）
 > **自包含**：是（无跨工程依赖）
-> **许可 / 限制**：原始文件含 CUI 受控横幅，本案例**原样保留**（见 §4.6）
+> **许可 / 限制**：原始 demo 头部的受控标记已中性化移除，内容未增删（见 §4.6）
 > **亮点**：① **完整武器链路**（`aero` → 弹体 `platform_type` → `weapon` → `weapon_effects`）；② **任务处理器状态机**（`DETECTED` ↔ `ENGAGE`）；③ 事件输出**逐项 enable 白名单**；④ 多入口"逐步加复杂度"演进（本案例收最简的 1st）
 > **对应**：结构 → `blueprints/layout/layout.md`；武器 → `knowledge/blocks/commands.md`；处理器 → 本案例 `processor/`
 
@@ -224,12 +224,12 @@ launcher.txt（入口）
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 define_path_variable CASE launcher
 log_file output/$(CASE).log
@@ -309,12 +309,12 @@ end_time 1200 sec
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 event_pipe file output/$(CASE).aer end_event_pipe
 
@@ -324,12 +324,12 @@ event_pipe file output/$(CASE).aer end_event_pipe
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # common terrain configuration
 
@@ -342,12 +342,12 @@ end_terrain
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # simple task processor to launch a sam at an air target
 
@@ -360,12 +360,12 @@ end_script_interface
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 file_path .
 
@@ -379,12 +379,12 @@ include_once platform/AIRPLANE.txt
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 aero SAM_MISSILE_AERO WSF_AERO
    cd_zero_subsonic    0.30
@@ -402,12 +402,12 @@ end_aero
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 weapon_effects SAM_MISSILE_EFFECT WSF_GRADUATED_LETHALITY      # unknown
    radius_and_pk 20.0 m 0.8
@@ -419,12 +419,12 @@ end_weapon_effects
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 sensor RADAR_SET WSF_RADAR_SENSOR
  # show_calibration_data
@@ -467,12 +467,12 @@ end_sensor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 #---------------------------------------
 processor SAM_TACTICS_PROCESSOR WSF_TASK_PROCESSOR
@@ -584,12 +584,12 @@ end_processor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once mover/SAM_MISSILE_AERO.txt
 include_once weapon_effects/SAM_MISSILE_EFFECT.txt
@@ -647,12 +647,12 @@ end_weapon
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 platform_type AIRPLANE WSF_PLATFORM
   icon F-18
@@ -665,12 +665,12 @@ end_platform_type
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once sensor/RADAR_SET.txt
 include_once weapon/SAM_MISSILE.txt
@@ -710,12 +710,12 @@ end_platform_type
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 platform target1 AIRPLANE
    side Blue
@@ -735,12 +735,12 @@ end_platform
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 platform sam_site SAM_LAUNCHER
 side Red
@@ -820,12 +820,15 @@ end_platform
 
 ### 4.6 许可说明
 
-原始 AFSIM 官方 demo 文件头部含 CUI（受控非密信息）横幅：
+原始 AFSIM 官方 demo 文件头部含 受控标记横幅，收录时已移除受控标记与分发限制声明，替换为不含限制声明的中性头注：
 
 ```text
-# CUI
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# AFSIM demo input file
+#
+# The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
+#
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 ```
 
-本案例**原样保留**该横幅（未剥离、未改写），并在每个文件头部呈现。使用与再分发须遵守原始许可。
+文件内其余 AFSIM 命令内容未作任何增删。

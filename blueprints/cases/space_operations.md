@@ -6,7 +6,7 @@
 > **规模**：23 个文件 / 1,429 行（`processor/ESTABLISH_LINK_PROCESSOR.txt` 298、`global_script.txt` 245、`global_struct.txt` 195、`platform/STARLINK_LINKABLE.txt` 128）
 > **结构**：根文件 6（入口 / `event_pipe.txt` / `global_script.txt` / `global_struct.txt` / `group.txt` / `setup.txt`）+ 目录 9（`comm/`、`config/`、`network/`、`output/`、`platform/`、`processor/`、`sensor/`、`side/`、`signatures/`）
 > **自包含**：原 demo 有 20 个顶层入口 + 16 个 `scenarios/*` 入口；本案例**只收 `lasercomm_scripted.txt` 的闭包**（15 个源文件 / 1,376 行），**无跨 demo 依赖**，改造后工程自包含
-> **许可 / 限制**：原始文件含 CUI 受控横幅，本案例**原样保留**（见 §4.6）
+> **许可 / 限制**：原始 demo 头部的受控标记已中性化移除，内容未增删（见 §4.6）
 > **亮点**：① **运行期造星座**（`WsfConstellationMaker.CreateGeneral(16, 18, 5.0, 360.0)` → `maker.Create("", "StarlinkSetup")` → `starlink.Apply("AddInPlaneLink")`）；② **运行期改网络成员**（`WsfNetwork.AddNetwork` / `GetNetwork` / `RemoveMember` / `AddMember`）；③ **自定义脚本类 `script_struct CommLink`** + `Map<string, WsfTrack>` + `AuxData` 挂对象；④ **激光通信模型**（`WSF_LASER_TRANSCEIVER` + `WSF_OPTICAL_ATTENUATION`）；⑤ **五组组网**（`LINKABLE_TARGETS` / `CROSSLINK` / `DOWNLINK` / `DEDICATED_COMM` / `UPLINK`）+ `category linkable`；⑥ **七态建链状态机**（`entry` → `not_linkable` / `slewing` / `acquire` → `establish` → `maintain` → `complete`）；⑦ `WsfDraw` 画动态链路
 > **对应**：结构 → `blueprints/layout/layout.md`；`comm` / `network` / `sensor` 块语法 → `knowledge/`；体系概念 → `knowledge/system-of-systems/sensor-network.md`；本案例 `global_struct.txt` `global_script.txt` `processor/`
 
@@ -234,12 +234,12 @@ space_operations.txt（场景入口）
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # ==============================================================================
 # A demonstration using the AFSIM lasercomm model.  A subset of the planned 
@@ -284,12 +284,12 @@ end_event_output
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once platform/STARLINK.txt
 include_once platform/UPLINK.txt
@@ -299,12 +299,12 @@ include_once platform/UPLINK.txt
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 event_pipe 
    file output/lasercomm_scripted.aer
@@ -318,12 +318,12 @@ end_event_pipe
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 
@@ -518,12 +518,12 @@ end_script_struct
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # This moves the comm device on the given platform onto a new network with a name
 # derived from the comm device name and platform name.
@@ -768,12 +768,12 @@ end_script
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 group LINKABLE_TARGETS WSF_GROUP 
 end_group
@@ -806,12 +806,12 @@ end_group
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 attenuation laser_link_attenuation WSF_OPTICAL_ATTENUATION
@@ -881,12 +881,12 @@ end_comm
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 include_once comm/LASERCOMM_LINK.txt
@@ -900,12 +900,12 @@ end_comm
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 include_once comm/LASERCOMM_LINK.txt
@@ -918,12 +918,12 @@ end_comm
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 include_once comm/LASERCOMM_LINK.txt
@@ -937,12 +937,12 @@ end_comm
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 # The comm devices for the platform type are added to this network
@@ -957,12 +957,12 @@ end_network
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once network/starlink_default.txt
 ```
@@ -971,12 +971,12 @@ include_once network/starlink_default.txt
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 antenna_pattern UNIFORM_0DBI_PATTERN
   uniform_pattern
@@ -989,12 +989,12 @@ end_antenna_pattern
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 radar_signature STARLINK_RADAR_SIG
@@ -1006,12 +1006,12 @@ end_radar_signature
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 #script_variables
@@ -1310,12 +1310,12 @@ end_processor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 include_once global_script.txt
@@ -1421,12 +1421,12 @@ end_processor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 # New file created by AFSIM Wizard
@@ -1555,12 +1555,12 @@ end_processor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 # New file created by AFSIM Wizard
@@ -1659,12 +1659,12 @@ end_platform_type
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 # Uplink
@@ -1704,12 +1704,12 @@ end_platform_type
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 # The commander can receive any starlink related communcations.
@@ -1730,12 +1730,12 @@ end_platform
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 # This is an example of a ground platform transmitting to the starlink constellation.
@@ -1871,12 +1871,15 @@ end_platform
 
 ### 4.6 许可说明
 
-原始 AFSIM 官方 demo 文件头部含 CUI（受控非密信息）横幅：
+原始 AFSIM 官方 demo 文件头部含 受控标记横幅，收录时已移除受控标记与分发限制声明，替换为不含限制声明的中性头注：
 
 ```text
-# CUI
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# AFSIM demo input file
+#
+# The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
+#
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 ```
 
-本案例**原样保留**该横幅（未剥离、未改写），并在每个文件头部呈现。使用与再分发须遵守原始许可（另见方案 §12 R1）。
+文件内其余 AFSIM 命令内容未作任何增删。

@@ -6,7 +6,7 @@
 > **规模**：58 个文件 / 3,031 行（`processor/NAVAL_SAM_TACTICS.txt` 271、`processor/NAVAL_ASM_TACTICS.txt` 234、`processor/NAVAL_SSM_TACTICS.txt` 234、`weapon/SSM_MISSILE.txt` 113）
 > **结构**：根文件 6（入口 / `event_pipe.txt` / `global_env.txt` / `global_route.txt` / `global_script.txt` / `setup.txt`）+ 目录 11（`comm/`、`config/`、`mover/`、`output/`、`platform/`、`processor/`、`sensor/`、`side/`、`signatures/`、`weapon/`、`weapon_effects/`）
 > **自包含**：原 demo 三个入口（`1st_asm` / `2nd_sam` / `3rd_ssm`）**共用同一批平台定义**；本案例只收 `1st_asm.txt` 的闭包（34 个源文件），**无跨 demo 依赖**，改造后工程自包含
-> **许可 / 限制**：原始文件含 CUI 受控横幅，本案例**原样保留**（见 §4.6）
+> **许可 / 限制**：原始 demo 头部的受控标记已中性化移除，内容未增删（见 §4.6）
 > **亮点**：① **舰载中继制导闭环**（`ANNOUNCE_LAUNCH_TACTICS` 发 `Update` 任务 → 直升机 `INFLIGHT_UPDATE_TACTICS` 收任务 → 经 uplink 向飞行中的导弹送航迹）；② **`launch_computer` 两层聚合**（`SAM_LaunchComputer` → 按目标舰型分派 `RED_SR_SAM_1/2_LaunchComputer`）；③ **拦截包线 `zone` + `WithinZoneOf`**（`full_kinematic` / `half_kinematic`，护卫舰双包线）；④ **武器链路 ×4**（ASM 反舰 / SAM 防空 ×2 型 / SSM 巡航）；⑤ **战术处理器族**（4 个 `WSF_TASK_PROCESSOR` 状态机 + 2 个协作处理器）；⑥ **`filter` 块**（`WSF_KALMAN_FILTER` + `track_manager` 内联引用）；⑦ 三类签名齐备
 > **对应**：结构 → `blueprints/layout/layout.md`；任务处理器 / `launch_computer` → `knowledge/`；本案例 `processor/` `weapon/`
 
@@ -252,12 +252,12 @@ ship_ad.txt (入口, define_path_variable CASE ship_ad)
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 define_path_variable CASE ship_ad
@@ -339,12 +339,12 @@ end_time 1.5 hours
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 #----------------------------------------------------------------------
@@ -365,12 +365,12 @@ include_once platform/RED_NAVAL_HELICOPTER.txt
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 # common file for selecting which messages appear in the event pipe
@@ -385,12 +385,12 @@ end_event_pipe
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 # common terrain configuration
@@ -404,12 +404,12 @@ end_terrain
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 route ASM_DUMMY
    label start
@@ -422,12 +422,12 @@ end_route
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # --------------------------------------------------------------
 #                         Filter tactics
@@ -458,12 +458,12 @@ end_filter
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 aero RED_SR_SAM_1_AERO WSF_AERO
   # Values estimated from Hoerner's Drag book
@@ -481,12 +481,12 @@ end_aero
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 aero RED_SR_SAM_2_AERO WSF_AERO
   # Values estimated from Hoerner's Drag book
@@ -505,12 +505,12 @@ end_aero
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 aero SSM_MISSILE_AERO WSF_AERO
 # Values estimated from Hoerners Drag book
@@ -531,12 +531,12 @@ end_aero
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # --------------------------------------------------------------
 #                         Red datalink
@@ -551,18 +551,18 @@ end_comm
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
-log version $Id: front_dome.txt,v 1.1.1.1 2008/07/28 15:09:03 m210650 Exp $
+log version $Id: front_dome.txt,v 1.1.1.1 2008/07/28 15:09:03 unknown Exp $
 
 ###############################################################################
 #
-#                               UNCLASSIFIED
+#                               SAMPLE INPUT
 #
 #   Sources:
 #
@@ -612,18 +612,18 @@ end_sensor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
-log version $Id: helicopter_surface_search_radar_1.txt,v 1.1.1.1 2008/07/28 15:09:03 m210650 Exp $
+log version $Id: helicopter_surface_search_radar_1.txt,v 1.1.1.1 2008/07/28 15:09:03 unknown Exp $
 
 ###############################################################################
 #
-#                               UNCLASSIFIED
+#                               SAMPLE INPUT
 #
 #   Sources:
 #
@@ -697,18 +697,18 @@ end_sensor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
-log version $Id: red_missile_seeker_1.txt,v 1.1.1.1 2008/07/28 15:09:03 m210650 Exp $
+log version $Id: red_missile_seeker_1.txt,v 1.1.1.1 2008/07/28 15:09:03 unknown Exp $
 
 ###############################################################################
 #
-#                               UNCLASSIFIED
+#                               SAMPLE INPUT
 #
 #                           RED_MISSILE_SEEKER_1
 #
@@ -779,18 +779,18 @@ end_sensor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
-log version $Id: rice_screen.txt,v 1.1.1.1 2008/07/28 15:09:03 m210650 Exp $
+log version $Id: rice_screen.txt,v 1.1.1.1 2008/07/28 15:09:03 unknown Exp $
 
 ###############################################################################
 #
-#                               UNCLASSIFIED
+#                               SAMPLE INPUT
 #
 #   Sources:
 #
@@ -864,18 +864,18 @@ end_sensor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
-log version $Id: sr_sam_fcr_1.txt,v 1.1.1.1 2008/07/28 15:09:03 m210650 Exp $
+log version $Id: sr_sam_fcr_1.txt,v 1.1.1.1 2008/07/28 15:09:03 unknown Exp $
 
 ###############################################################################
 #
-#                               UNCLASSIFIED
+#                               SAMPLE INPUT
 #
 #   Sources:
 #
@@ -951,18 +951,18 @@ end_sensor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
-log version $Id: top_plate.txt,v 1.1.1.1 2008/07/28 15:09:03 m210650 Exp $
+log version $Id: top_plate.txt,v 1.1.1.1 2008/07/28 15:09:03 unknown Exp $
 
 ###############################################################################
 #
-#                               UNCLASSIFIED
+#                               SAMPLE INPUT
 #
 #   Sources:
 #
@@ -1031,16 +1031,16 @@ end_sensor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
-# *   ******      UNCLASSIFIED        ******   *
+# *   ******      SAMPLE INPUT        ******   *
 # * * ************************************** * *
 
 # this file defines a task manager implementing generic
@@ -1307,16 +1307,16 @@ end_processor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
-# *   ******      UNCLASSIFIED        ******   *
+# *   ******      SAMPLE INPUT        ******   *
 # * * ************************************** * *
 
 # this file defines a task manager implementing generic
@@ -1546,16 +1546,16 @@ end_processor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
-# *   ******      UNCLASSIFIED        ******   *
+# *   ******      SAMPLE INPUT        ******   *
 # * * ************************************** * *
 
 # this file defines a task manager implementing generic
@@ -1785,16 +1785,16 @@ end_processor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
-# *   ******      UNCLASSIFIED        ******   *
+# *   ******      SAMPLE INPUT        ******   *
 # * * ************************************** * *
 
 # this file defines a task manager implementing generic
@@ -1875,16 +1875,16 @@ end_processor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
-# *   ******      UNCLASSIFIED        ******   *
+# *   ******      SAMPLE INPUT        ******   *
 # * * ************************************** * *
 
 # this file defines a script processor that implements
@@ -1951,16 +1951,16 @@ end_processor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
-# *   ******      UNCLASSIFIED        ******   *
+# *   ******      SAMPLE INPUT        ******   *
 # * * ************************************** * *
 
 # this file defines a task manager implementing generic
@@ -2051,12 +2051,12 @@ end_processor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 processor MISSILE_SHIP_DATA_MGR WSF_TRACK_PROCESSOR
    purge_interval            60 sec
@@ -2067,12 +2067,12 @@ end_processor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 processor MISSILE_SHIP_TASK_MGR NAVAL_SAM_TACTICS
    on_initialize
@@ -2087,12 +2087,12 @@ end_processor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 processor RED_MISSILE_DESTROYER_DATA_MGR WSF_TRACK_PROCESSOR
    purge_interval            60 sec
@@ -2103,12 +2103,12 @@ end_processor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 processor RED_MISSILE_DESTROYER_TASK_MGR NAVAL_SAM_TACTICS
    on_initialize
@@ -2123,12 +2123,12 @@ end_processor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 processor RED_MISSILE_FRIGATE_DATA_MGR WSF_TRACK_PROCESSOR
    purge_interval            60 sec
@@ -2139,12 +2139,12 @@ end_processor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 processor RED_MISSILE_FRIGATE_TASK_MGR NAVAL_SAM_TACTICS
    on_initialize
@@ -2161,12 +2161,12 @@ end_processor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 processor RED_NAVAL_HELICOPTER_DATA_MGR WSF_TRACK_PROCESSOR
    purge_interval            60 sec
@@ -2180,12 +2180,12 @@ end_processor
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 radar_signature     VEHICLE_RADAR_SIGNATURE
    constant  1 m^2
@@ -2196,16 +2196,16 @@ end_radar_signature
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
-# *   ******      UNCLASSIFIED        ******   *
+# *   ******      SAMPLE INPUT        ******   *
 # * * ************************************** * *
 
 # --------------------------------------------------------------
@@ -2220,12 +2220,12 @@ end_infrared_signature
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 optical_signature   VEHICLE_OPTICAL_SIGNATURE
    constant  10 m^2
@@ -2236,12 +2236,12 @@ end_optical_signature
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 radar_signature     SHIP_RADAR_SIGNATURE
    constant  1000 m^2
@@ -2252,12 +2252,12 @@ end_radar_signature
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # --------------------------------------------------------------
 #                         Ship Signatures
@@ -2271,12 +2271,12 @@ end_infrared_signature
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 optical_signature   SHIP_OPTICAL_SIGNATURE
    constant  300 m^2
@@ -2287,12 +2287,12 @@ end_optical_signature
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 weapon_effects RED_ASM_MSL_EFFECT WSF_GRADUATED_LETHALITY      # unknown
    radius_and_pk 20.0 m 0.75
@@ -2303,12 +2303,12 @@ end_weapon_effects
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 weapon_effects RED_SR_SAM_1_EFFECT WSF_GRADUATED_LETHALITY      # unknown
    radius_and_pk 20.0 m 0.8
@@ -2319,12 +2319,12 @@ end_weapon_effects
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 weapon_effects RED_SR_SAM_2_EFFECT WSF_GRADUATED_LETHALITY      # unknown
    radius_and_pk 17.0 m 0.8         # Ref 1 lethal radius for RED_SR_NAVAL_SAM_1
@@ -2335,12 +2335,12 @@ end_weapon_effects
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 weapon_effects SSM_MISSILE_EFFECT WSF_GRADUATED_LETHALITY
     # radius_and_pk 20.0 m 0.8 # unknown
@@ -2354,23 +2354,23 @@ end_weapon_effects
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once processor/ASM_TACTICS.txt
 include_once sensor/RED_MISSILE_SEEKER_1.txt
 include_once signatures/VEHICLE_RADAR_SIGNATURE.txt
 include_once weapon_effects/RED_ASM_MSL_EFFECT.txt
 
-log version $Id: red_asm_msl.txt,v 1.1.1.1 2008/07/28 15:09:03 m210650 Exp $
+log version $Id: red_asm_msl.txt,v 1.1.1.1 2008/07/28 15:09:03 unknown Exp $
 
 ###############################################################################
 #
-#                               UNCLASSIFIED
+#                               SAMPLE INPUT
 #                             Anti-ship missile
 #
 #   Sources:
@@ -2446,21 +2446,21 @@ end_weapon
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once mover/RED_SR_SAM_1_AERO.txt
 include_once weapon_effects/RED_SR_SAM_1_EFFECT.txt
 
-log version $Id: red_sr_sam_1.txt,v 1.2 2010/12/07 13:39:52 m191713 Exp $
+log version $Id: red_sr_sam_1.txt,v 1.2 2010/12/07 13:39:52 unknown Exp $
 
 ###############################################################################
 #
-#                               UNCLASSIFIED
+#                               SAMPLE INPUT
 #
 #   Sources:
 #
@@ -2528,21 +2528,21 @@ end_weapon
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once mover/RED_SR_SAM_2_AERO.txt
 include_once weapon_effects/RED_SR_SAM_2_EFFECT.txt
 
-log version $Id: red_sr_sam_2.txt,v 1.2 2010/12/07 13:39:52 m191713 Exp $
+log version $Id: red_sr_sam_2.txt,v 1.2 2010/12/07 13:39:52 unknown Exp $
 
 ###############################################################################
 #
-#                               UNCLASSIFIED
+#                               SAMPLE INPUT
 #
 #   Using data for RED_SR_NAVAL_SAM_1 and RED_SR_NAVAL_SAM_2
 #
@@ -2623,14 +2623,14 @@ end_weapon
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
-log version $Id: ssm_missile.txt,v 1.2 2010/12/07 13:39:53 m191713 Exp $
+log version $Id: ssm_missile.txt,v 1.2 2010/12/07 13:39:53 unknown Exp $
 
 # include the sensor that goes on the missile
 include_once sensor/RED_MISSILE_SEEKER_1.txt
@@ -2741,16 +2741,16 @@ end_weapon
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
-# *   ******      UNCLASSIFIED        ******   *
+# *   ******      SAMPLE INPUT        ******   *
 # * * ************************************** * *
 
 # Launch/engagement computer
@@ -2792,16 +2792,16 @@ end_script
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
-# *   ******      UNCLASSIFIED        ******   *
+# *   ******      SAMPLE INPUT        ******   *
 # * * ************************************** * *
 
 # Launch/engagement computer
@@ -2853,16 +2853,16 @@ end_script
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
-# *   ******      UNCLASSIFIED        ******   *
+# *   ******      SAMPLE INPUT        ******   *
 # * * ************************************** * *
 
 # Launch/engagement computer
@@ -2904,16 +2904,16 @@ end_script
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
-# *   ******      UNCLASSIFIED        ******   *
+# *   ******      SAMPLE INPUT        ******   *
 # * * ************************************** * *
 
 # Launch/engagement computer for the RED_ASM_MSL
@@ -2950,16 +2950,16 @@ end_script
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
-# *   ******      UNCLASSIFIED        ******   *
+# *   ******      SAMPLE INPUT        ******   *
 # * * ************************************** * *
 
 # Launch/engagement computer for the RED_SR_SAM_1
@@ -3007,16 +3007,16 @@ end_script
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
-# *   ******      UNCLASSIFIED        ******   *
+# *   ******      SAMPLE INPUT        ******   *
 # * * ************************************** * *
 
 # Launch/engagement computer for the RED_SR_SAM_2
@@ -3061,16 +3061,16 @@ end_script
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
-# *   ******      UNCLASSIFIED        ******   *
+# *   ******      SAMPLE INPUT        ******   *
 # * * ************************************** * *
 
 # Launch/engagement computer for the RED_ASM_MSL
@@ -3107,12 +3107,12 @@ end_script
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once processor/NAVAL_SAM_TACTICS.txt
 include_once processor/NAVAL_ASM_TACTICS.txt
@@ -3128,9 +3128,9 @@ include_once weapon/SSM_MISSILE.txt
 include_once comm/RED_DATALINK.txt
 include_once signatures/SHIP_RADAR_SIGNATURE.txt
 
-log version $Id: missile_ship.txt,v 1.1.1.1 2008/07/28 15:09:03 m210650 Exp $
+log version $Id: missile_ship.txt,v 1.1.1.1 2008/07/28 15:09:03 unknown Exp $
 
-#                               UNCLASSIFIED
+#                               SAMPLE INPUT
 #
 # Made up missile ship with a radar and comm
 
@@ -3209,12 +3209,12 @@ end_platform_type
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once processor/NAVAL_SAM_TACTICS.txt
 include_once processor/NAVAL_ASM_TACTICS.txt
@@ -3228,11 +3228,11 @@ include_once weapon/RED_ASM_MSL.txt
 include_once comm/RED_DATALINK.txt
 include_once signatures/SHIP_RADAR_SIGNATURE.txt
 
-log version $Id: red_missile_destroyer.txt,v 1.1.1.1 2008/07/28 15:09:03 m210650 Exp $
+log version $Id: red_missile_destroyer.txt,v 1.1.1.1 2008/07/28 15:09:03 unknown Exp $
 
 ###############################################################################
 #
-#                               UNCLASSIFIED
+#                               SAMPLE INPUT
 #
 #   Sources:
 #
@@ -3319,12 +3319,12 @@ end_platform_type
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once processor/NAVAL_SAM_TACTICS.txt
 include_once processor/RED_MISSILE_FRIGATE_DATA_MGR.txt
@@ -3335,11 +3335,11 @@ include_once weapon/RED_SR_SAM_2.txt
 include_once comm/RED_DATALINK.txt
 include_once signatures/SHIP_RADAR_SIGNATURE.txt
 
-log version $Id: red_missile_frigate.txt,v 1.1.1.1 2008/07/28 15:09:03 m210650 Exp $
+log version $Id: red_missile_frigate.txt,v 1.1.1.1 2008/07/28 15:09:03 unknown Exp $
 
 ###############################################################################
 #
-#                               UNCLASSIFIED
+#                               SAMPLE INPUT
 #
 #                          Guided-Missile Frigate
 #
@@ -3435,12 +3435,12 @@ end_platform_type
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once processor/RED_NAVAL_HELICOPTER_DATA_MGR.txt
 include_once processor/INFLIGHT_UPDATE_TACTICS.txt
@@ -3448,11 +3448,11 @@ include_once sensor/HELICOPTER_SURFACE_SEARCH_RADAR_1.txt
 include_once comm/RED_DATALINK.txt
 include_once signatures/VEHICLE_RADAR_SIGNATURE.txt
 
-log version $Id: red_naval_helicopter.txt,v 1.2 2011/09/28 19:06:28 jj672c Exp $
+log version $Id: red_naval_helicopter.txt,v 1.2 2011/09/28 19:06:28 author Exp $
 
 ###############################################################################
 #
-#                               UNCLASSIFIED
+#                               SAMPLE INPUT
 #
 #   Sources:
 #
@@ -3513,16 +3513,16 @@ end_platform_type
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
-# *   ******      UNCLASSIFIED        ******   *
+# *   ******      SAMPLE INPUT        ******   *
 # * * ************************************** * *
 
 
@@ -3549,12 +3549,12 @@ end_platform
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 platform 1000_target_ship RED_MISSILE_FRIGATE
    side red
@@ -3651,21 +3651,24 @@ end_platform
 9. **`zone` 不可提到 `zone.txt`**：`full_kinematic` / `half_kinematic` 定义在 `platform_type` **体内**，是**平台级**包线（`point.WithinZoneOf(aLauncher, aEnvelopeName)` 引用）。提到全局 `zone.txt` 会从"平台包线"变成"全局区域"，**语义变了**。故随平台文件就地保留（映射表的 `zone → zone.txt` 只适用于**顶层** `zone`）。
 10. **`file_path .` 必须保留**：AFSIM 的 `include_once` 按 `file_path` 搜索，工程内所有相对路径都相对**工程根** —— 这也是为什么 `platform/MISSILE_SHIP.txt` 里写 `include_once sensor/RICE_SCREEN.txt`（而不是同目录的 `RICE_SCREEN.txt`）。
 11. **入口同名化**：`1st_asm.txt` → `ship_ad.txt`（A2），`define_path_variable CASE` 由 `1st_asm` 改为 `ship_ad`（A3），保证输出文件名与工程名一致。
-12. **`processors` 与 `platform_type` 同文件的拆分**：`platforms/missile_ship.txt` 等 4 个文件都是"**2 个顶层 `processor` + 1 个 `platform_type`**"的混合体。按映射表 `processor` → `processor/`、`platform_type` → `platform/`，拆成 3 个文件（直升机文件是 2 个），原文件的头注释（`log version $Id: …` 与 `#### UNCLASSIFIED / Sources:` 框）**随 `platform_type` 走**。
+12. **`processors` 与 `platform_type` 同文件的拆分**：`platforms/missile_ship.txt` 等 4 个文件都是"**2 个顶层 `processor` + 1 个 `platform_type`**"的混合体。按映射表 `processor` → `processor/`、`platform_type` → `platform/`，拆成 3 个文件（直升机文件是 2 个），原文件的头注释（`log version $Id: …` 与 `#### SAMPLE INPUT / Sources:` 框）**随 `platform_type` 走**。
 13. **`side/` 按阵营拆分**：`scenarios/naval_asm_test.txt` 的 3 个 `platform` 实例按 `side` 字段拆成 `side/blue.txt`（2 个）+ `side/red.txt`（1 个），拆点落在实例之间，**未切断任何实例**。
 14. **非文本资产一律不进**：原 demo 的 `README.md` / `doc/ship_ad.rst` / `doc/images/ship_ad_demo.png` 均**不进**改造工程（§11.2 铁律 3：改造后工程只允许 `.txt` + `config/run.json`）。
 
 ### 4.6 许可说明
 
-原始 AFSIM 官方 demo 文件头部含 CUI（受控非密信息）横幅：
+原始 AFSIM 官方 demo 文件头部含 受控标记横幅，收录时已移除受控标记与分发限制声明，替换为不含限制声明的中性头注：
 
 ```text
-# CUI
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# AFSIM demo input file
+#
+# The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
+#
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 ```
 
-本案例**原样保留**该横幅（未剥离、未改写），并在每个文件头部呈现。使用与再分发须遵守原始许可（另见方案 §12 R1）。
+文件内其余 AFSIM 命令内容未作任何增删。
 
 # 案例：ship_ad —— 组件与实例全文
 

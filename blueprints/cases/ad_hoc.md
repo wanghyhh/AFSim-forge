@@ -12,7 +12,7 @@
 >   
 > **自包含**：是（无跨工程依赖）
 >   
-> **许可 / 限制**：原始文件含 CUI 受控横幅，本案例**原样保留**（见 §4.6）
+> **许可 / 限制**：原始 demo 头部的受控标记已中性化移除，内容未增删（见 §4.6）
 >   
 > **亮点**：① 动态组网（连接随距离自动增删）；② 自定义 `router_protocol` + 贪心路由算法；③ `WsfDraw` 运行时绘图；④ 三阵营（blue / red / black）与跨平台 `external_link`
 >   
@@ -188,12 +188,12 @@ flowchart TD
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 #
 # This demo highlights some of the ad-hoc capabilities available in AFSIM.
@@ -240,12 +240,12 @@ end_event_output
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 event_pipe
    file output/ad_hoc.aer
@@ -256,12 +256,12 @@ end_event_pipe
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 global_environment
 end_global_environment
@@ -271,12 +271,12 @@ end_global_environment
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 script_variables
@@ -355,12 +355,12 @@ end_execute
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 route detector_route
@@ -376,12 +376,12 @@ end_route
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once platform/DETECTOR.txt
 include_once platform/INTRUDER.txt
@@ -392,12 +392,12 @@ include_once platform/BLACK_VAN.txt
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 comm AD_HOC WSF_RADIO_TRANSCEIVER
@@ -418,12 +418,12 @@ end_comm
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 include_once global_script.txt
@@ -502,12 +502,12 @@ end_router_protocol
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 include_once comm/AD_HOC_router_protocol.txt
@@ -523,12 +523,12 @@ end_router
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 network ad_hoc WSF_COMM_NETWORK_AD_HOC
@@ -540,12 +540,12 @@ end_network
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once network/ad_hoc_network.txt
 ```
@@ -554,12 +554,12 @@ include_once network/ad_hoc_network.txt
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 include_once comm/ad_hoc_comm.txt
@@ -610,12 +610,12 @@ end_platform_type
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 platform_type INTRUDER WSF_PLATFORM
@@ -634,12 +634,12 @@ end_platform_type
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 platform_type BLACK_VAN WSF_PLATFORM
    side black
@@ -665,12 +665,12 @@ end_platform_type
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 platform intruder INTRUDER
@@ -681,12 +681,12 @@ end_platform
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 // This platform is on the same network, but only exists
@@ -779,12 +779,12 @@ end_platform
 
 ```text
 # ****************************************************************************
-# CUI
+# AFSIM demo input file
 #
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 platform black_van BLACK_VAN
 end_platform
@@ -858,12 +858,15 @@ end_platform
 
 ### 4.6 许可说明
 
-原始 AFSIM 官方 demo 文件头部含 CUI（受控非密信息）横幅：
+原始 AFSIM 官方 demo 文件头部含 受控标记横幅，收录时已移除受控标记与分发限制声明，替换为不含限制声明的中性头注：
 
 ```text
-# CUI
-# The use, dissemination or disclosure of data in this file is subject to
-# limitation or restriction. See accompanying README and LICENSE for details.
+# AFSIM demo input file
+#
+# The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
+#
+# Original demo input. Structure reorganized only; content not modified.
+# See NOTICE.md for provenance and licensing.
 ```
 
-本案例**原样保留**该横幅（未剥离、未改写），并在每个文件头部呈现。使用与再分发须遵守原始许可。
+文件内其余 AFSIM 命令内容未作任何增删。

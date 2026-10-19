@@ -51,15 +51,15 @@ network NetworkA WSF_COMM_NETWORK_AD_HOC
    update_rate 1 s
    comm_list
       member RED_EWR_322728 EWR_DATALINK
-      member GBI_LAUNCHER_322857 DATALINK
-      member GBI_BATTERY_322860 DATALINK
-      member GBI_BATTERY_322860 gbi_cmd_link
+      member INTERCEPTOR_LAUNCHER_322857 DATALINK
+      member INTERCEPTOR_BATTERY_322860 DATALINK
+      member INTERCEPTOR_BATTERY_322860 interceptor_cmd_link
    end_comm_list
 end_network
 ```
 
 > ⚠️ `member` 第一个参数是 **`side/` 里的平台实例名**，不是类型名。
-> 同一平台可挂多条 comm（如指挥车同时挂 `DATALINK` 与 `gbi_cmd_link`）。
+> 同一平台可挂多条 comm（如指挥车同时挂 `DATALINK` 与 `interceptor_cmd_link`）。
 
 ### `medium/`
 
@@ -82,14 +82,14 @@ end_medium
 ## 3. 平台内的信息流连线
 
 ```text
-# platform/GBI_BATTERY.txt
+# platform/INTERCEPTOR_BATTERY.txt
 comm DATALINK DATALINK
-   internal_link GBI_DATA_MGR
-   internal_link GBI_PROCESSOR_WITH_EWR_GUIDANCE
+   internal_link INTERCEPTOR_DATA_MGR
+   internal_link INTERCEPTOR_PROCESSOR_WITH_EWR_GUIDANCE
    internal_link data_mgr
 end_comm
 sensor TTR_RADAR TTR_RADAR
-   internal_link processor_2100780702274809857
+   internal_link processor_TRACK_0001
    internal_link data_mgr
 end_sensor
 ```
@@ -110,14 +110,14 @@ comm   ──internal_link──▶ WSF_TRACK_PROCESSOR（航迹管理）
 ## 4. 体系级信息流（跨平台）
 
 ```
-RED_EWR_322728                GBI_BATTERY_322860             GBI_LAUNCHER_322857
-   BLUE_EWR_RADAR_B              GBI_DATA_MGR                   GBI_DATA_MGR
+RED_EWR_322728                INTERCEPTOR_BATTERY_322860             INTERCEPTOR_LAUNCHER_322857
+   BLUE_EWR_RADAR_B              INTERCEPTOR_DATA_MGR                   INTERCEPTOR_DATA_MGR
         │ 探测航迹                     │ 汇总航迹                       │ 接收目标指示
         ▼                             ▼                              ▼
-   EWR_DATALINK ──NetworkA──▶ DATALINK / gbi_cmd_link ──NetworkA──▶ DATALINK
+   EWR_DATALINK ──NetworkA──▶ DATALINK / interceptor_cmd_link ──NetworkA──▶ DATALINK
         │                             │                              │
         └────── commander ────────────┴────────── commander ─────────┘
-                 (上级：GBI_BATTERY_322860)
+                 (上级：INTERCEPTOR_BATTERY_322860)
 ```
 
 **两个关键机制**：

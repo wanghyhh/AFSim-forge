@@ -1,6 +1,6 @@
 # 杀伤链（kill-chain）
 
-> **素材来源**：样例工程 `event_pipe.txt`、`processor/GBI_*`、`weapon/GBI.txt`、`side/red.txt`。
+> **素材来源**：样例工程 `event_pipe.txt`、`processor/INTERCEPTOR_*`、`weapon/INTERCEPTOR.txt`、`side/red.txt`。
 > 通用方法论标注「待校验」。
 
 ---
@@ -15,32 +15,32 @@
 | :-- | :-- | :-- |
 | ① 探测 | 预警雷达（`RED_EWR`） | `sensor/`（`WSF_RADAR_SENSOR`，SEARCH 模式） |
 | ② 跟踪 | 跟踪雷达（`EWR_TTR`）+ 航迹管理 | `sensor/`（TRACK 模式）+ `WSF_TRACK_PROCESSOR` |
-| ③ 决策 | 指挥单元（`GBI_BATTERY`） | `WSF_TASK_PROCESSOR` + 任务下发 |
-| ④ 交战 | 发射车（`GBI_LAUNCHER`）+ 拦截弹 | `weapon/` + `WSF_EXPLICIT_WEAPON` + 制导/引信处理器 |
-| ⑤ 评估 | 拦截评估处理器 | `processor/GBI_INTERCEPT_ASSESS.txt` + 毁伤 `weapon_effects/` |
+| ③ 决策 | 指挥单元（`INTERCEPTOR_BATTERY`） | `WSF_TASK_PROCESSOR` + 任务下发 |
+| ④ 交战 | 发射车（`INTERCEPTOR_LAUNCHER`）+ 拦截弹 | `weapon/` + `WSF_EXPLICIT_WEAPON` + 制导/引信处理器 |
+| ⑤ 评估 | 拦截评估处理器 | `processor/INTERCEPTOR_ASSESS.txt` + 毁伤 `weapon_effects/` |
 
 ---
 
 ## 2. 样例工程中的杀伤链处理器链
 
-GBI 拦截弹内部挂了一串专用处理器，正是杀伤链的实现：
+INTERCEPTOR 拦截弹内部挂了一串专用处理器，正是杀伤链的实现：
 
 | 处理器 | 类型 | 环节 |
 | :-- | :-- | :-- |
-| `GBI_LAUNCH_PREP` | — | 发射准备 |
-| `GBI_GUIDANCE` | — | 制导（中段/末段） |
-| `GBI_SEEKER` | — | 导引头（末制导） |
-| `GBI_FUSE` | `WSF_AIR_TARGET_FUSE` | **引信**（起爆控制） |
-| `GBI_INTERCEPT_ASSESS` | — | **拦截评估**（⑤） |
-| `GBI_LETHALITY` | `weapon_effects` `WSF_GRADUATED_LETHALITY` | 毁伤判定 |
+| `INTERCEPTOR_LAUNCH_PREP` | — | 发射准备 |
+| `INTERCEPTOR_GUIDANCE` | — | 制导（中段/末段） |
+| `INTERCEPTOR_SEEKER` | — | 导引头（末制导） |
+| `INTERCEPTOR_FUSE` | `WSF_AIR_TARGET_FUSE` | **引信**（起爆控制） |
+| `INTERCEPTOR_ASSESS` | — | **拦截评估**（⑤） |
+| `INTERCEPTOR_LETHALITY` | `weapon_effects` `WSF_GRADUATED_LETHALITY` | 毁伤判定 |
 
 发射平台侧：
 
 | 处理器 | 类型 | 作用 |
 | :-- | :-- | :-- |
-| `GBI_DATA_MGR` | `WSF_TRACK_PROCESSOR` | 航迹管理（②） |
-| `GBI_TASK_MGR` | `WSF_TASK_PROCESSOR` | 任务管理（③） |
-| `GBI_PROCESSOR_WITH_EWR_GUIDANCE` | — | 用预警雷达引导 |
+| `INTERCEPTOR_DATA_MGR` | `WSF_TRACK_PROCESSOR` | 航迹管理（②） |
+| `INTERCEPTOR_TASK_MGR` | `WSF_TASK_PROCESSOR` | 任务管理（③） |
+| `INTERCEPTOR_PROCESSOR_WITH_EWR_GUIDANCE` | — | 用预警雷达引导 |
 
 ---
 
@@ -113,6 +113,6 @@ t6  评估完成（PLATFORM_BROKEN）
 
 ## 6. 待校验项
 
-- 各处理器的**内部逻辑**（`GBI_GUIDANCE` / `GBI_SEEKER` / `GBI_INTERCEPT_ASSESS` 的脚本未在样例规范中展开）；
+- 各处理器的**内部逻辑**（`INTERCEPTOR_GUIDANCE` / `INTERCEPTOR_SEEKER` / `INTERCEPTOR_ASSESS` 的脚本未在样例规范中展开）；
 - 任务下发到发射的**判定条件**；
 - 毁伤判定与**评估口径**的正式定义。

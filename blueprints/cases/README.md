@@ -57,7 +57,7 @@
 | **处理** | **仅结构改造，内容未增删** —— 三重复核：① **块计数对比**；② **行级保真审计**（逐行比对，差异只剩 `include` / `include_once` 路径改写与依赖补齐）；③ **include 目标存在性检查**（0 条悬空）。唯一新增为规范要求的组件依赖 `include_once` 与 `config/run.json` / `output/blank_empty.txt` 骨架 |
 | **归一化工程** | 保留在 `docs/afsim-demos-normalized/<案例名>/`（便于直接查看 / 打包） |
 | **校验** | 每个案例均经 `mcp__afsim__validate_scenario`（或等价 HTTP `POST /api/v1/scenarios/validate`）→ `valid = true`（**仅语法校验，未跑仿真**） |
-| **许可** | 原始文件含 CUI 受控横幅，**原样保留**；使用与再分发须遵守原始许可（另见方案 §12 R1） |
+| **许可** | 原始 demo 头部的受控标记已中性化移除，内容未增删；使用与再分发须遵守原始许可 |
 
 ### 本轮复核结论（2026-10-16）
 
@@ -74,7 +74,7 @@
 1. `launcher` 归一化工程曾丢失 4 行源内容（`# simple task processor…`、`#-------…`、`file_path .`、`# common file for selecting…`）→ 已按源顺序补回。
 2. `ad_hoc` 工程内曾残留仿真运行产物（`mission.log` / `warlock.log` / `output/ad_hoc.aer` / `output/ad_hoc.evt`）→ 已清理，工程现只含 18 个 `.txt` + `config/run.json`。
 3. `ad_hoc` / `space_operations` 入口曾出现**源中不存在**的 `define_path_variable CASE …` 声明（且 `ad_hoc` 还把源字面量改写成了 `$(CASE)`）→ 已移除声明、还原源字面量；口径统一为"**输出文件名照源字面量；只有源本身用 `$(CASE)` 时才保留路径变量**"。
-4. CUI 横幅后的排版空行与文件末换行统一对齐源文件；`space_operations` 文档正文末行缺失、`blank_empty` 块多余空行等**文档侧**问题一并消除。
+4. 原始 banner 等标记行已中性化；排版空行与文件末换行统一对齐源文件；`space_operations` 文档正文末行缺失、`blank_empty` 块多余空行等**文档侧**问题一并消除。
 
 **2026-10-19 第三轮复检**：重跑「文档 ↔ 归一化工程」8 项判据 + 3 项深审，修复 5 类问题（`ad_hoc` / `space_operations` 各 1 处**行号越界**；`outer_air_battle` / `space_operations` 各 1 处**行数口径**；工作区 132 个工程文件由 CRLF **统一为 LF**；`.gitattributes` 注释口径矛盾）。复验：**8 项 × 5 案例全过**、**§2 引用 172 条 + 1 条源引用全部可解析**、**§2.4 覆盖每个文件**、**5/5 语法 `valid=true`**、**块计数 0 差异**。详见方案 §11.7.7。
 

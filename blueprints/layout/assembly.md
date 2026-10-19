@@ -81,7 +81,7 @@ define_path_variable CASE <想定名>
 include_once sensor/TTR_RADAR.txt
 include_once comm/C2_LINK.txt
 include_once signatures/VEHICLE_RADAR_SIGNATURE.txt
-include_once processor/processor_2100780702274809857.txt
+include_once processor/processor_TRACK_0001.txt
 
 platform_type EWR_TTR WSF_PLATFORM
    …
@@ -109,8 +109,8 @@ include_once platform/EWR_TTR.txt
 | 项 | 约定 |
 | :-- | :-- |
 | 想定名 | 字母/数字/下划线，**无中文、无空格**；= 入口文件名 = 压缩包名 |
-| 平台类型 | 大写 + 下划线（`GBI_LAUNCHER`） |
-| 平台实例 | 类型名 + `_` + 业务 code（`GBI_LAUNCHER_322857`） |
+| 平台类型 | 大写 + 下划线（`INTERCEPTOR_LAUNCHER`） |
+| 平台实例 | 类型名 + `_` + 业务 code（`INTERCEPTOR_LAUNCHER_322857`） |
 | 组件名 | 大写 + 下划线，语义化（`DATALINK`、`TTR_RADAR`） |
 | 签名 | `<对象>_<类型>_SIG` / `_SIGNATURE` |
 | 扩展名 | **一律 `.txt`**（不是 `.wsf`） |

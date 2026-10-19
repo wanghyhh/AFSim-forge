@@ -6,8 +6,8 @@
 
 # ── MCP 校验工具（唯一校验通道）────────────────────────────────
 mcp:
-  # 工具名前缀由 DSH 中 mcp-client 的 serverName 决定：mcp__<server_name>__
-  # 若 DSH 侧改了 serverName，只需同步此处与下方 tool 字段。
+  # 工具名前缀由宿主环境中 mcp-client 的 serverName 决定：mcp__<server_name>__
+  # 若宿主环境侧改了 serverName，只需同步此处与下方 tool 字段。
   prefix: "mcp__afsim__"
 
   # 白名单：本 skill 允许调用的工具

@@ -10,7 +10,7 @@ metadata:
 
 # afsim-forge — AFSIM 体系工程生成与校验
 
-> **单入口 + 意图路由**：本 skill 在 DSH 中以 `/afsim-forge` 调用；进入后按下方「意图路由表」分派工作流。
+> **单入口 + 意图路由**：本 skill 在支持 skill 的宿主环境中以 `/afsim-forge` 调用；进入后按下方「意图路由表」分派工作流。
 > **输入 = 实验筹划（自然语言，必需）+ 想定编辑（`scenarioJsonData` JSON，可选、格式不定）**，生成前必走 `workflows/intake.md`。
 > 详细知识一律外链，按需加载 —— 本文件只做入口与规则。
 
@@ -20,7 +20,7 @@ metadata:
 
 ```
 afsim-forge/
-├── SKILL.md · config.yaml                ← ① 入口层：本文件是唯一入口，知识一律外链
+├── SKILL.md · config.yaml · README.md · NOTICE.md   ← ① 入口层：本文件是唯一入口，知识一律外链
 ├── workflows/                            ← ② 流程层：intake / generate / validate / debug / archive
 ├── blueprints/                           ← ③ 骨架层：要"照抄/填空"的东西
 │   ├── layout/       结构与装配规则（权威）
@@ -144,7 +144,7 @@ afsim-forge/
 ## MCP 校验（唯一校验通道）
 
 > 本 skill **只通过 MCP 工具工作**，不接触 AFSIM 本体（安装位置、可执行文件、命令行等均属服务端职责）。
-> 工具名前缀由 DSH 的 `serverName` 决定，**单点维护在 `config.yaml`**（`mcp.prefix`）。
+> 工具名前缀由宿主环境的 `serverName` 决定，**单点维护在 `config.yaml`**（`mcp.prefix`）。
 
 | 允许 | 用途 |
 | :-- | :-- |
@@ -211,4 +211,4 @@ afsim-forge/
 ## 配置
 
 - MCP 工具契约、工程结构约定、**运行时状态目录（`.afsim-forge/`）**：见 `config.yaml`（**单点维护**）。
-- 工具名前缀随 DSH 的 `serverName` 变化，只需改 `config.yaml` 一处。
+- 工具名前缀随宿主环境的 `serverName` 变化，只需改 `config.yaml` 一处。

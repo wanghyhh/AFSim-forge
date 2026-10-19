@@ -17,33 +17,33 @@
 样例中的实际写法：
 
 ```text
-# 上级（指挥节点）：GBI_BATTERY_322860
-platform GBI_BATTERY_322860 GBI_BATTERY
+# 上级（指挥节点）：INTERCEPTOR_BATTERY_322860
+platform INTERCEPTOR_BATTERY_322860 INTERCEPTOR_BATTERY
    side red
    commander SELF
    command_chain CmdChain_1 SELF
 end_platform
 
-# 下级：RED_EWR_322728 与 GBI_LAUNCHER_322857 都挂在它下面
+# 下级：RED_EWR_322728 与 INTERCEPTOR_LAUNCHER_322857 都挂在它下面
 platform RED_EWR_322728 RED_EWR
-   commander GBI_BATTERY_322860
+   commander INTERCEPTOR_BATTERY_322860
 end_platform
 
-platform GBI_LAUNCHER_322857 GBI_LAUNCHER
-   commander GBI_BATTERY_322860
+platform INTERCEPTOR_LAUNCHER_322857 INTERCEPTOR_LAUNCHER
+   commander INTERCEPTOR_BATTERY_322860
 end_platform
 ```
 
-> ⚠️ **`command_chain` / `commander` 里写的是「平台实例名」**（如 `GBI_BATTERY_322860`），**不是类型名**。
+> ⚠️ **`command_chain` / `commander` 里写的是「平台实例名」**（如 `INTERCEPTOR_BATTERY_322860`），**不是类型名**。
 
 ---
 
 ## 2. 指挥链的典型形态
 
 ```
-GBI_BATTERY_322860  （SELF，链首）
+INTERCEPTOR_BATTERY_322860  （SELF，链首）
    ├── RED_EWR_322728          （预警雷达）
-   └── GBI_LAUNCHER_322857     （发射车）
+   └── INTERCEPTOR_LAUNCHER_322857     （发射车）
 ```
 
 **层级原则**：上级负责**任务分配与态势汇总**，下级负责**执行与上报**。
@@ -76,7 +76,7 @@ GBI_BATTERY_322860  （SELF，链首）
 处理器层面的上报写法（见 `blueprints/fragments/processor/track_processor.txt.tpl`）：
 
 ```text
-processor GBI_DATA_MGR WSF_TRACK_PROCESSOR
+processor INTERCEPTOR_DATA_MGR WSF_TRACK_PROCESSOR
    report_to
    commander
    via DATALINK            ← 经由哪条数据链

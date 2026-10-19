@@ -46,7 +46,7 @@
 
 | 维度 | 案例（实例） | skeleton（骨架） | 原因 |
 | :-- | :-- | :-- | :-- |
-| 命名 | 具体业务名 `GBI_LAUNCHER`、`TTR_RADAR` | 占位符 `{{PLATFORM_TYPE}}` | 模板要能生成**任意**想定 |
+| 命名 | 具体业务名 `INTERCEPTOR_LAUNCHER`、`TTR_RADAR` | 占位符 `{{PLATFORM_TYPE}}` | 模板要能生成**任意**想定 |
 | 数值 | 具体值 `9500 mhz`、`power 1000 kw` | 占位符 `{{FREQUENCY}}` | 无依据时**不编造**，标"待确认" |
 | 自动 ID | 工具生成的雪花 ID | 语义化 `{{SENSOR_NAME}}_ANTENNA_SEARCH` | 雪花 ID 无复用价值 |
 | 业务脚本 | 含任务管理逻辑（`Map<int,SimTask>…`） | **不含** | 属用户内部业务，不该硬编码 |
