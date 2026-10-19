@@ -127,7 +127,7 @@
 
 ```
 afsim-forge/
-├── SKILL.md · config.yaml · README.md · NOTICE.md   ① 入口层
+├── SKILL.md · config.yaml · README.md   ① 入口层
 │
 ├── workflows/                                       ② 流程层
 │   ├── intake.md      输入解析（两类输入 → 工程要素）
@@ -302,7 +302,6 @@ archive（归档：staging → verified，只进不出）
 ## 许可与致谢
 
 - **第三方移植内容**：`knowledge/language/`（5 篇）与 `knowledge/blocks/`（4 篇）整体移植自开源项目 **AFSIM Script Generator**（作者 **lookingforfeng**，声明许可 **MIT**）。本项目仅做重命名与目录重排，正文未改写。
-- 移植清单、未纳入的上游文件及原因、改动说明、可信度分级 —— 见 **[`NOTICE.md`](NOTICE.md)**。
 - **本项目自研部分**（`workflows/`、`blueprints/`、`knowledge/system-of-systems/`、`knowledge/lessons/`、`SKILL.md`、`config.yaml`）目前**未单独声明开源许可**；如需对外开源，请另行补充 `LICENSE`。
 - 案例素材来自 AFSIM 官方示例工程，仅做结构归位与路径改写（内容零增删）。
 

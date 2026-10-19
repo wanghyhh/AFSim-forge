@@ -55,4 +55,4 @@
 
 - 本目录文件**体量较大**（合计约 4,900 行），**按需逐个加载**，不要一次全读。
 - 少数文件的头部有「待校验」标记 —— 表示该结论来自**推断**而非实测，用于生成时可参考但**不应作为唯一依据**；遇到与 `blueprints/cases/` 实测案例冲突时，**以案例为准**。
-- **来源与许可**：`language/` 与 `blocks/` 的文档**整体移植自第三方开源项目 AFSIM Script Generator**（作者 **lookingforfeng**，README 声明 **MIT**，快照内无 LICENSE 文件）；本项目仅做**重命名与目录重排**，正文未改写。移植清单与改动说明见 `../NOTICE.md`。
+- **来源与许可**：`language/` 与 `blocks/` 的文档**整体移植自第三方开源项目 AFSIM Script Generator**（作者 **lookingforfeng**，README 声明 **MIT**，快照内无 LICENSE 文件）；本项目仅做**重命名与目录重排**，正文未改写。

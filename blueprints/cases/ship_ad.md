@@ -257,7 +257,6 @@ ship_ad.txt (入口, define_path_variable CASE ship_ad)
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 define_path_variable CASE ship_ad
@@ -344,7 +343,6 @@ end_time 1.5 hours
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 #----------------------------------------------------------------------
@@ -370,7 +368,6 @@ include_once platform/RED_NAVAL_HELICOPTER.txt
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 # common file for selecting which messages appear in the event pipe
@@ -390,7 +387,6 @@ end_event_pipe
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 # common terrain configuration
@@ -409,7 +405,6 @@ end_terrain
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 route ASM_DUMMY
    label start
@@ -427,7 +422,6 @@ end_route
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # --------------------------------------------------------------
 #                         Filter tactics
@@ -463,7 +457,6 @@ end_filter
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 aero RED_SR_SAM_1_AERO WSF_AERO
   # Values estimated from Hoerner's Drag book
@@ -486,7 +479,6 @@ end_aero
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 aero RED_SR_SAM_2_AERO WSF_AERO
   # Values estimated from Hoerner's Drag book
@@ -510,7 +502,6 @@ end_aero
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 aero SSM_MISSILE_AERO WSF_AERO
 # Values estimated from Hoerners Drag book
@@ -536,7 +527,6 @@ end_aero
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # --------------------------------------------------------------
 #                         Red datalink
@@ -556,7 +546,6 @@ end_comm
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 log version $Id: front_dome.txt,v 1.1.1.1 2008/07/28 15:09:03 unknown Exp $
 
@@ -617,7 +606,6 @@ end_sensor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 log version $Id: helicopter_surface_search_radar_1.txt,v 1.1.1.1 2008/07/28 15:09:03 unknown Exp $
 
@@ -702,7 +690,6 @@ end_sensor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 log version $Id: red_missile_seeker_1.txt,v 1.1.1.1 2008/07/28 15:09:03 unknown Exp $
 
@@ -784,7 +771,6 @@ end_sensor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 log version $Id: rice_screen.txt,v 1.1.1.1 2008/07/28 15:09:03 unknown Exp $
 
@@ -869,7 +855,6 @@ end_sensor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 log version $Id: sr_sam_fcr_1.txt,v 1.1.1.1 2008/07/28 15:09:03 unknown Exp $
 
@@ -956,7 +941,6 @@ end_sensor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 log version $Id: top_plate.txt,v 1.1.1.1 2008/07/28 15:09:03 unknown Exp $
 
@@ -1036,7 +1020,6 @@ end_sensor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
@@ -1312,7 +1295,6 @@ end_processor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
@@ -1551,7 +1533,6 @@ end_processor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
@@ -1790,7 +1771,6 @@ end_processor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
@@ -1880,7 +1860,6 @@ end_processor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
@@ -1956,7 +1935,6 @@ end_processor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
@@ -2056,7 +2034,6 @@ end_processor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 processor MISSILE_SHIP_DATA_MGR WSF_TRACK_PROCESSOR
    purge_interval            60 sec
@@ -2072,7 +2049,6 @@ end_processor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 processor MISSILE_SHIP_TASK_MGR NAVAL_SAM_TACTICS
    on_initialize
@@ -2092,7 +2068,6 @@ end_processor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 processor RED_MISSILE_DESTROYER_DATA_MGR WSF_TRACK_PROCESSOR
    purge_interval            60 sec
@@ -2108,7 +2083,6 @@ end_processor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 processor RED_MISSILE_DESTROYER_TASK_MGR NAVAL_SAM_TACTICS
    on_initialize
@@ -2128,7 +2102,6 @@ end_processor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 processor RED_MISSILE_FRIGATE_DATA_MGR WSF_TRACK_PROCESSOR
    purge_interval            60 sec
@@ -2144,7 +2117,6 @@ end_processor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 processor RED_MISSILE_FRIGATE_TASK_MGR NAVAL_SAM_TACTICS
    on_initialize
@@ -2166,7 +2138,6 @@ end_processor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 processor RED_NAVAL_HELICOPTER_DATA_MGR WSF_TRACK_PROCESSOR
    purge_interval            60 sec
@@ -2185,7 +2156,6 @@ end_processor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 radar_signature     VEHICLE_RADAR_SIGNATURE
    constant  1 m^2
@@ -2201,7 +2171,6 @@ end_radar_signature
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
@@ -2225,7 +2194,6 @@ end_infrared_signature
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 optical_signature   VEHICLE_OPTICAL_SIGNATURE
    constant  10 m^2
@@ -2241,7 +2209,6 @@ end_optical_signature
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 radar_signature     SHIP_RADAR_SIGNATURE
    constant  1000 m^2
@@ -2257,7 +2224,6 @@ end_radar_signature
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # --------------------------------------------------------------
 #                         Ship Signatures
@@ -2276,7 +2242,6 @@ end_infrared_signature
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 optical_signature   SHIP_OPTICAL_SIGNATURE
    constant  300 m^2
@@ -2292,7 +2257,6 @@ end_optical_signature
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 weapon_effects RED_ASM_MSL_EFFECT WSF_GRADUATED_LETHALITY      # unknown
    radius_and_pk 20.0 m 0.75
@@ -2308,7 +2272,6 @@ end_weapon_effects
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 weapon_effects RED_SR_SAM_1_EFFECT WSF_GRADUATED_LETHALITY      # unknown
    radius_and_pk 20.0 m 0.8
@@ -2324,7 +2287,6 @@ end_weapon_effects
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 weapon_effects RED_SR_SAM_2_EFFECT WSF_GRADUATED_LETHALITY      # unknown
    radius_and_pk 17.0 m 0.8         # Ref 1 lethal radius for RED_SR_NAVAL_SAM_1
@@ -2340,7 +2302,6 @@ end_weapon_effects
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 weapon_effects SSM_MISSILE_EFFECT WSF_GRADUATED_LETHALITY
     # radius_and_pk 20.0 m 0.8 # unknown
@@ -2359,7 +2320,6 @@ end_weapon_effects
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once processor/ASM_TACTICS.txt
 include_once sensor/RED_MISSILE_SEEKER_1.txt
@@ -2451,7 +2411,6 @@ end_weapon
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once mover/RED_SR_SAM_1_AERO.txt
 include_once weapon_effects/RED_SR_SAM_1_EFFECT.txt
@@ -2533,7 +2492,6 @@ end_weapon
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once mover/RED_SR_SAM_2_AERO.txt
 include_once weapon_effects/RED_SR_SAM_2_EFFECT.txt
@@ -2628,7 +2586,6 @@ end_weapon
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 log version $Id: ssm_missile.txt,v 1.2 2010/12/07 13:39:53 unknown Exp $
 
@@ -2746,7 +2703,6 @@ end_weapon
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
@@ -2797,7 +2753,6 @@ end_script
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
@@ -2858,7 +2813,6 @@ end_script
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
@@ -2909,7 +2863,6 @@ end_script
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
@@ -2955,7 +2908,6 @@ end_script
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
@@ -3012,7 +2964,6 @@ end_script
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
@@ -3066,7 +3017,6 @@ end_script
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
@@ -3112,7 +3062,6 @@ end_script
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once processor/NAVAL_SAM_TACTICS.txt
 include_once processor/NAVAL_ASM_TACTICS.txt
@@ -3214,7 +3163,6 @@ end_platform_type
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once processor/NAVAL_SAM_TACTICS.txt
 include_once processor/NAVAL_ASM_TACTICS.txt
@@ -3324,7 +3272,6 @@ end_platform_type
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once processor/NAVAL_SAM_TACTICS.txt
 include_once processor/RED_MISSILE_FRIGATE_DATA_MGR.txt
@@ -3440,7 +3387,6 @@ end_platform_type
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once processor/RED_NAVAL_HELICOPTER_DATA_MGR.txt
 include_once processor/INFLIGHT_UPDATE_TACTICS.txt
@@ -3518,7 +3464,6 @@ end_platform_type
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # * * ************************************** * *
 # *   ****** Demonstration input file ******   *
@@ -3554,7 +3499,6 @@ end_platform
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 platform 1000_target_ship RED_MISSILE_FRIGATE
    side red
@@ -3665,7 +3609,6 @@ end_platform
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 ```
 
 文件内其余 AFSIM 命令内容未作任何增删。

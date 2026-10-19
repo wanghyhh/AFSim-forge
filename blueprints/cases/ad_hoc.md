@@ -193,7 +193,6 @@ flowchart TD
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 #
 # This demo highlights some of the ad-hoc capabilities available in AFSIM.
@@ -245,7 +244,6 @@ end_event_output
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 event_pipe
    file output/ad_hoc.aer
@@ -261,7 +259,6 @@ end_event_pipe
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 global_environment
 end_global_environment
@@ -276,7 +273,6 @@ end_global_environment
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 script_variables
@@ -360,7 +356,6 @@ end_execute
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 route detector_route
@@ -381,7 +376,6 @@ end_route
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once platform/DETECTOR.txt
 include_once platform/INTRUDER.txt
@@ -397,7 +391,6 @@ include_once platform/BLACK_VAN.txt
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 comm AD_HOC WSF_RADIO_TRANSCEIVER
@@ -423,7 +416,6 @@ end_comm
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 include_once global_script.txt
@@ -507,7 +499,6 @@ end_router_protocol
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 include_once comm/AD_HOC_router_protocol.txt
@@ -528,7 +519,6 @@ end_router
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 network ad_hoc WSF_COMM_NETWORK_AD_HOC
@@ -545,7 +535,6 @@ end_network
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once network/ad_hoc_network.txt
 ```
@@ -559,7 +548,6 @@ include_once network/ad_hoc_network.txt
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 include_once comm/ad_hoc_comm.txt
@@ -615,7 +603,6 @@ end_platform_type
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 platform_type INTRUDER WSF_PLATFORM
@@ -639,7 +626,6 @@ end_platform_type
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 platform_type BLACK_VAN WSF_PLATFORM
    side black
@@ -670,7 +656,6 @@ end_platform_type
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 platform intruder INTRUDER
@@ -686,7 +671,6 @@ end_platform
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 // This platform is on the same network, but only exists
@@ -784,7 +768,6 @@ end_platform
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 platform black_van BLACK_VAN
 end_platform
@@ -866,7 +849,6 @@ end_platform
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 ```
 
 文件内其余 AFSIM 命令内容未作任何增删。

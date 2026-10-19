@@ -20,7 +20,7 @@ metadata:
 
 ```
 afsim-forge/
-├── SKILL.md · config.yaml · README.md · NOTICE.md   ← ① 入口层：本文件是唯一入口，知识一律外链
+├── SKILL.md · config.yaml · README.md   ← ① 入口层：本文件是唯一入口，知识一律外链
 ├── workflows/                            ← ② 流程层：intake / generate / validate / debug / archive / local-exec
 ├── blueprints/                           ← ③ 骨架层：要"照抄/填空"的东西
 │   ├── layout/       结构与装配规则（权威）

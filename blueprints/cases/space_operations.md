@@ -239,7 +239,6 @@ space_operations.txt（场景入口）
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # ==============================================================================
 # A demonstration using the AFSIM lasercomm model.  A subset of the planned 
@@ -289,7 +288,6 @@ end_event_output
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once platform/STARLINK.txt
 include_once platform/UPLINK.txt
@@ -304,7 +302,6 @@ include_once platform/UPLINK.txt
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 event_pipe 
    file output/lasercomm_scripted.aer
@@ -323,7 +320,6 @@ end_event_pipe
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 
@@ -523,7 +519,6 @@ end_script_struct
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # This moves the comm device on the given platform onto a new network with a name
 # derived from the comm device name and platform name.
@@ -773,7 +768,6 @@ end_script
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 group LINKABLE_TARGETS WSF_GROUP 
 end_group
@@ -811,7 +805,6 @@ end_group
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 attenuation laser_link_attenuation WSF_OPTICAL_ATTENUATION
@@ -886,7 +879,6 @@ end_comm
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 include_once comm/LASERCOMM_LINK.txt
@@ -905,7 +897,6 @@ end_comm
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 include_once comm/LASERCOMM_LINK.txt
@@ -923,7 +914,6 @@ end_comm
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 include_once comm/LASERCOMM_LINK.txt
@@ -942,7 +932,6 @@ end_comm
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 # The comm devices for the platform type are added to this network
@@ -962,7 +951,6 @@ end_network
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once network/starlink_default.txt
 ```
@@ -976,7 +964,6 @@ include_once network/starlink_default.txt
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 antenna_pattern UNIFORM_0DBI_PATTERN
   uniform_pattern
@@ -994,7 +981,6 @@ end_antenna_pattern
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 radar_signature STARLINK_RADAR_SIG
@@ -1011,7 +997,6 @@ end_radar_signature
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 #script_variables
@@ -1315,7 +1300,6 @@ end_processor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 include_once global_script.txt
@@ -1426,7 +1410,6 @@ end_processor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 # New file created by AFSIM Wizard
@@ -1560,7 +1543,6 @@ end_processor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 # New file created by AFSIM Wizard
@@ -1664,7 +1646,6 @@ end_platform_type
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 # Uplink
@@ -1709,7 +1690,6 @@ end_platform_type
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 # The commander can receive any starlink related communcations.
@@ -1735,7 +1715,6 @@ end_platform
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 
 # This is an example of a ground platform transmitting to the starlink constellation.
@@ -1879,7 +1858,6 @@ end_platform
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 ```
 
 文件内其余 AFSIM 命令内容未作任何增删。

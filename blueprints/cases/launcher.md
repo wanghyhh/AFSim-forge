@@ -229,7 +229,6 @@ launcher.txt（入口）
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 define_path_variable CASE launcher
 log_file output/$(CASE).log
@@ -314,7 +313,6 @@ end_time 1200 sec
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 event_pipe file output/$(CASE).aer end_event_pipe
 
@@ -329,7 +327,6 @@ event_pipe file output/$(CASE).aer end_event_pipe
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # common terrain configuration
 
@@ -347,7 +344,6 @@ end_terrain
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 # simple task processor to launch a sam at an air target
 
@@ -365,7 +361,6 @@ end_script_interface
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 file_path .
 
@@ -384,7 +379,6 @@ include_once platform/AIRPLANE.txt
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 aero SAM_MISSILE_AERO WSF_AERO
    cd_zero_subsonic    0.30
@@ -407,7 +401,6 @@ end_aero
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 weapon_effects SAM_MISSILE_EFFECT WSF_GRADUATED_LETHALITY      # unknown
    radius_and_pk 20.0 m 0.8
@@ -424,7 +417,6 @@ end_weapon_effects
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 sensor RADAR_SET WSF_RADAR_SENSOR
  # show_calibration_data
@@ -472,7 +464,6 @@ end_sensor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 #---------------------------------------
 processor SAM_TACTICS_PROCESSOR WSF_TASK_PROCESSOR
@@ -589,7 +580,6 @@ end_processor
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once mover/SAM_MISSILE_AERO.txt
 include_once weapon_effects/SAM_MISSILE_EFFECT.txt
@@ -652,7 +642,6 @@ end_weapon
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 platform_type AIRPLANE WSF_PLATFORM
   icon F-18
@@ -670,7 +659,6 @@ end_platform_type
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 include_once sensor/RADAR_SET.txt
 include_once weapon/SAM_MISSILE.txt
@@ -715,7 +703,6 @@ end_platform_type
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 platform target1 AIRPLANE
    side Blue
@@ -740,7 +727,6 @@ end_platform
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 # ****************************************************************************
 platform sam_site SAM_LAUNCHER
 side Red
@@ -828,7 +814,6 @@ end_platform
 # The Advanced Framework for Simulation, Integration, and Modeling (AFSIM)
 #
 # Original demo input. Structure reorganized only; content not modified.
-# See NOTICE.md for provenance and licensing.
 ```
 
 文件内其余 AFSIM 命令内容未作任何增删。
