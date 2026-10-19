@@ -1,6 +1,6 @@
 ---
 name: afsim-forge
-description: 按标准多目录工程结构，从自然语言生成 AFSIM 工程，并调用 MCP 语法校验接口闭环纠错。当用户提到 AFSIM 工程/想定生成、体系仿真建模、platform_type、sensor、weapon、processor、include_once、工程骨架、语法校验时使用。不运行仿真。
+description: 按标准多目录工程结构，从「实验筹划（自然语言）+ 想定编辑（scenarioJsonData JSON）」两类输入生成 AFSIM 工程，并调用 MCP 语法校验接口闭环纠错。当用户提供实验筹划/想定编辑、或提到 AFSIM 工程/想定生成、体系仿真建模、platform_type、sensor、weapon、processor、include_once、工程骨架、语法校验时使用。不运行仿真。
 whenToUse: 需要生成、校验或修复 AFSIM 体系工程时
 disable-model-invocation: false
 user-invocable: true
@@ -11,6 +11,7 @@ metadata:
 # afsim-forge — AFSIM 体系工程生成与校验
 
 > **单入口 + 意图路由**：本 skill 在 DSH 中以 `/afsim-forge` 调用；进入后按下方「意图路由表」分派工作流。
+> **输入 = 实验筹划（自然语言，必需）+ 想定编辑（`scenarioJsonData` JSON，可选、格式不定）**，生成前必走 `workflows/intake.md`。
 > 详细知识一律外链，按需加载 —— 本文件只做入口与规则。
 
 ---
@@ -19,8 +20,8 @@ metadata:
 
 ```
 afsim-forge/
-├── SKILL.md · config.yaml · NOTICE.md   ← ① 入口层：本文件是唯一入口，知识一律外链
-├── workflows/                            ← ② 流程层：generate / validate / debug / archive
+├── SKILL.md · config.yaml                ← ① 入口层：本文件是唯一入口，知识一律外链
+├── workflows/                            ← ② 流程层：intake / generate / validate / debug / archive
 ├── blueprints/                           ← ③ 骨架层：要"照抄/填空"的东西
 │   ├── layout/       结构与装配规则（权威）
 │   ├── skeleton/     9 根文件 + run.json 的可填骨架（含 minimal/ 最小可跑工程）
@@ -52,14 +53,34 @@ afsim-forge/
 
 | 意图 | 用户触发词（示例） | 走哪条工作流 |
 | :-- | :-- | :-- |
-| **生成新工程** | "生成 / 新建 / 做一个 … AFSIM 工程" | `workflows/generate.md` |
+| **解析输入** | 给了"实验筹划 / 想定编辑 / scenarioJsonData" | `workflows/intake.md`（**生成前必走**） |
+| **生成新工程** | "生成 / 新建 / 做一个 … AFSIM 工程" | `workflows/intake.md` → `workflows/generate.md` |
 | **校验** | "校验 / 检查语法 / 语法对不对" | `workflows/validate.md` |
 | **修复** | "报错了 / 帮我修一下 / 通不过" | `workflows/debug.md` |
 | **归档** | "归档 / 确认 / 可以了" | `workflows/archive.md` |
 | **帮助** | "怎么用 / 有哪些能力" | 本文件「能力概览」 |
 
-**能力概览**：① 按标准工程结构生成 AFSIM 工程；② 调用 MCP 做语法校验并闭环修复；③ 提供 AFSIM 语法与体系仿真知识；④ 成果 staging → verified 闭环管理。
+**能力概览**：① 解析两类输入（实验筹划 + 想定编辑 JSON）；② 按标准工程结构生成 AFSIM 工程；③ 调用 MCP 做语法校验并闭环修复；④ 提供 AFSIM 语法与体系仿真知识；⑤ 成果 staging → verified 闭环管理。
 **不做**：跑仿真、回放、下载仿真结果（见下方「MCP 边界」）。
+
+---
+
+## 输入（两类，生成前必须先解析）
+
+> **详细规则见 `workflows/intake.md`**；这里只放必须记住的结论。
+
+| 输入 | 形式 | 必需 | 作用 |
+| :-- | :-- | :-: | :-- |
+| **实验筹划** | **自然语言文本** | ✔ | 整个想定的详细内容：**任务、仿真目的、过程、包含兵力**等 |
+| **想定编辑** | **JSON 文本**（`scenarioJsonData`） | ○ | 一些**必要的配置**；**格式不定** |
+
+**三条必须记住的规则**：
+
+1. **JSON 有就读、没有就生成** —— 提供了必须读取并按语义落地（**不许忽略、不许只取一半、不许丢字段**）；没提供就按实验筹划 + 缺省值生成，**不得因此停下追问**。
+2. **优先级**：`JSON 显式给出 > 实验筹划明确描述 > 缺省值`。配置项冲突以 JSON 为准并标注；**想定内容（兵力/阵营/任务）冲突必须问用户**。
+3. **实验筹划要拆成工程要素**（想定名 / 阵营与兵力 / 任务与过程 / 指挥与通信 / 传感器与武器 / 指标口径），拆不出就按缺省补，**不编造兵力与性能参数**。
+
+> 解析产出一份**6 项结论**（想定名 / 阵营与兵力 / 任务与过程 / 体系关系 / 配置及来源 / 待确认清单），它就是交付说明的骨架。
 
 ---
 
@@ -97,7 +118,7 @@ afsim-forge/
 | `event_pipe` | `AIRCOMBAT` / `TRACK_UPDATE` / `BEHAVIOR_TOOL` | 与样例一致 |
 | 阵营 | 红方 `red` / 蓝方 `blue` | 对应 `side/red.txt`、`side/blue.txt` |
 | `config/run.json` 输出开关 | `recordAer=1` / `recordEvent=0` / `recordLog=1` | |
-| `config/run.json` 的 `scenariosId` | **留空（`0`）** | 由业务侧填充，**不自行编造** |
+| `config/run.json` 的 `scenariosId` | **留空（`0`）** | **想定编辑 JSON 给了就照抄**；没给才留空，**不自行编造** |
 
 ### 2. 组件级
 
@@ -116,7 +137,7 @@ afsim-forge/
 | 内容 | 处理 |
 | :-- | :-- |
 | `common/` 数据表（弹道表等） | **只建目录、不造数据**；若工程引用，须在交付说明中**列出待补清单**（文件名 + 用途 + 被谁引用） |
-| `config/run.json` 的 `scenariosId` | 留空 `0`，由业务侧填充 |
+| `config/run.json` 的 `scenariosId` | JSON 给了照抄；没给留空 `0`，由业务侧填充 |
 
 ---
 
@@ -145,7 +166,8 @@ afsim-forge/
 
 | 层级 | 文件 | 何时加载 |
 | :-- | :-- | :-- |
-| **L0**（常驻） | `SKILL.md`（本文件） | 默认；含硬约束、缺省值、判据铁律 |
+| **L0**（常驻） | `SKILL.md`（本文件） | 默认；含输入契约、硬约束、缺省值、判据铁律 |
+| **L1**（生成前必读） | `workflows/intake.md` | 拿到实验筹划 / 想定编辑 JSON，要解析成工程要素时 |
 | **L1**（起步必读） | `blueprints/README.md` | 想知道"该去哪个目录找东西"时 |
 | | `blueprints/layout/layout.md` | 要建工程结构（哪个文件放哪、必建哪些）时 |
 | | `blueprints/skeleton/README.md` → `skeleton/minimal/` | 要**立刻**搭一个能过校验的最小骨架时 |
@@ -159,9 +181,9 @@ afsim-forge/
 | **L3**（报错后） | `knowledge/lessons/errors.md` | 拿到校验报错，按关键字找 `[Exxx]` |
 | | `knowledge/lessons/index.md` → `root-causes.md` | `[Exxx]` 命中后查归类与根因修法 |
 
-**工作流**（流程性内容全在这，不重复写进本文件）：`workflows/generate.md` · `validate.md` · `debug.md` · `archive.md`
+**工作流**（流程性内容全在这，不重复写进本文件）：`workflows/intake.md` · `generate.md` · `validate.md` · `debug.md` · `archive.md`
 
-**加载顺序建议**：`L0 → workflows/<意图>.md → L1 → L2 → L3`。**同一轮不要把所有 L2 文件都读进来**，按需逐个加载。
+**加载顺序建议**：`L0 → workflows/intake.md（生成类意图必走）→ workflows/<意图>.md → L1 → L2 → L3`。**同一轮不要把所有 L2 文件都读进来**，按需逐个加载。
 
 ---
 

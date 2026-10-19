@@ -54,6 +54,41 @@ mcp:
     # 未列出的 code：读 msg 原文向用户报告，不得据此判断语法对错
     fallback: "读 msg 原文，向用户报告；不要用 code 判断语法对错"
 
+# ── 输入约定（生成前必须先解析）─────────────────────────────────
+# 详细解析规则见 workflows/intake.md
+input:
+  # ① 实验筹划：自然语言文本，必需 —— 描述整个想定的详细内容
+  experiment_plan:
+    required: true
+    format: "自然语言文本"
+    covers: ["任务", "仿真目的", "过程", "包含兵力"]
+    # 缺了它无法开工，直接向用户要
+    on_missing: "ask_user"
+
+  # ② 想定编辑：JSON 文本（scenarioJsonData），可选、**格式不定**
+  scenario_json:
+    required: false
+    format: "JSON 文本"
+    schema: "不定 —— 按语义识别，不按固定 schema 解析"
+    # 提供了必须读；没提供按实验筹划 + 缺省值生成，不得因此停下
+    on_missing: "generate_from_experiment_plan"
+    on_present: "must_read"
+    # 铁律
+    rules:
+      no_drop_fields: true          # JSON 有的键，最终工程里必须还在
+      no_rename: true               # 字段名 / 嵌套 / 数组顺序保持原样
+      no_unit_guess: true           # 数值无单位时按 run.json 既有口径，判断不了标"待确认"
+    # 认不出的字段：原样并入 config/run.json，并在交付说明列出清单
+    unknown_fields: "keep_in_run_json_and_report"
+
+  # 冲突裁决：想定编辑 JSON 显式给出 > 实验筹划明确描述 > 缺省值
+  priority: ["scenario_json", "experiment_plan", "defaults"]
+  # 想定内容（兵力 / 阵营 / 任务）冲突时不裁决，停下来问用户
+  escalate_on_conflict: ["兵力", "阵营", "任务"]
+
+  # 解析产物：6 项结论（交付说明的骨架）
+  parse_outputs: ["想定名", "阵营与兵力", "任务与过程", "体系关系", "配置及来源", "待确认清单"]
+
 # ── 工程结构约定 ──────────────────────────────────────────────
 project:
   # 结构权威说明（运行依赖）—— 与本文件冲突时以它为准

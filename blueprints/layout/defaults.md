@@ -18,7 +18,7 @@
 | `event_pipe` | `enable AIRCOMBAT` / `TRACK_UPDATE` / `BEHAVIOR_TOOL` | 与样例一致 |
 | 阵营 | 红 `red` / 蓝 `blue` | 对应 `side/red.txt`、`side/blue.txt` |
 | `run.json` 输出开关 | `recordAer=1` / `recordEvent=0` / `recordLog=1` | |
-| `run.json` 的 `scenariosId` | **`0`（留空）** | 业务侧填充，**不自行编造** |
+| `run.json` 的 `scenariosId` | **`0`（留空）** | **想定编辑 JSON 给了就照抄**；没给才留空，**不自行编造** |
 | `run.json` 的 `continueTime` | `1440` | 分钟 |
 
 ---
@@ -47,7 +47,7 @@
 | 内容 | 处理 |
 | :-- | :-- |
 | `common/` 数据表（弹道表等） | **只建目录、不造数据**；若工程引用，须在交付说明中**列出待补清单**（文件名 + 用途 + 被谁引用） |
-| `run.json` 的 `scenariosId` | 留空 `0`，业务侧填充 |
+| `run.json` 的 `scenariosId` | 想定编辑 JSON 给了照抄；没给留空 `0`，由业务侧填充 |
 | 真实平台性能参数（雷达功率、导弹推力等） | 优先从 `blueprints/cases/` 的实测案例取用；无依据时**标注"待确认"**，不编造 |
 
 ---
