@@ -61,7 +61,7 @@ space_operations/
 
 本案例（`space_operations`）是 AFSIM 官方 demo 中激光通信（lasercomm）星座组网演示的一个**选摘**子集，入口为 `space_operations.txt`，其头注释（`space_operations.txt:10-18`）明确了任务意图：用 `WsfConstellationMaker`（Wizard 星座生成器）在运行期建模一个"starfire"星座子集；星座内卫星之间的 crosslink（星间链路）与 downlink（下行链路）均为激光通信；同一轨道面内的卫星与轨道中前后相邻卫星建立**固定**网络链路，而侧向 crosslink 则与相对较近的卫星**动态**建立连接；所有通信链路的管理均通过脚本完成，最终利用这张 ad-hoc（自组）网络，让一个地面平台周期性地向地球另一侧的指挥官发送消息。
 
-仿真时间窗口在入口文件顶层声明（`space_operations.txt:37-39`）：`start_date nov 1 2019`、`start_time 07:30:00`、`end_time 2000 s`，即总时长 2000 秒。事件输出分两条通道：`event_output` 块输出 `output/lasercomm_scripted.evt`（`space_operations.txt:41-46`），显式 enable `TASK_ASSIGNED`、`MESSAGE_TRANSMITTED`、`MESSAGE_RECEIVED` 三类事件；`event_pipe` 块输出 `output/lasercomm_scripted.aer`（`event_pipe.txt:9-14`），enable `MESSAGE_TRANSMITTED`、`MESSAGE_RECEIVED`、`DRAW` 三类事件（`DRAW` 用于记录 `WsfDraw` 动态链路绘制的回放）。注意：两个输出文件名是源文件里的**字面量**（非 `$(CASE)` 路径变量），为原样保留。
+仿真时间窗口在入口文件顶层声明（`space_operations.txt:37-39`）：`start_date nov 1 2019`、`start_time 07:30:00`、`end_time 2000 s`，即总时长 2000 秒。事件输出分两条通道：`event_output` 块输出 `output/lasercomm_scripted.evt`（`space_operations.txt:40-45`），显式 enable `TASK_ASSIGNED`、`MESSAGE_TRANSMITTED`、`MESSAGE_RECEIVED` 三类事件；`event_pipe` 块输出 `output/lasercomm_scripted.aer`（`event_pipe.txt:9-14`），enable `MESSAGE_TRANSMITTED`、`MESSAGE_RECEIVED`、`DRAW` 三类事件（`DRAW` 用于记录 `WsfDraw` 动态链路绘制的回放）。注意：两个输出文件名是源文件里的**字面量**（非 `$(CASE)` 路径变量），为原样保留。
 
 态势上，本案例不涉及交战，而是纯粹的**通信组网验证**：星座自身为 blue 方，一名地面指挥官 `commander1` 同在 blue 方；另一地面平台 `sender1` 属 green 方，作为"地球另一侧"的消息发起者，借助星座链路向 `commander1` 中继消息。
 
@@ -184,7 +184,7 @@ space_operations.txt（场景入口）
 - `SetDedicated`（90-103 行）：置专用态（`is_linking/is_linked=true`、`remote_platform_name=sDEDICATED`），或取消专用时 `Free`。
 - `Free`（111-132 行）：双向互链时写 `REMOVE_CONNECTION` 注释并递归 `CommLink_FreeP(对端)`，否则写 `LINK_ABORTED`，最后 `CommLink_FreeP(本端)`。
 
-**`processor/ESTABLISH_LINK_PROCESSOR.txt`（299 行）**——七态状态机：
+**`processor/ESTABLISH_LINK_PROCESSOR.txt`（298 行）**——七态状态机：
 
 - 变量（18-23 行）：`mTimeToAcquire=1.0 s`、`mIsGimbaled=true`、`mAcquireTime` Map、`mTrackProcessorName="track-proc"`。
 - `SelectComm`（47-65 行）：选第一个 `IsTurnedOn()`、未 `Linking`、且 `linkable_targets` 含目标的 comm。
@@ -228,6 +228,7 @@ space_operations.txt（场景入口）
 
 > 文件顺序 = **装配顺序**（入口 → 根文件 → 组件自下而上 → `platform_type` → `side/` 实例 → 非 AFSIM 文件）。
 > 共 23 个文件、1,429 行；正文与归一化工程**逐行一致**（文档内行尾统一为 LF；源为 CRLF 的文件在文档中即表现为 LF）。
+> 行数按**换行符**计（`wc -l` 口径）；本案例有 **3** 个源文件末行无换行符（`platform/STARLINK_LINKABLE.txt`、`processor/ESTABLISH_LINK_PROCESSOR.txt`、`sensor/UNIFORM_0DBI_PATTERN.txt`），其**可寻址行号**比"行数"多 1；文档为闭合围栏在末行补一个换行符，正文内容不变。
 
 ### ===== FILE: space_operations.txt =====
 

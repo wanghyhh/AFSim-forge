@@ -210,7 +210,7 @@ outer_air_battle.txt（入口）
 
 **（3）`processor/BLUE_MULTIROLE_FIGHTER_2_TASK_PROCESSOR.txt`（177 行）——战斗机拦截状态机**。`script_variables` 定 `aam="blue_lr_a2a_rf_missile"`、`flyout=60.0`、`currentRouteIndex=-1`、`Map<string,bool> deassigned` 等（`:13-22`）。状态链 `DETECTED→INTERCEPT→ENGAGE→WAIT→RETURN_TO_ROUTE`：`DETECTED→INTERCEPT` 条件是 `TasksReceivedFor(TRACK.TrackId(),"ENGAGE")>0`（即确实收到指挥官的 ENGAGE 任务）；`INTERCEPT` 记下 `currentRouteIndex`、置 `activeTarget=true`，算拦截点飞向目标，`SlantRangeTo < 50 nm` 转 `ENGAGE`（`:110-138`）；`ENGAGE` 内 `Fire(TRACK,"ENGAGE",aim120,2)` 齐射 2 枚（`:144-150`）；`WAIT` 设 `evalTime` 后若目标失效转 `RETURN_TO_ROUTE`（`:154-166`）；`returnToRoute()` 调 `TaskComplete` 并 `FollowRoute(routeName, currentRouteIndex)` 恢复原航线、清 `activeTarget`（`:75-82`）。`WSF_TASK_CANCEL_MESSAGE` 分支把 `deassigned[currentTarget]=true` 并清空 `currentTarget`（`:48-57`），因取消消息里的 TrackId 来自指挥官、无法反查航迹，故用 map 记录，供状态机判断。
 
-**（4）`global_script.txt`（33 行）——`OnStation()`**。`script void OnStation()` 被 `global_route.txt` 各 CAP 轨道首点 `execute OnStation` 调用：仅当 `PLATFORM.AuxDataDouble("NOW_ON_CAP")<0.0` 时才写入 `NOW_ON_CAP=TIME_NOW`，同理 `ON_STATION_TIME`（`:23-32`）。这种"负值哨兵 + 首次打点"写法保证飞机每次绕圈回到首点时不重置计时。
+**（4）`global_script.txt`（32 行）——`OnStation()`**。`script void OnStation()` 被 `global_route.txt` 各 CAP 轨道首点 `execute OnStation` 调用：仅当 `PLATFORM.AuxDataDouble("NOW_ON_CAP")<0.0` 时才写入 `NOW_ON_CAP=TIME_NOW`，同理 `ON_STATION_TIME`（`:23-32`）。这种"负值哨兵 + 首次打点"写法保证飞机每次绕圈回到首点时不重置计时。
 
 **（5）`global_struct.txt`（15 行）——`script_struct`**。`script_struct launchParameters` 定义三个字段 `int num / string type / string prefix`，供 `CVN_TASK_PROCESSOR` 用 `struct.New("launchParameters")` 实例化并在造机循环里取用（`:9-15`）。
 
@@ -238,6 +238,7 @@ outer_air_battle.txt（入口）
 
 > 文件顺序 = **装配顺序**（入口 → 根文件 → 组件自下而上 → `platform_type` → `side/` 实例 → 非 AFSIM 文件）。
 > 共 39 个文件、2,590 行；正文与归一化工程**逐行一致**（文档内行尾统一为 LF；源为 CRLF 的文件在文档中即表现为 LF）。
+> 行数按**换行符**计（`wc -l` 口径）；本案例有 **6** 个源文件末行无换行符（`event_pipe.txt`、`global_script.txt`、`platform/BLUE_MULTIROLE_FIGHTER_2_MRC.txt`、`platform/BLUE_PROP_AWACS_1.txt`、`platform/TIMED_AC.txt`、`sensor/GEO_AA_RADAR.txt`），其**可寻址行号**比"行数"多 1；文档为闭合围栏在末行补一个换行符，正文内容不变。
 
 ### ===== FILE: outer_air_battle.txt =====
 

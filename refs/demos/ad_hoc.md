@@ -146,7 +146,7 @@ flowchart TD
 
 **入网落地。** 由于 black_van 与 `detect1` 地面重合、而贪心按 `GroundRangeTo`（忽略高度）向目的收敛，消息最终被路由到 `detect1`；`detect1` 的 `ad_hoc` 通信设备带 `local_link van_comm`（`side/blue.txt:33-35`），把消息本地桥接进 `van_net`，再经同名 `van_net` 送达 black_van 的 `van_comm` → `internal_link bogey_book`。`bogey_book` 收到 `WSF_TRACK_MESSAGE` 时打印 `"<name> RECEIVES TRACK AT TIME: <TIME_NOW>"`（`platform/BLACK_VAN.txt:13-20`）。
 
-**计数与绘图输出。** 顶层观察者 `observer enable MESSAGE_RECEIVED` 订阅消息接收事件：每当接收方是 `black_van`，`MessageReceived` 把 `blackVanMsgs` 加一并 `WsfEventPipe.Record(rcvPlat,"Received Messages = ",blackVanMsgs)`（`global_script.txt:54-68`），写入 `event_pipe` 的 `output/ad_hoc.aer`。同时 `event_output enable all` 把全部事件写入 `output/ad_hoc.evt`（`ad_hoc.txt:45-48`）。
+**计数与绘图输出。** 顶层观察者 `observer enable MESSAGE_RECEIVED` 订阅消息接收事件：每当接收方是 `black_van`，`MessageReceived` 把 `blackVanMsgs` 加一并 `WsfEventPipe.Record(rcvPlat,"Received Messages = ",blackVanMsgs)`（`global_script.txt:54-68`），写入 `event_pipe` 的 `output/ad_hoc.aer`。同时 `event_output enable all` 把全部事件写入 `output/ad_hoc.evt`（`ad_hoc.txt:44-47`）。
 
 **高速穿越展示。** 蓝方 `spectator` 以 3000 km/h、30000 ft 高度沿 40°N 从 102°W 平飞过探测区，其 `ad_hoc` 链路随进出各节点无线电范围快速增删，`WsfDraw` 画出戏剧化的连接生灭；按入口注释，在种子 1 下该平台还会参与中继消息（`ad_hoc.txt:22-26`）。
 
@@ -173,7 +173,7 @@ flowchart TD
 7. 贪心按“目的平台地面距离”收敛，依赖目的平台真实 `Location()`；本案例用 `execute` 把 black_van 放到网关 detect1 的经纬度上，才让“距目的最近”的下一跳恰好收敛到网关（`global_script.txt:70-79`）。
 8. `GroundRangeTo` 只算地面距离、忽略高度，因此 black_van 高度归 0、detect1 在 2000 m 也互不影响路由方向（`comm/AD_HOC_router_protocol.txt:64`）。
 9. 用 `category` + 传感器 `ignore ad_hoc` 统一过滤友军、避免互相误检测（`platform/DETECTOR.txt:14,32`），`frame_time 10 s` 控制检测刷新节奏。
-10. `event_pipe`（`output/ad_hoc.aer`，供回放 `WsfEventPipe.Record` 的数据）与 `event_output`（`output/ad_hoc.evt`，事件日志）是两个独立输出通道，勿混淆（`event_pipe.txt:9-11`、`ad_hoc.txt:45-48`）。
+10. `event_pipe`（`output/ad_hoc.aer`，供回放 `WsfEventPipe.Record` 的数据）与 `event_output`（`output/ad_hoc.evt`，事件日志）是两个独立输出通道，勿混淆（`event_pipe.txt:9-11`、`ad_hoc.txt:44-47`）。
 11. `route` 里 `goto start` 使巡逻航线闭合循环、`position ... extrapolate` 使航迹在末点后直线延伸，二者用途不同（`global_route.txt:15`、`platform/INTRUDER.txt:16`）。
 12. `use_default_protocol false` + `hop_limit 10` 明确“只用自定义协议、最多 10 跳”，是控制路由行为的一对关键开关（`comm/DEFAULT_router.txt:14-15`）。
 
