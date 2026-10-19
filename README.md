@@ -302,7 +302,7 @@ archive（归档：staging → verified，只进不出）
 ## 许可与致谢
 
 - **第三方移植内容**：`knowledge/language/`（5 篇）与 `knowledge/blocks/`（4 篇）整体移植自开源项目 **AFSIM Script Generator**（作者 **lookingforfeng**，声明许可 **MIT**）。本项目仅做重命名与目录重排，正文未改写。
-- **本项目自研部分**（`workflows/`、`blueprints/`、`knowledge/system-of-systems/`、`knowledge/lessons/`、`SKILL.md`、`config.yaml`）目前**未单独声明开源许可**；如需对外开源，请另行补充 `LICENSE`。
+- **本项目自研部分**（`workflows/`、`blueprints/`、`knowledge/system-of-systems/`、`knowledge/lessons/`、`SKILL.md`、`config.yaml`）同样采用 **MIT License**；详见根目录 [`LICENSE`](LICENSE)。
 - 案例素材来自 AFSIM 官方示例工程，仅做结构归位与路径改写（内容零增删）。
 
 ---
