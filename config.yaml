@@ -1,187 +1,63 @@
-# afsim-forge 配置 —— 单点维护
-# 修改本文件即可调整 MCP 契约与工程结构约定，无需改动 workflows/ 与 SKILL.md。
+# afsim-forge-skill 配置 —— 单点维护
+# 本文件只放**其它文档不重复**的配置锚点；叙述性规则的权威在 workflows/ 与 blueprints/。
 #
-# 边界说明：本 skill 默认只经 MCP 工具完成校验；MCP 不可用时按下方备用方案直调本地可执行文件。
-# AFSIM 的安装位置、可执行文件、命令行参数等均属 MCP 服务端职责，本文件不体现。
-# 
-# 备用方案：当 MCP 工具不可用时，AI 应主动询问用户本地 AFSIM 安装路径，
-# 直接调用 mission.exe / mystic.exe 完成校验。详见 workflows/local-exec.md。
-# 安装路径**不得固化到本文件**，每次临时询问用户。
+# 写入边界：skill 目录（含本文件）运行期**只读**；运行期产出一律写工作空间的 .afsim-forge/。
+# 输入解析规则见 workflows/1_intake.md；本地可执行文件备用通道见 workflows/local-exec.md。
 
 # ── MCP 工具（校验首选；仿真/回放仅交付后按需）──────────────────
 mcp:
-  # 工具名前缀由宿主环境中 mcp-client 的 serverName 决定：mcp__<server_name>__
-  # 若宿主环境侧改了 serverName，只需同步此处与下方 tool 字段。
+  # 工具名前缀由宿主环境 serverName 决定（mcp__<server_name>__）；serverName 变了只需改这一处。
   prefix: "mcp__afsim__"
 
-  # 全部工具已解禁，但**按阶段取用**（对齐 workflows/4_validate.md §7 与 5_deliver.md §4）：
-  #   校验阶段（4_validate）：health / selftest（可选）、validate_scenario（核心）
-  #   交付后仿真（5_deliver §4，用户明确要求时）：upload_zip / submit_simulation /
-  #     get_simulation / list_results / download_result
-  #   交付后回放（用户明确要求时）：replay
-  # 日常流程止于校验：用户没要求跑仿真时，不得调用仿真类工具。
+  # 全部工具已解禁，但**按阶段取用**（详见 workflows/4_validate.md §7 与 5_deliver.md §4）：
+  #   校验阶段：health / selftest（可选）、validate_scenario（核心）
+  #   交付后仿真 / 回放：仅在用户明确要求时使用
   allow:
     - selftest            # MCP 链路自检
     - health              # 校验服务健康检查
     - validate_scenario   # ★ 语法校验（核心）
-    - upload_zip          # 仅交付后仿真（5_deliver §4）
+    - upload_zip          # 仅交付后仿真
     - submit_simulation   # 仅交付后仿真
     - get_simulation      # 仅交付后仿真（轮询状态）
     - list_results        # 仅交付后仿真（取结果清单）
     - download_result     # 仅交付后仿真（下载 output 到工程 output/）
-    - replay              # 仅交付后回放（用户明确要求时）
+    - replay              # 仅交付后回放
 
-  # 校验调用规范（首选通道：MCP 服务）
+  # 校验调用与判据（完整调用示例、返回契约、错误定位见 workflows/4_validate.md）
   validate:
     tool: "mcp__afsim__validate_scenario"
-    params:
-      zip_path: "<ZIP 绝对路径，需为 MCP 服务所在机器可读>"
-      full_output: false      # true 时返回完整校验输出（默认截断）
-    # 判据：只看 data.valid；语法对错都返回 HTTP 200
-    judge: "data.valid"
-    # 失败定位字段
-    error_fields: [severity, message, file, line, column]
-    # 修复循环上限
-    max_repair_rounds: 3
-    # 升级取全文的阈值：output 不足以定位时改用 full_output=true
-    escalate_on_insufficient_output: true
+    judge: "data.valid"        # 唯一判据；语法对错都返回 HTTP 200
+    max_repair_rounds: 3       # 修复循环上限
 
-  # 备用通道：本地可执行文件（MCP 不可用时启用）
-  # 安装路径不固化在此，每次由 AI 询问用户获取
+  # 备用通道：MCP 不可用时直调本地可执行文件（命令、判据、错误解析见 workflows/local-exec.md）
   fallback:
-    enabled: "ask_user_on_mcp_unavailable"  # MCP 不可用时询问用户本地安装路径
-    ref: "workflows/local-exec.md"          # 完整命令、判据、错误解析见该文档
-    executable:
-      mission: "<用户提供的安装路径>\\bin\\mission.exe"
-      mystic: "<用户提供的安装路径>\\bin\\mystic.exe"
-    # 本地调用与 MCP 服务的判据完全一致：exit 0 = valid true, exit 1 = valid false
+    enabled: "ask_user_on_mcp_unavailable"   # 每次询问用户本地安装路径，不固化
 
-  # 返回契约：{ok, code, msg, data}，任何情况都不抛异常
-  response:
-    ok_field: ok
-    code_field: code
-    msg_field: msg
-    data_field: data
-    # 链路错误码 —— 与语法对错无关，仅用于兜底话术
-    codes:
-      0: "校验服务不可达 —— 请用户确认校验服务已启动"
-      400: "参数或 ZIP 不合规（多为缺同名启动文件）"
-      404: "zip_path 指向的文件不存在"
-    # 未列出的 code：读 msg 原文向用户报告，不得据此判断语法对错
-    fallback: "读 msg 原文，向用户报告；不要用 code 判断语法对错"
+# ── 输入约定 ────────────────────────────────────────────────
+# 规则唯一权威在 workflows/1_intake.md（两类输入 / 优先级 / JSON 三铁律 / 6 项产物），本文件不复述。
 
-# ── 输入约定（生成前必须先解析）─────────────────────────────────
-# 详细解析规则见 workflows/1_intake.md
-input:
-  # ① 实验筹划：自然语言文本，必需 —— 描述整个想定的详细内容
-  experiment_plan:
-    required: true
-    format: "自然语言文本"
-    covers: ["任务", "仿真目的", "过程", "包含兵力"]
-    # 缺了它无法开工，直接向用户要
-    on_missing: "ask_user"
-
-  # ② 想定编辑：JSON 文本（scenarioJsonData），可选、**格式不定**
-  scenario_json:
-    required: false
-    format: "JSON 文本"
-    schema: "不定 —— 按语义识别，不按固定 schema 解析"
-    # 提供了必须读；没提供按实验筹划 + 缺省值生成，不得因此停下
-    on_missing: "generate_from_experiment_plan"
-    on_present: "must_read"
-    # 铁律
-    rules:
-      no_drop_fields: true          # JSON 有的键，最终工程里必须还在
-      no_rename: true               # 字段名 / 嵌套 / 数组顺序保持原样
-      no_unit_guess: true           # 数值无单位时按 run.json 既有口径，判断不了标"待确认"
-    # 认不出的字段：原样并入 config/run.json，并在交付说明列出清单
-    unknown_fields: "keep_in_run_json_and_report"
-
-  # 冲突裁决：想定编辑 JSON 显式给出 > 实验筹划明确描述 > 缺省值
-  priority: ["scenario_json", "experiment_plan", "defaults"]
-  # 想定内容（兵力 / 阵营 / 任务）冲突时不裁决，停下来问用户
-  escalate_on_conflict: ["兵力", "阵营", "任务"]
-
-  # 解析产物：6 项结论（交付说明的骨架）
-  parse_outputs: ["想定名", "阵营与兵力", "任务与过程", "体系关系", "配置及来源", "待确认清单"]
-
-# ── 工程结构约定 ──────────────────────────────────────────────
+# ── 工程结构约定 ────────────────────────────────────────────
 project:
-  # 结构权威说明（运行依赖）—— 与本文件冲突时以它为准
-  structure_ref: "blueprints/layout/layout.md"
-  # 装配规则（include 顺序、include vs include_once、命名约定）
-  assembly_ref: "blueprints/layout/assembly.md"
-  # 缺省值清单
-  defaults_ref: "blueprints/layout/defaults.md"
-  # 溯源：本规范的来源文档（**skill 外路径，仅记录出处，非运行依赖**；随 skill 分发时该文件不存在属正常）
-  spec_source: "docs/体系工程文件说明-20260922/样例工程规范.md"
-  # 更可靠的实测正例（5 个工程，全部 valid=true）
-  verified_cases: "blueprints/cases"
-
-  # 入口文件规则
-  entry_file: "<想定名>.txt"          # 严格同名，且与 ZIP 同名
-  entry_path_variable: "define_path_variable CASE <想定名>"
-  # 路径基准：必须存在，且在第一个 include_once 之前（AFSIM 按它搜索 include 目标）
-  entry_file_path: "file_path ."
-
-  # 规范定义的全量目录（14 个）
-  # 注意：**并非全部必建** —— 只建实际用到的；但 config/ output/ side/ 与 4 个必建根文件必须有。
-  #      入口文件里不得 include_once 不存在的文件。
-  all_dirs:
-    - config
-    - common
-    - output
-    - medium
-    - comm
-    - mover
-    - network
-    - platform
-    - processor
-    - sensor
-    - side
-    - signatures
-    - weapon
-    - weapon_effects
-
-  # 根文件（9 个）
-  root_files:
-    required: ["<想定名>.txt", setup.txt, event_pipe.txt, global_env.txt]
-    optional: [global_route.txt, global_script.txt, global_struct.txt, group.txt, zone.txt]
-
-  # output/ 占位文件（ZIP 不保留空目录，必须占位）
-  output_placeholder: "output/blank_empty.txt"
-
-  # 命名约束
-  naming:
-    scenario_name: "字母/数字/下划线，无中文、无空格"
-    instance_name: "<类型名>_<业务code>"
-
-  # 禁止项
-  forbidden:
-    - "中文路径"
-    - "扩展名 .wsf"
-    - "数值不带单位"
+  structure_ref: "blueprints/layout/layout.md"    # ★ 结构唯一权威（目录树、9 根文件、块→目录映射）
+  assembly_ref: "blueprints/layout/assembly.md"   # 装配规则（include 顺序、include vs include_once）
+  defaults_ref: "blueprints/layout/defaults.md"   # 缺省值清单
+  spec_source: "docs/体系工程文件说明-20260922/样例工程规范.md"   # skill 外溯源，非运行依赖
+  verified_cases: "blueprints/cases"              # 5 个实测 valid=true 的完整案例
 
 # ── 运行时状态（★ 写入工作空间，绝不写入 skill 目录）────────────
-# 原则：skill 目录是**只读资产**（本文件、SKILL.md、workflows/、blueprints/、knowledge/），
-#      运行期一律不写；一切运行时产出写入**当前工作空间**下的状态目录。
 runtime:
-  # 状态根目录 —— 相对**当前工作空间**（cwd），而非 skill 安装目录。
-  # 理由：skill 可能被多个项目共享，写 skill 目录会串味、且 skill 升级会丢失积累。
+  # 相对当前工作空间（cwd），非 skill 安装目录——skill 可能被多项目共享，写 skill 目录会串味。
   state_dir: ".afsim-forge"
 
-  # 运行时产出区（成果闭环）—— 位于工作空间，不在 skill 目录内
+  # 成果闭环（位于工作空间）
   output:
-    staging: ".afsim-forge/output/staging"              # 已生成、待校验
-    verified: ".afsim-forge/output/verified"            # 已过校验 + 用户认可，只进不出
+    staging: ".afsim-forge/output/staging"            # 已生成、待校验
+    verified: ".afsim-forge/output/verified"          # 已过校验 + 用户认可，只进不出
     verified_subdirs: [scenario, component, template]
 
-  # 本项目运行时积累的教训（新报错 → 新增条目）
-  # 注意：skill 的 knowledge/lessons/*.md 是**只读基线**，二者同构；
-  #      查教训时先看本项目 lessons/，再看 skill 基线。
+  # 本项目运行时教训；skill 的 knowledge/lessons/ 是只读基线，二者同构，先查本项目再看基线
   lessons: ".afsim-forge/lessons"
 
-  # 写入边界
   write_policy:
-    skill_dir: "read-only"        # skill 目录运行期只读
-    state_dir: "read-write"       # 运行时状态一律写这里
+    skill_dir: "read-only"      # skill 目录运行期只读
+    state_dir: "read-write"     # 运行时状态一律写这里

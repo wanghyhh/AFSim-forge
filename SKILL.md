@@ -231,5 +231,5 @@ afsim-forge/
 
 ## 配置
 
-- MCP 工具契约、工程结构约定、**运行时状态目录（`.afsim-forge/`）**：见 `config.yaml`（**单点维护**）。
+- MCP 工具契约、**运行时状态目录（`.afsim-forge/`）**：见 `config.yaml`（**单点维护**）；工程结构约定见 `blueprints/layout/layout.md`（权威）。
 - 工具名前缀随宿主环境的 `serverName` 变化，只需改 `config.yaml` 一处。
