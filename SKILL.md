@@ -1,6 +1,6 @@
 ---
 name: afsim-forge
-description: 按标准多目录工程结构，从「实验筹划（自然语言）+ 想定编辑（scenarioJsonData JSON）」两类输入生成 AFSIM 工程，并调用 MCP 语法校验接口闭环纠错。当用户提供实验筹划/想定编辑、或提到 AFSIM 工程/想定生成、体系仿真建模、platform_type、sensor、weapon、processor、include_once、工程骨架、语法校验时使用。不运行仿真。
+description: 按标准多目录工程结构，从「实验筹划（自然语言）+ 想定编辑（scenarioJsonData JSON）」两类输入生成 AFSIM 工程，并调用 MCP 语法校验接口闭环纠错。当用户提供实验筹划/想定编辑、或提到 AFSIM 工程/想定生成、体系仿真建模、platform_type、sensor、weapon、processor、include_once、工程骨架、语法校验时使用。默认不运行仿真（交付后可按用户要求运行）。
 whenToUse: 需要生成、校验或修复 AFSIM 体系工程时
 disable-model-invocation: false
 user-invocable: true
@@ -24,7 +24,7 @@ afsim-forge/
 ├── workflows/                            ← ② 流程层：1_intake / 2_blueprint / 3_generate / 4_validate / 5_deliver / debug / local-exec
 ├── blueprints/                           ← ③ 骨架层：要"照抄/填空"的东西
 │   ├── layout/       结构与装配规则（权威）
-│   ├── skeleton/     9 根文件 + run.json 的可填骨架（含 minimal/ 最小可跑工程）
+│   ├── skeleton/     9 根文件 + run.json + blueprint.md.tpl 蓝图模板（含 minimal/ 最小可跑工程）
 │   ├── fragments/    11 类组件片段（.tpl）
 │   └── cases/        5 个完整工程案例（一案例一文档：说明 + 逐文件全文）
 └── knowledge/                            ← ④ 知识层：要"读懂/查阅"的东西
@@ -130,7 +130,7 @@ afsim-forge/
 | :-- | :-- | :-- |
 | 想定名 | `<主题拼音>_<日期>` | 无中文、无空格；由需求自动生成 |
 | `file_path` | `.` | 入口文件，**必须在第一个 `include_once` 之前** |
-| `end_time` | `10 m` | 入口文件；单位必带 |
+| `end_time` | `10 m`（缺省）或 **任务结束时间 + 缓冲** | 入口文件；单位必带；缓冲 = max(任务时间 × 0.2, 2 m)，见 `workflows/2_blueprint.md` §3.3 |
 | `start_date` / `start_time` | 当前日期 / `00:00:00` | 与 `config/run.json` 的 `scenariosTime` **保持一致** |
 | `event_output` | `enable all` | 后期可收敛为逐项 `enable` |
 | `event_pipe` | `AIRCOMBAT` / `TRACK_UPDATE` / `BEHAVIOR_TOOL` | 与样例一致 |

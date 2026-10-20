@@ -10,7 +10,7 @@
 | 子目录 | 是什么 | 什么时候读 | 权威性 |
 | :-- | :-- | :-- | :-- |
 | `layout/` | **结构规则**：目录树、根文件职责、块→目录映射、装配顺序、缺省值、`run.json` 字段 | 动手建工程前**必读** | ★★★ **结构唯一权威** |
-| `skeleton/` | **可填骨架**：9 个根文件 + `config/run.json` 的 `.tpl`；`minimal/` 是可一次过校验的最小工程 | 从零生成时直接复制 | ★★☆ 与 `layout/` 逐项对齐 |
+| `skeleton/` | **可填骨架**：9 个根文件 + `config/run.json` 的 `.tpl`；`blueprint.md.tpl` 是工程蓝图模板；`minimal/` 是可一次过校验的最小工程 | 从零生成时直接复制 | ★★☆ 与 `layout/` 逐项对齐 |
 | `fragments/` | **组件片段**：11 类（platform / sensor / weapon / mover / comm / processor / network / medium / side / signatures / weapon_effects），每个自带依赖 include 头 | 需要某个组件的写法时 | ★★☆ 片段级正例 |
 | `cases/` | **5 个完整工程案例**：一案例一文档，含详细说明 + 逐文件全文，全部实测 `valid=true` | 想找"同类工程怎么组织"时 | ★★★ **最可靠的正例** |
 
@@ -19,7 +19,7 @@
 | 文件 | 内容 |
 | :-- | :-- |
 | `layout.md` | ★ 目录树 + 9 根文件职责 + 目录→块类型映射 + 生成自检清单 |
-| `assembly.md` | 装配链、入口三要素、`include` vs `include_once`、命名与写法约定、常见装配错误 |
+| `assembly.md` | 装配链、入口四要素、`include` vs `include_once`、命名与写法约定、常见装配错误 |
 | `defaults.md` | 缺省值（工程级 / 组件级 / 须人类提供的） |
 | `run-json.md` | `config/run.json` 字段说明 |
 
@@ -60,7 +60,7 @@
 
 ## 4. 使用顺序（推荐）
 
-0. **先解析输入** —— `workflows/1_intake.md`：把**实验筹划**（自然语言）与**想定编辑**（`scenarioJsonData` JSON，可选）拆成想定名 / 阵营与兵力 / 任务与过程 / 体系关系 / 配置及来源。**没有这一步，后面的目录和文件都无从谈起。**
+0. **先解析输入、再出蓝图** —— `workflows/1_intake.md`（6 项结论）→ `workflows/2_blueprint.md`（蓝图是唯一事实源，模板 `skeleton/blueprint.md.tpl`）。**没有这两步，后面的目录和文件都无从谈起；后续一切修改也先改蓝图、再改工程。**
 1. **`skeleton/minimal/`** —— 先跑通"结构 + 校验链路"，别一上来就写几十个文件。
 2. **`layout/layout.md`** —— 明确新文件该落到哪个目录。
 3. **`fragments/`** —— 按组件类型取片段，填参数。

@@ -2,7 +2,7 @@
 
 > **本文档定位**：与同目录下 5 个**真实案例**（`ad_hoc` / `launcher` / `outer_air_battle` / `ship_ad` / `space_operations`）并列。
 > **区别**：5 个真实案例对应**已有工程**（含完整脚本全文）；本文档 5 个测试想定是**仅自然语言描述**的实验筹划，无对应工程，可作为 `afsim-forge` 的回归测试输入。
-> **用途**：喂入 `workflows/intake.md` 解析 → 走 `workflows/generate.md` 全流程 → 验证生成工程的语法正确性与自检规则触发。
+> **用途**：喂入 `workflows/1_intake.md` 解析 → 走 `workflows/2_blueprint.md` + `workflows/3_generate.md` 全流程 → 验证生成工程的语法正确性与自检规则触发。
 
 ---
 

@@ -45,5 +45,5 @@ concepts.md（建立框架）
 
 ## 4. 本目录**不做**的事
 
-- **不跑仿真、不取结果**：`kpi-metrics.md` 只用于**设计期预留指标口径**（如配好 `event_output` 输出项），不负责仿真后分析。
+- **不负责仿真后分析**：`kpi-metrics.md` 只用于**设计期预留指标口径**（如配好 `event_output` 输出项）；跑仿真与取结果仅在交付后按用户要求进行。
 - **不替代结构规则**：`sensor-network.md` 讲"信息流该怎么设计"，但 `network/*.txt` 具体放哪、`medium.txt` 怎么汇总，以 `blueprints/layout/layout.md` 为准。
