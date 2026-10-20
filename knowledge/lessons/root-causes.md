@@ -292,7 +292,7 @@ AFSIM 对**非 ASCII 路径**处理有缺陷（`mystic` 回放乱码最明显）
 ### 生成期预防
 
 - 写进 `SKILL.md`「判据铁律」（已落地）。
-- `workflows/validate.md` §3 与 `config.yaml` 的 `judge: "data.valid"` 双重固化。
+- `workflows/4_validate.md` §3 与 `config.yaml` 的 `judge: "data.valid"` 双重固化。
 
 ---
 

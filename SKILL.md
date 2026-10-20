@@ -11,7 +11,7 @@ metadata:
 # afsim-forge — AFSIM 体系工程生成与校验
 
 > **单入口 + 意图路由**：本 skill 在支持 skill 的宿主环境中以 `/afsim-forge` 调用；进入后按下方「意图路由表」分派工作流。
-> **输入 = 实验筹划（自然语言，必需）+ 想定编辑（`scenarioJsonData` JSON，可选、格式不定）**，生成前必走 `workflows/intake.md`。
+> **输入 = 实验筹划（自然语言，必需）+ 想定编辑（`scenarioJsonData` JSON，可选、格式不定）**，生成前必走 `workflows/1_intake.md`。
 > 详细知识一律外链，按需加载 —— 本文件只做入口与规则。
 
 ---
@@ -21,7 +21,7 @@ metadata:
 ```
 afsim-forge/
 ├── SKILL.md · config.yaml · README.md   ← ① 入口层：本文件是唯一入口，知识一律外链
-├── workflows/                            ← ② 流程层：intake / generate / validate / debug / archive / local-exec
+├── workflows/                            ← ② 流程层：1_intake / 2_blueprint / 3_generate / 4_validate / 5_deliver / debug / local-exec
 ├── blueprints/                           ← ③ 骨架层：要"照抄/填空"的东西
 │   ├── layout/       结构与装配规则（权威）
 │   ├── skeleton/     9 根文件 + run.json 的可填骨架（含 minimal/ 最小可跑工程）
@@ -44,8 +44,23 @@ afsim-forge/
 >
 > **结构**只认 `blueprints/layout/layout.md`；**骨架/片段**取 `blueprints/skeleton/`、`blueprints/fragments/`；
 > **完整案例**看 `blueprints/cases/`（结构 + 逐文件全文，最可靠的正例）；**语法**查 `knowledge/language/`、`knowledge/blocks/`。
-> 生成 → **先 AI 自检（格式、结构、时间）→ 再调用语法校验** → 通过才归档。**未过校验的工程，不得交付。**
+> **先生成蓝图（唯一事实源），再据蓝图生成工程**：工程的一切创建、修改、修复，**先改蓝图、再改工程**，禁止跳过蓝图。
+> 蓝图 AI 自检 → 据蓝图生成 → 语法校验 → 通过才归档。**未过校验的工程，不得交付。**
 > **skill 目录只读**：所有运行时产出写工作空间的 `.afsim-forge/`。
+
+---
+
+## 工作流总览（5 步 + 2 条旁路）
+
+| 步 | 文档 | 职责 |
+| :-: | :-- | :-- |
+| 1 | `workflows/1_intake.md` | 意图识别：解析两类输入，产出 6 项结论 |
+| 2 | `workflows/2_blueprint.md` | **蓝图生成**：生成 `<想定名>.md`（唯一事实源）→ AI 自检 → 仿真时长校核 |
+| 3 | `workflows/3_generate.md` | 工程生成：据蓝图 §4 落盘，AI 自检 = 工程 vs 蓝图逐字符一致 |
+| 4 | `workflows/4_validate.md` | 语法校验：MCP 首选，本地 `mission.exe` 备用 |
+| 5 | `workflows/5_deliver.md` | 交付：结束判定 → 内容整理 → 行数统计 → 仿真询问 → verified 归档 |
+| 旁路 | `workflows/debug.md` | 校验失败闭环修复（≤3 轮） |
+| 旁路 | `workflows/local-exec.md` | 本地可执行文件通道（校验 / 仿真 / 回放） |
 
 ---
 
@@ -53,21 +68,22 @@ afsim-forge/
 
 | 意图 | 用户触发词（示例） | 走哪条工作流 |
 | :-- | :-- | :-- |
-| **解析输入** | 给了"实验筹划 / 想定编辑 / scenarioJsonData" | `workflows/intake.md`（**生成前必走**） |
-| **生成新工程** | "生成 / 新建 / 做一个 … AFSIM 工程" | `workflows/intake.md` → `workflows/generate.md` |
-| **校验** | "校验 / 检查语法 / 语法对不对" | `workflows/validate.md` |
+| **解析输入** | 给了"实验筹划 / 想定编辑 / scenarioJsonData" | `workflows/1_intake.md`（**生成前必走**） |
+| **生成新工程** | "生成 / 新建 / 做一个 … AFSIM 工程" | `workflows/1_intake.md` → `workflows/2_blueprint.md` → `workflows/3_generate.md` |
+| **出蓝图 / 先看设计** | "先出蓝图 / 先看设计再生成" | `workflows/2_blueprint.md` |
+| **校验** | "校验 / 检查语法 / 语法对不对" | `workflows/4_validate.md` |
 | **修复** | "报错了 / 帮我修一下 / 通不过" | `workflows/debug.md` |
-| **归档** | "归档 / 确认 / 可以了" | `workflows/archive.md` |
+| **交付 / 归档** | "归档 / 确认 / 可以了 / 交付" | `workflows/5_deliver.md` |
 | **帮助** | "怎么用 / 有哪些能力" | 本文件「能力概览」 |
 
-**能力概览**：① 解析两类输入（实验筹划 + 想定编辑 JSON）；② 按标准工程结构生成 AFSIM 工程；③ 调用 MCP 或本地 `mission.exe` 做语法校验并闭环修复；④ 提供 AFSIM 语法与体系仿真知识；⑤ 成果 staging → verified 闭环管理。
-**不做**：跑仿真、回放、下载仿真结果（见下方「MCP 边界」）。
+**能力概览**：① 解析两类输入（实验筹划 + 想定编辑 JSON）；② 生成工程蓝图（唯一事实源）；③ 按蓝图生成标准工程；④ 调用 MCP 或本地 `mission.exe` 做语法校验并闭环修复；⑤ 提供 AFSIM 语法与体系仿真知识；⑥ 成果 staging → verified 闭环管理。
+**不做**：日常流程止于语法校验；跑仿真 / 回放仅在交付后、用户明确要求时进行（`workflows/5_deliver.md` §4）。
 
 ---
 
 ## 输入（两类，生成前必须先解析）
 
-> **详细规则见 `workflows/intake.md`**；这里只放必须记住的结论。
+> **详细规则见 `workflows/1_intake.md`**；这里只放必须记住的结论。
 
 | 输入 | 形式 | 必需 | 作用 |
 | :-- | :-- | :-: | :-- |
@@ -99,7 +115,8 @@ afsim-forge/
 11. **新增平台必须登记进 `setup.txt`**。
 12. **禁止中文路径**（AFSIM 中文路径缺陷）。
 13. **禁止**编造 `common/` 数据表内容（见「缺省值」§3）。
-14. **生成完成后、语法校验前，必须执行 AI 自检**：装配链完整性、配置语义一致性、仿真时长充分性（见 `workflows/generate.md` Step 4.5）。
+14. **先改蓝图，再改工程**：工程的一切创建 / 修改 / 修复，第一步永远是改 `<想定名>.md`（§6 记一条），第二步才据蓝图改工程文件。**禁止跳过蓝图直接改工程**（见 `workflows/2_blueprint.md` §5）。
+15. **按需回顾**：每一轮操作前，若对「要求或工程结构」记忆模糊（尤其上下文被清理 / 压缩后），**先重读本文件与工程蓝图**，再继续操作。
 
 ---
 
@@ -142,23 +159,23 @@ afsim-forge/
 
 ---
 
-## MCP 校验（首选通道）
+## MCP 工具（校验首选，仿真按需）
 
 > 本 skill **默认通过 MCP 工具完成校验**。当 MCP 不可用时，AI 应主动询问用户本地 AFSIM 安装路径，通过直接调用 `mission.exe` 完成校验 —— **不固化任何安装路径到 skill 文档中**，每次临时询问。
 > 工具名前缀由宿主环境的 `serverName` 决定，**单点维护在 `config.yaml`**（`mcp.prefix`）。
 > 本地调用方案的完整命令、判据与错误解析见 `workflows/local-exec.md`。
 
-| 允许 | 用途 |
-| :-- | :-- |
-| `validate_scenario` | **核心**：语法校验（无状态，不跑仿真），参数 `zip_path`、`full_output` |
-| `health` | 可选：确认校验服务在线 |
-| `selftest` | 可选：MCP 链路自检 |
+**工具全部解禁，按阶段取用**（边界见 `workflows/4_validate.md` §7）：
 
-**禁止**（服务端其他能力，本 skill 一概不用）：`upload_zip`、`submit_simulation`、`get_simulation`、`list_results`、`download_result`、`replay`。
+| 阶段 | 可用工具 |
+| :-- | :-- |
+| 校验（日常） | `validate_scenario`（核心）、`health` / `selftest`（可选） |
+| 交付后仿真（`5_deliver.md` §4，用户明确要求时） | `upload_zip` / `submit_simulation` / `get_simulation` / `list_results` / `download_result` |
+| 交付后回放（用户明确要求时） | `replay` |
 
 **判据铁律**：**只看 `data.valid`**。语法对错**都返回 HTTP 200**，禁止用状态码或 `ok` 判断。
 
-> 完整调用规范见 `workflows/validate.md`；工具契约详见 `config.yaml`。
+> 完整调用规范见 `workflows/4_validate.md`；工具契约详见 `config.yaml`。
 
 ---
 
@@ -169,7 +186,8 @@ afsim-forge/
 | 层级 | 文件 | 何时加载 |
 | :-- | :-- | :-- |
 | **L0**（常驻） | `SKILL.md`（本文件） | 默认；含输入契约、硬约束、缺省值、判据铁律 |
-| **L1**（生成前必读） | `workflows/intake.md` | 拿到实验筹划 / 想定编辑 JSON，要解析成工程要素时 |
+| **L1**（生成前必读） | `workflows/1_intake.md` | 拿到实验筹划 / 想定编辑 JSON，要解析成工程要素时 |
+| **L1**（蓝图必读） | `workflows/2_blueprint.md` · `blueprints/skeleton/blueprint.md.tpl` | 要生成工程蓝图（一切工程的起点）时 |
 | **L1**（起步必读） | `blueprints/README.md` | 想知道"该去哪个目录找东西"时 |
 | | `blueprints/layout/layout.md` | 要建工程结构（哪个文件放哪、必建哪些）时 |
 | | `blueprints/skeleton/README.md` → `skeleton/minimal/` | 要**立刻**搭一个能过校验的最小骨架时 |
@@ -183,9 +201,9 @@ afsim-forge/
 | **L3**（报错后） | `knowledge/lessons/errors.md` | 拿到校验报错，按关键字找 `[Exxx]` |
 | | `knowledge/lessons/index.md` → `root-causes.md` | `[Exxx]` 命中后查归类与根因修法 |
 
-**工作流**（流程性内容全在这，不重复写进本文件）：`workflows/intake.md` · `generate.md` · `validate.md` · `debug.md` · `archive.md` · `local-exec.md`
+**工作流**（流程性内容全在这，不重复写进本文件）：`workflows/1_intake.md` · `2_blueprint.md` · `3_generate.md` · `4_validate.md` · `5_deliver.md` · `debug.md` · `local-exec.md`
 
-**加载顺序建议**：`L0 → workflows/intake.md（生成类意图必走）→ workflows/<意图>.md → L1 → L2 → L3`。**同一轮不要把所有 L2 文件都读进来**，按需逐个加载。
+**加载顺序建议**：`L0 → workflows/1_intake.md（生成类意图必走）→ workflows/2_blueprint.md → workflows/3_generate.md → workflows/4_validate.md → workflows/5_deliver.md → L1 → L2 → L3`。**同一轮不要把所有 L2 文件都读进来**，按需逐个加载。
 
 ---
 
@@ -195,9 +213,10 @@ afsim-forge/
 > 一切运行时产出（工程、ZIP、教训）写入**当前工作空间**的状态目录 `.afsim-forge/`（见 `config.yaml` 的 `runtime`）。
 
 ```
-需求 → 生成（staging）→ MCP 校验 → [未通过] → 修复 → 再校验
-                                ↓ [data.valid = true]
-                          用户认可 → 归档（verified）
+需求 → 1_intake → 2_blueprint（蓝图 + AI 自检 + 时长校核）
+      → 3_generate（据蓝图生成，AI 自检 = 工程 vs 蓝图一致）
+      → 4_validate（MCP / 本地 mission.exe）→ [未通过] → debug 修复（先改蓝图）→ 再校验
+      → 5_deliver（用户认可 → 内容整理 → 行数统计 → 可选仿真）→ verified
 ```
 
 | 位置（均在工作空间下） | 含义 |

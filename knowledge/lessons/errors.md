@@ -233,27 +233,27 @@
 
 > 本节**不是语法错误**——`data.valid` 判不出这些，看 `ok` / `code`。
 
-### [E100] `ok=false, code=0` → 出处：`workflows/validate.md` §6
+### [E100] `ok=false, code=0` → 出处：`workflows/4_validate.md` §6
 
 - **根因**：校验服务不可达（MCP 后端未启动或不通）。
 - **修法**：请用户确认校验服务已启动；可先调 `mcp__afsim__health` 复核。**不要**继续尝试校验。
 
-### [E101] `ok=false, code=400` → 出处：`workflows/validate.md` §6
+### [E101] `ok=false, code=400` → 出处：`workflows/4_validate.md` §6
 
 - **根因**：参数或 ZIP 不合规，**多为缺同名启动文件**。
 - **修法**：检查 ZIP 名与包内 `<想定名>.txt`；确认 `zip_path` 为绝对路径。
 
-### [E102] `ok=false, code=404` → 出处：`workflows/validate.md` §6
+### [E102] `ok=false, code=404` → 出处：`workflows/4_validate.md` §6
 
 - **根因**：`zip_path` 指向的文件不存在。
 - **修法**：检查路径拼写；确认 ZIP 已生成且为绝对路径。
 
-### [E103] `ok=false`，其他未列出的 `code` → 出处：`workflows/validate.md` §6
+### [E103] `ok=false`，其他未列出的 `code` → 出处：`workflows/4_validate.md` §6
 
 - **根因**：未预期的链路异常。
 - **修法**：读 `msg` 原文向用户报告；**不要**用 `code` 判断语法对错（判语法只认 `data.valid`）。
 
-### [E104] 用 HTTP 200 判成"通过" → 出处：`workflows/validate.md` §3
+### [E104] 用 HTTP 200 判成"通过" → 出处：`workflows/4_validate.md` §3
 
 - **根因**：误以为状态码能反映语法对错。
 - **修法**：**铁律——只看 `data.valid`**。语法对错都返回 HTTP 200。

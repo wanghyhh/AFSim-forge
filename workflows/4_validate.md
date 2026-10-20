@@ -2,7 +2,7 @@
 
 > **本 skill 的首选校验通道**是 MCP 的 `mcp__afsim__validate_scenario` 工具。
 > **备用通道**：当 MCP 不可用时，按 `workflows/local-exec.md` 询问用户本地 AFSIM 安装路径，直接调用 `mission.exe` 完成校验。
-> 本工作流**不跑仿真**、不回放、不下载结果。
+> 本工作流**只做校验**，不跑仿真、不回放——仿真仅在 `workflows/5_deliver.md` 第 4 步、用户明确要求时进行。
 
 ---
 
@@ -95,6 +95,8 @@ mcp__afsim__validate_scenario({ "zip_path": "<ZIP 绝对路径>", "full_output":
    - 命中后 → `knowledge/lessons/index.md` → `knowledge/lessons/root-causes.md`（见 `workflows/debug.md`）
 5. 修复 → **重新打包** → 再校验。
 
+> **修改铁律（贯穿全 skill）**：所有对脚本的修改，**必须先改蓝图 `<想定名>.md`**（§6 记一条），**再据蓝图改工程文件**。禁止跳过蓝图直接改工程——这是上下文压缩后不发散的根本保证。修复循环上限见 §5。
+
 ### 若 `output` 不足以定位
 
 改用 `full_output: true` 重取完整校验输出：
@@ -128,20 +130,23 @@ mcp__afsim__validate_scenario({ "zip_path": "<...>", "full_output": true })
 
 ---
 
-## 7. 禁用工具
+## 7. 工具使用边界
 
-以下工具**任何情况下都不得调用**（本 skill 不跑仿真）：
+MCP 工具已全部解禁，但**按阶段取用**（`config.yaml` 的 `mcp` 段单点维护）：
 
-```
-upload_zip · submit_simulation · get_simulation
-list_results · download_result · replay
-```
+| 阶段 | 可用工具 |
+| :-- | :-- |
+| 本工作流（校验） | `health` / `selftest`（可选）、`validate_scenario`（核心） |
+| 交付后仿真（`5_deliver.md` §4，用户明确要求时） | `upload_zip` / `submit_simulation` / `get_simulation` / `list_results` / `download_result` |
+| 交付后回放（用户明确要求时） | `replay` |
+
+> 日常流程**止于校验**：用户没要求跑仿真时，不得调用仿真类工具。
 
 ---
 
 ## 8. 校验通过后
 
-- 若 `data.valid = true` → 按 `workflows/archive.md` 判断是否归档。
+- 若 `data.valid = true` → 进入 `workflows/5_deliver.md`（结束判定 → 内容整理 → 行数统计 → 后续询问 → 归档）。
 - **归档前必须**：`data.valid = true` **且** 用户认可。
 
 ---

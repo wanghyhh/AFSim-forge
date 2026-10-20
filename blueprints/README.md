@@ -60,12 +60,12 @@
 
 ## 4. 使用顺序（推荐）
 
-0. **先解析输入** —— `workflows/intake.md`：把**实验筹划**（自然语言）与**想定编辑**（`scenarioJsonData` JSON，可选）拆成想定名 / 阵营与兵力 / 任务与过程 / 体系关系 / 配置及来源。**没有这一步，后面的目录和文件都无从谈起。**
+0. **先解析输入** —— `workflows/1_intake.md`：把**实验筹划**（自然语言）与**想定编辑**（`scenarioJsonData` JSON，可选）拆成想定名 / 阵营与兵力 / 任务与过程 / 体系关系 / 配置及来源。**没有这一步，后面的目录和文件都无从谈起。**
 1. **`skeleton/minimal/`** —— 先跑通"结构 + 校验链路"，别一上来就写几十个文件。
 2. **`layout/layout.md`** —— 明确新文件该落到哪个目录。
 3. **`fragments/`** —— 按组件类型取片段，填参数。
 4. **`cases/`** —— 卡住时找同类案例对照（尤其是 `include` 顺序、`side/` 实例写法、`network` 的 `member`）。
-5. **校验** —— 走 `workflows/validate.md`；报错查 `knowledge/lessons/errors.md`。
+5. **校验** —— 走 `workflows/4_validate.md`；报错查 `knowledge/lessons/errors.md`。
 
 > ⚠️ 无论走哪条路径：**入口文件里不得 `include_once` 不存在的文件**；**新增平台必须登记进 `setup.txt`**。
 

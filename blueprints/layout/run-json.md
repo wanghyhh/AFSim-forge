@@ -2,7 +2,7 @@
 
 > `config/run.json` 是**业务侧运行控制文件**，非 AFSIM 语法，由上层工具读取。
 > 生成时按本文件填写；**`scenariosId` 优先取「想定编辑 JSON」的值**（原值照抄），JSON 没给才留空（`0`）。
-> **想定编辑 JSON（`scenarioJsonData`）的已知字段全部落在这里**，认不出的字段也**原样并入**本文件。详见 `workflows/intake.md` §3。
+> **想定编辑 JSON（`scenarioJsonData`）的已知字段全部落在这里**，认不出的字段也**原样并入**本文件。详见 `workflows/1_intake.md` §3。
 
 ---
 

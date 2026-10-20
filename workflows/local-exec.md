@@ -1,8 +1,10 @@
 # 工作流：本地 AFSIM 可执行文件调用（local-exec）
 
-> **定位**：本 skill 的**备用校验通道**。当 MCP 工具（`mcp__afsim__validate_scenario`）不可用时，AI 应主动询问用户 AFSIM 本地安装路径，通过直接调用 `mission.exe` / `mystic.exe` 完成校验与回放。
+> **定位**：本 skill 的**备用通道**。当 MCP 工具不可用时，AI 应主动询问用户 AFSIM 本地安装路径，通过直接调用 `mission.exe` / `mystic.exe` 完成校验、仿真与回放。
 > 
 > **原则**：**不固化任何安装路径到 skill 文档中**；每次临时询问用户，仅作本次会话生效，不保存到配置文件。
+>
+> **覆盖两个场景**：① `4_validate.md` 的语法校验（§1，默认场景）；② `5_deliver.md` §4.2 交付后跑仿真（§2，用户明确要求时）。
 
 ---
 

@@ -32,8 +32,10 @@
 1. 建目录 `config/ platform/ side/ output/`。
 2. 复制各 `.tpl` 到目标位置并去掉 `.tpl` 后缀，替换 `{{...}}` 占位符。
 3. 创建空的 `output/blank_empty.txt`。
-4. 打包 ZIP（ZIP 名 = 想定名）→ 按 `workflows/validate.md` 调用校验。
-5. 通过后，再按 `workflows/generate.md` 逐步加平台、传感器、武器。
+4. 打包 ZIP（ZIP 名 = 想定名）→ 按 `workflows/4_validate.md` 调用校验。
+5. 通过后，再按 `workflows/3_generate.md` 逐步加平台、传感器、武器。
+
+> 正式流程请先读 `workflows/2_blueprint.md`：先出蓝图（`blueprints/skeleton/blueprint.md.tpl`），再按蓝图施工；本目录的 minimal/ 适合验证「最小可跑」概念或作蓝图 §4 的填空参考。
 
 ---
 

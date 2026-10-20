@@ -7,11 +7,13 @@
 
 ## 1. 使用步骤
 
+> 前置：**先出蓝图**（`workflows/2_blueprint.md` + 同目录 `blueprint.md.tpl`）——蓝图是唯一事实源，以下每步都按蓝图 §2 / §4 施工，边做边对照。
+
 1. 建目录：按 `dirs.txt` 创建实际用到的目录（**不必 14 个全建**）+ `output/blank_empty.txt`。
-2. 填根文件：把本目录 `*.tpl` 复制为工程根下的对应文件，替换占位符。
+2. 填根文件：把本目录 `*.tpl` 复制为工程根下的对应文件，替换占位符（内容以蓝图 §4 为准）。
 3. 填组件：从 `blueprints/fragments/` 取片段，落到对应子目录。
 4. 登记：把新建的 `platform/*.txt` 写进 `setup.txt`。
-5. **校验**：走 `workflows/validate.md`。
+5. **校验**：走 `workflows/4_validate.md`；修复**先改蓝图**再改工程。
 
 ---
 
