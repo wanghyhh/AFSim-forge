@@ -1,6 +1,6 @@
-# afsim-forge
+# afsim-forge-skill
 
-> **让模型从自然语言直接生成 AFSIM 脚本文件** —— 产出的不是零散片段，而是**一整套完整的、可直接运行的多文件 AFSIM 工程**。
+> **让模型从自然语言直接生成 AFSIM 脚本文件的skill** —— 产出的不是零散片段，而是**一整套完整的、可直接运行的多文件 AFSIM 工程**。
 
 ![version](https://img.shields.io/badge/version-v1.0.0-blue)
 ![afsim](https://img.shields.io/badge/AFSIM-2.9.0-informational)

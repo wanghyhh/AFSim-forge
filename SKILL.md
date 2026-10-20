@@ -1,5 +1,5 @@
 ---
-name: afsim-forge
+name: afsim-forge-skill
 description: 按标准多目录工程结构，从「实验筹划（自然语言）+ 想定编辑（scenarioJsonData JSON）」两类输入生成 AFSIM 工程，并调用 MCP 语法校验接口闭环纠错。当用户提供实验筹划/想定编辑、或提到 AFSIM 工程/想定生成、体系仿真建模、platform_type、sensor、weapon、processor、include_once、工程骨架、语法校验时使用。默认不运行仿真（交付后可按用户要求运行）。
 whenToUse: 需要生成、校验或修复 AFSIM 体系工程时
 disable-model-invocation: false
@@ -8,7 +8,7 @@ metadata:
   version: v1.0.0
 ---
 
-# afsim-forge — AFSIM 体系工程生成与校验
+# afsim-forge-skill — AFSIM 体系工程生成与校验
 
 > **单入口 + 意图路由**：本 skill 在支持 skill 的宿主环境中以 `/afsim-forge` 调用；进入后按下方「意图路由表」分派工作流。
 > **输入 = 实验筹划（自然语言，必需）+ 想定编辑（`scenarioJsonData` JSON，可选、格式不定）**，生成前必走 `workflows/1_intake.md`。
