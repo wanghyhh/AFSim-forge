@@ -28,7 +28,7 @@
 输出修正方案 + 教训提醒
 ```
 
-**未命中**时：查 `knowledge/blocks/pitfalls.md` 与 `knowledge/language/script-syntax.md`；仍不确定具体写法 → 走 `knowledge/corpus/00-index.md` §六 检索官方 demo 原文（按报错中的命令 / 参数名查），照其结构改。
+**未命中**时：查 `knowledge/blocks/pitfalls.md` 与 `knowledge/language/script-syntax.md`；仍不确定具体写法 → 走 `knowledge/corpus/00-retrieval.md` 检索官方 demo 原文（按报错中的命令 / 参数名查），照其结构改。
 
 > `knowledge/lessons/*.md` 是 skill 自带的**只读基线**；本项目运行时新增的教训在工作空间的 `.afsim-forge/lessons/`（同构），**查找时先看后者**。
 

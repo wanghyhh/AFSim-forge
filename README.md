@@ -322,7 +322,7 @@ afsim-forge-skill/
 | 找同类完整工程照结构 | `blueprints/cases/` |
 | 查语法 / 参数 / 体系设计 | `knowledge/README.md`（总索引） |
 | 查报错什么意思 | `knowledge/lessons/errors.md` |
-| 拿不准某命令 / 参数官方怎么写 | `knowledge/corpus/00-index.md` §六（3,408 条 demo 原文，按需检索） |
+| 拿不准某命令 / 参数官方怎么写 | `knowledge/corpus/00-retrieval.md`（检索协议，3,408 条 demo 原文按需检索） |
 | 本地直调 mission.exe（无 MCP 时） | `workflows/local-exec.md` |
 
 ---

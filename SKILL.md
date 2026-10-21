@@ -44,7 +44,7 @@ afsim-forge/
 > **不要凭空自造 AFSIM 语法，要基于骨架与已验证案例输出。**
 >
 > **结构**只认 `blueprints/layout/layout.md`；**骨架/片段**取 `blueprints/skeleton/`、`blueprints/fragments/`；
-> **完整案例**看 `blueprints/cases/`（结构 + 逐文件全文，最可靠的正例）；**语法**查 `knowledge/language/`、`knowledge/blocks/`；**拿不准具体写法**查 `knowledge/corpus/`（官方 demo 原文摘抄，按 §六 检索）。
+> **完整案例**看 `blueprints/cases/`（结构 + 逐文件全文，最可靠的正例）；**语法**查 `knowledge/language/`、`knowledge/blocks/`；**拿不准具体写法**查 `knowledge/corpus/`（官方 demo 原文摘抄，按 `00-retrieval.md` 检索）。
 > **先生成蓝图（唯一事实源），再据蓝图生成工程**：结构 / 兵力 / 任务类变更**先改蓝图、再改工程**；脚本内容在蓝图 §4 裁剪后以工程文件为准，变更记入蓝图 §6。
 > 蓝图 AI 自检 → 据蓝图生成 → 语法校验 → 通过才归档。**未过校验的工程，不得交付。**
 > **skill 目录只读**：所有运行时产出写工作空间的 `.afsim-forge/`。
@@ -118,7 +118,7 @@ afsim-forge/
 13. **禁止**编造 `common/` 数据表内容（见「缺省值」§3）。
 14. **蓝图分层维护**：结构 / 兵力 / 任务 / 配置语义类变更**先改蓝图再改工程**；脚本内容在蓝图 §4 裁剪后**直接改工程**并记入 §6。任何变更都必须落 §6（见 `workflows/4_validate.md` §4）。
 15. **按需回顾**：每一轮操作前，若对「要求或工程结构」记忆模糊（尤其上下文被清理 / 压缩后），**先重读本文件与工程蓝图**，再继续操作。
-16. **不确定就查摘抄库，不要凭记忆编造**：遇到「这个命令 / 参数该怎么写」拿不准时，按 `knowledge/corpus/00-index.md` §六 检索官方 demo 原文（3,408 条片段）。**查不到才走手册推演，且必须过语法校验**。摘抄库只学**语法结构**，禁止照抄其中数值。
+16. **不确定就查摘抄库，不要凭记忆编造**：遇到「这个命令 / 参数该怎么写」拿不准时，读 `knowledge/corpus/00-retrieval.md`（检索协议，80 行）并按其配方检索官方 demo 原文（3,408 条片段）。**查不到才走手册推演，且必须过语法校验**。摘抄库只学**语法结构**，禁止照抄其中数值。
     **禁止整卷读取**（最大卷 3.3 万行 / 1 MB）：`grep` 定位到行号后只读 1~3 条命中片段（每条约 40 行）；`grep` 输出一律带 `| head -N`。
 
 ---
@@ -201,7 +201,7 @@ afsim-forge/
 | | `knowledge/language/*.md` | 脚本语法、API、消息、类型 |
 | | `knowledge/blocks/*.md` | 命令、mover、sensor 参数、常见坑 |
 | | `knowledge/system-of-systems/*.md` | 体系设计（指挥链、杀伤链、传感器网、指标） |
-| | `knowledge/corpus/00-index.md` | **拿不准某个命令 / 参数怎么写**时按 §六 检索官方 demo 原文（3,408 条，勿通读） |
+| | `knowledge/corpus/00-retrieval.md` | **拿不准某个命令 / 参数怎么写**时读它（80 行）并按四类入口检索（3,408 条，勿通读） |
 | **L3**（报错后） | `knowledge/lessons/errors.md` | 拿到校验报错，按关键字找 `[Exxx]` |
 | | `knowledge/lessons/index.md` → `root-causes.md` | `[Exxx]` 命中后查归类与根因修法 |
 

@@ -1,7 +1,7 @@
 # AFSIM 脚本语法摘抄库 · 总索引
 
 > **来源**：AFSIM 2.9.0 官方 demo 集 `demos/` —— 4,751 个 `.txt` / 1,323,430 行
-> **规模**：49,816 个语法块 → **449 种块类型** / **3,404 个参数签名** → **3,408 条摘抄**（3,404 条签名代表 + 4 条结构条目） / 约 135,038 行
+> **规模**：49,816 个语法块 → **449 种块类型** / **3,404 个参数签名** → **3,408 条摘抄**（3,404 条签名代表 + 4 条结构条目） / 12 个内容卷合计 132,674 行（全目录 18 个文件约 13.6 万行）
 > **性质**：**原文摘抄，一字未改**。不做总结、不做改写、不删注释 —— 每条都能回原文逐字节核对
 > **用途**：智能体生成工程时**按需检索**的保底参考。**不要通读**，只查你卡住的那个命令/参数
 > **警示**：片段中的数值、平台名、路径均为 demo 原值，**只学语法结构，禁止照抄数值**；依赖 `common/` 数据表（`WSF_RADAR_SIGNATURE` 等）的片段须另行提供对应表文件
@@ -33,7 +33,7 @@
 
 **注意**：本库**只覆盖 demo 中出现过的语法**。查不到 = demo 里没有，此时回 `knowledge/` 与 `blueprints/cases/`，或按 AFSIM 手册语法推演后**必须走语法校验**。
 
-> **智能体请直接看 §六「给智能体的检索协议」** —— 那里有可直接执行的 grep 配方、中→英检索词对照、单次读多少、查不到怎么降级。本节只是给人的概览。
+> **智能体请直接读 `00-retrieval.md`**（检索协议，80 行 / 4 KB）—— 那里有可直接执行的 grep 配方、中→英检索词对照、单次读多少、查不到怎么降级。**本文只在需要「类型 → 卷」定位表（§三）时读**。
 
 ---
 
@@ -68,6 +68,7 @@
 | `21-other.md` | 长尾块 | 71 | 1,790 | 42 | `circular_pattern`(46)、`uniform_pattern`(44)、`rectangular_pattern`(39)、`sine_pattern`(36)、`system_type_data`(22)、`probabilities`(18) |
 | `90-tokens.md` | 全量关键字索引（token → 块类型 / 出处） | 2,256 | 2,263 | — | — |
 | `91-feature-files.md` | 功能主题 → demo 文件 反向索引（18 个主题） | — | 381 | — | — |
+| `00-retrieval.md` | **检索协议（智能体唯一入口）** | — | 约 80 | — | — |
 | `99-coverage.md` | 覆盖报告与边界说明 | — | 本文 | — | — |
 
 **去重口径**：同一「参数签名」= `md5(块类型 | 类型名 | 排序后的一级子参数列表)`。同签名的 N 个块只保留**子参数最全**的 1 条作代表，并注明「同签名共 N 处，另见 …」。所以：**语法形态一条不缺，重复内容一条不多**。
@@ -210,82 +211,11 @@
 
 ---
 
-## 六、给智能体的检索协议
+## 六、检索协议 → 独立文件 `00-retrieval.md`
 
-> 分卷最大 1 MB（`10-platform.md`），**禁止整卷读入上下文**。按下面四类问题选入口，用 `grep` 定位到行号，再用 `Read` 只取那一条（`offset` + `limit`）。
+检索协议已独立成文件（**约 80 行 / 4 KB**，整读约 1~1.5K tokens）：四类问题 → 四入口、五条可直接跑的 `grep` 配方、中→英检索词对照、单次读多少、查不到四级降级、三条禁忌。
 
-### 6.1 先判类型，再选入口
-
-| 你此刻的状态 | 入口 | 命中后做什么 |
-| :-- | :-- | :-- |
-| 「要做某类功能，不知从哪下手」 | `91-feature-files.md` | 挑 1~2 个 demo 文件，去 `demos/` 读它的入口 `.txt` |
-| 「知道命令名 / 参数名，不知放哪、怎么写」 | `90-tokens.md` | 拿「所在块类型」→ 回对应分卷搜 `### <块类型>` |
-| 「知道 `WSF_XXX` 类型名」 | 各内容卷 | 直接搜标题行，读 1~3 条片段 |
-| 「只知道中文功能词」 | `90-tokens.md` 模糊搜 | 先中→英换词（见 6.3），再按上一行走 |
-
-### 6.2 五条可直接跑的配方
-
-```bash
-# ① 按类型名精确找（最常用）：知道 WSF_TRACK_PROCESSOR
-grep -n '^### .* · WSF_TRACK_PROCESSOR' 1[0-9]-*.md 2[0-1]-*.md
-
-# ② 按参数名反查：知道 report_interval，不知放哪
-grep -n '`report_interval`' 90-tokens.md
-#   → 命中行给出「所在块类型 processor」+ 首个出处 → 转 ①
-
-# ③ 按功能词模糊找 token：只知道语义（fusion / jam / report / track）
-grep -i 'fusion' 90-tokens.md | head -20
-
-# ④ 按功能主题导航：完全不知道用什么命令
-sed -n '/^## 数据链/,/^## /p' 91-feature-files.md
-
-# ⑤ 在全部内容卷里搜某个命令（跨卷，看谁用过）
-grep -rn 'report_fused_tracks' 1[0-9]-*.md 2[0-1]-*.md | head -10
-```
-
-命中后只读那一条：
-
-```text
-Read(file, offset=<命中行号>, limit=40)   # 一条片段通常 20~60 行，含 出处 + 片段 + 要点
-```
-
-### 6.3 中 → 英检索词对照（语料是英文，先换词再搜）
-
-| 中文 | 英文 token |
-| :-- | :-- |
-| 数据链 / 上报 | `datalink` `report_to` `report_interval` `comm` `transmitter` |
-| 航迹 / 融合 | `track` `track_manager` `fusion_method` `fused_track` `master_track_processor` |
-| 传感器 / 探测 | `sensor` `radar` `esm` `ir` `detection` `beam` `mode` |
-| 干扰 / 电子战 | `jam` `jammer` `electronic_attack` `electronic_protect` `technique` `attenuation` |
-| 武器 / 杀伤 | `weapon` `launch_computer` `weapon_effects` `kill` `pkill` |
-| 运动 / 飞行 | `mover` `route` `waypoint` `orbit` `aero` `autopilot` `pid` |
-| 编组 / 指挥 | `group` `command_chain` `task` `asset` `commander` `subordinate` |
-| 脚本 / 状态 | `script` `on_update` `state` `next_state` `script_variables` |
-| 特征 / RCS | `signature` `radar_signature` `infrared_signature` `optical_signature` |
-| 输出 / 记录 | `event_output` `event_pipe` `observer` `csv` `log` |
-| 区域 / 位置 | `zone` `position` `latitude` `altitude` `heading` |
-
-### 6.4 读多少
-
-- **一次 1~3 条片段**足够写出一个块。片段是完整块（含 `end_xxx`），不是碎片。
-- 同一类型有多个条目时（不同签名），**先读第 1 条**；不够再读第 2 条，别一次全读。
-- 需要「同签名的其它用法」时，看条目里「另见 `文件:行`」，按出处回 `demos/` 读原文。
-
-### 6.5 查不到怎么办
-
-```text
-grep 无命中 → demo 里确实没有这个语法，不要硬编。按序降级：
-  ① 换同义词再搜（6.3 表里同一行换一个 token）
-  ② 去 91-feature-files.md 找同类功能的 demo，读它的完整工程
-  ③ 回 skill 根目录的 `blueprints/cases/`（已验证可跑）与 `knowledge/`（本项目经验）
-  ④ 仍无 → 按 AFSIM 手册语法推演，**必须走语法校验**（4_validate.md），不得跳过
-```
-
-### 6.6 三条禁忌
-
-1. **不要通读分卷**。`10-platform.md` 3.2 万行，读进来只会挤掉真正有用的上下文。
-2. **不要抄数值**。片段里的距离/频率/RCS/时间是 demo 为各自想定调的，只学结构。
-3. **不要直接复制 `include` 行**。demo 的 include 依赖它自己的目录树与 `common/` 数据表，复制到新工程会「语法对、校验报错」。
+> **智能体请只读 `00-retrieval.md`，不要读本文**。本文约 230 行 / 33 KB（整读约 8~10K tokens），只在需要「类型 → 卷」定位表（§三）时才读。
 
 ---
 
