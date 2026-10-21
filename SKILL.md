@@ -44,7 +44,7 @@ afsim-forge/
 >
 > **结构**只认 `blueprints/layout/layout.md`；**骨架/片段**取 `blueprints/skeleton/`、`blueprints/fragments/`；
 > **完整案例**看 `blueprints/cases/`（结构 + 逐文件全文，最可靠的正例）；**语法**查 `knowledge/language/`、`knowledge/blocks/`。
-> **先生成蓝图（唯一事实源），再据蓝图生成工程**：工程的一切创建、修改、修复，**先改蓝图、再改工程**，禁止跳过蓝图。
+> **先生成蓝图（唯一事实源），再据蓝图生成工程**：结构 / 兵力 / 任务类变更**先改蓝图、再改工程**；脚本内容在蓝图 §4 裁剪后以工程文件为准，变更记入蓝图 §6。
 > 蓝图 AI 自检 → 据蓝图生成 → 语法校验 → 通过才归档。**未过校验的工程，不得交付。**
 > **skill 目录只读**：所有运行时产出写工作空间的 `.afsim-forge/`。
 
@@ -56,7 +56,7 @@ afsim-forge/
 | :-: | :-- | :-- |
 | 1 | `workflows/1_intake.md` | 意图识别：解析两类输入，产出 6 项结论 |
 | 2 | `workflows/2_blueprint.md` | **蓝图生成**：生成 `<想定名>.md`（唯一事实源）→ AI 自检 → 仿真时长校核 |
-| 3 | `workflows/3_generate.md` | 工程生成：据蓝图 §4 落盘，AI 自检 = 工程 vs 蓝图逐字符一致 |
+| 3 | `workflows/3_generate.md` | 工程生成：据蓝图 §4 落盘 → T1/T2 语法校验 → 一致性自检 → **裁剪 §4** → T3 终校验 |
 | 4 | `workflows/4_validate.md` | 语法校验：MCP 首选，本地 `mission.exe` 备用 |
 | 5 | `workflows/5_deliver.md` | 交付：结束判定 → 内容整理 → 行数统计 → 仿真询问 → verified 归档 |
 | 旁路 | `workflows/debug.md` | 校验失败闭环修复（≤3 轮） |
@@ -115,7 +115,7 @@ afsim-forge/
 11. **新增平台必须登记进 `setup.txt`**。
 12. **禁止中文路径**（AFSIM 中文路径缺陷）。
 13. **禁止**编造 `common/` 数据表内容（见「缺省值」§3）。
-14. **先改蓝图，再改工程**：工程的一切创建 / 修改 / 修复，第一步永远是改 `<想定名>.md`（§6 记一条），第二步才据蓝图改工程文件。**禁止跳过蓝图直接改工程**（见 `workflows/2_blueprint.md` §5）。
+14. **蓝图分层维护**：结构 / 兵力 / 任务 / 配置语义类变更**先改蓝图再改工程**；脚本内容在蓝图 §4 裁剪后**直接改工程**并记入 §6。任何变更都必须落 §6（见 `workflows/4_validate.md` §4）。
 15. **按需回顾**：每一轮操作前，若对「要求或工程结构」记忆模糊（尤其上下文被清理 / 压缩后），**先重读本文件与工程蓝图**，再继续操作。
 
 ---
@@ -215,7 +215,7 @@ afsim-forge/
 ```
 需求 → 1_intake → 2_blueprint（蓝图 + AI 自检 + 时长校核）
       → 3_generate（据蓝图生成，AI 自检 = 工程 vs 蓝图一致）
-      → 4_validate（MCP / 本地 mission.exe）→ [未通过] → debug 修复（先改蓝图）→ 再校验
+      → 4_validate（MCP / 本地 mission.exe）→ [未通过] → debug 修复（脚本改工程 + §6 记录）→ 再校验
       → 5_deliver（用户认可 → 内容整理 → 行数统计 → 可选仿真）→ verified
 ```
 

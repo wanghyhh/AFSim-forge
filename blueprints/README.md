@@ -60,7 +60,7 @@
 
 ## 4. 使用顺序（推荐）
 
-0. **先解析输入、再出蓝图** —— `workflows/1_intake.md`（6 项结论）→ `workflows/2_blueprint.md`（蓝图是唯一事实源，模板 `skeleton/blueprint.md.tpl`）。**没有这两步，后面的目录和文件都无从谈起；后续一切修改也先改蓝图、再改工程。**
+0. **先解析输入、再出蓝图** —— `workflows/1_intake.md`（6 项结论）→ `workflows/2_blueprint.md`（蓝图是唯一事实源，模板 `skeleton/blueprint.md.tpl`）。**没有这两步，后面的目录和文件都无从谈起；结构类修改也先改蓝图、再改工程。**
 1. **`skeleton/minimal/`** —— 先跑通"结构 + 校验链路"，别一上来就写几十个文件。
 2. **`layout/layout.md`** —— 明确新文件该落到哪个目录。
 3. **`fragments/`** —— 按组件类型取片段，填参数。

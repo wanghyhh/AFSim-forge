@@ -1,8 +1,10 @@
 # 工作流：工程生成（generate）
 
 > **输入**：已就绪的蓝图文件 `<想定名>.md`（`workflows/2_blueprint.md` 的产出）。
-> **产出**：与蓝图 §4 **逐字符一致**的完整工程（落在 `.afsim-forge/output/staging/<想定名>/`）。
+> **产出**：与蓝图 §4 **逐字符一致**的完整工程（落在 `.afsim-forge/output/staging/<想定名>/`），且蓝图 §4 已裁剪为指针。
 > 结构规则仍以 `blueprints/layout/layout.md` 为准；蓝图与 layout 冲突时，**先修蓝图再实施**。
+>
+> **★ T1 / T2 / T3 三个校验点均为「语法校验」**（真实打包走 `workflows/4_validate.md`，判据 `data.valid`），**必须逐点执行、不得跳过**。AI 自检是另外两个环节（`2_blueprint` §3、本文 Step 5），二者互补、不能互相替代。
 
 ---
 
@@ -17,16 +19,16 @@
 ## Step 1：建目录与骨架
 
 1. 建工程目录 `.afsim-forge/output/staging/<想定名>/`。
-2. **蓝图文件复制进去**：`<想定名>.md` 放工程根（蓝图是工程的一部分，随工程交付）。
+2. **确认蓝图在工程根**：`<想定名>.md` 与入口同级（蓝图是工程的一部分，随工程交付；**只有这一份**，Step 6 裁剪的就是它）。
 3. 按蓝图 §2 创建实际用到的目录（不必 14 个全建）；`output/blank_empty.txt` 必须建。
 
 ---
 
-## Step 2：【校验点 T1】骨架校验
+## Step 2：【校验点 T1｜语法校验】骨架校验
 
-先生成 4 个必建根文件（入口 / setup / event_pipe / global_env）+ `config/run.json` 的空壳，打包校验一遍，确认 `include_once` 链、路径变量、文件名无误。
+先生成 4 个必建根文件（入口 / setup / event_pipe / global_env）+ `config/run.json` 的空壳，**打包走语法校验**，确认 `include_once` 链、路径变量、文件名无误。
 
-→ 走 `workflows/4_validate.md`。**不通过则先修（先改蓝图，再改工程），不要继续。**
+→ 走 `workflows/4_validate.md`，判据 `data.valid`。**不通过则先修（此时 §4 尚在：先改蓝图 §4 并记 §6，再改工程），不要继续。**
 
 ---
 
@@ -38,11 +40,11 @@
 
 ---
 
-## Step 4：【校验点 T2】阶段校验
+## Step 4：【校验点 T2｜语法校验】阶段校验
 
-每完成一类组件（platform / sensor / weapon / processor / side）打包校验一次，把错误限制在刚生成的范围内。
+每完成一类组件（platform / sensor / weapon / processor / side）**打包走语法校验**一次，把错误限制在刚生成的范围内；失败时同样「先改蓝图 §4（§6 记录）再改工程」。
 
-→ 走 `workflows/4_validate.md`。
+→ 走 `workflows/4_validate.md`，判据 `data.valid`。
 
 ---
 
@@ -62,15 +64,29 @@
 
 ---
 
-## Step 6：【校验点 T3】终校验
+## Step 6：裁剪蓝图 §4（★ 自检通过后立即执行）
 
-全量打包 → 校验 → **必须 `data.valid = true`**。
+**前提**：Step 5 五项自检**全部通过**。未通过时禁止裁剪——否则失去比对基准。
 
-→ 走 `workflows/4_validate.md`；失败走 `workflows/debug.md`。
+把蓝图 §4 的全部 `### ===== FILE: ... =====` 文件块删除，替换为一行：
+
+> 完整脚本全文见当前工程文件（后续变更见 §6 变更记录）。
+
+- **理由**：避免后续修改脚本时同时维护蓝图与工程两套副本。
+- 裁剪后脚本以**工程文件**为准；一切变更记入蓝图 §6（修改铁律见 `4_validate.md` §4）。
+- 蓝图其余章节（§0–§3、§5、§6）**仍是唯一基准**，不得裁剪。
 
 ---
 
-## Step 7：移交交付
+## Step 7：【校验点 T3｜语法校验】终校验
+
+全量打包 → **走语法校验** → **必须 `data.valid = true`**。
+
+→ 走 `workflows/4_validate.md`，判据 `data.valid`；失败走 `workflows/debug.md`（脚本直接改工程 + §6 记录）。
+
+---
+
+## Step 8：移交交付
 
 向用户报告工程已生成且通过校验，进入 `workflows/5_deliver.md`（结束判定 → 内容整理 → 行数统计 → 后续询问 → 归档）。
 
