@@ -127,7 +127,7 @@
 ## 目录结构（4 层）
 
 ```
-afsim-forge/
+afsim-forge-skill/
 ├── SKILL.md · config.yaml · README.md   ① 入口层
 │
 ├── workflows/                                       ② 流程层（5 步 + 2 条旁路）
@@ -169,7 +169,7 @@ afsim-forge/
 把整个目录放到宿主的 skill 发现路径下：
 
 ```bash
-<SKILLS_HOME>/skills/afsim-forge/
+<SKILLS_HOME>/skills/afsim-forge-skill/
 ```
 
 目录形态必须是 `<name>/SKILL.md`（**不支持**嵌套 `**/SKILL.md`）。
@@ -177,7 +177,7 @@ afsim-forge/
 ### 3. 调用
 
 ```
-/afsim-forge
+/afsim-forge-skill
 ```
 
 单入口 + 意图路由。进入后按你的话自动分派：
@@ -324,7 +324,6 @@ afsim-forge/
 | 查报错什么意思 | `knowledge/lessons/errors.md` |
 | 拿不准某命令 / 参数官方怎么写 | `knowledge/corpus/00-index.md` §六（3,408 条 demo 原文，按需检索） |
 | 本地直调 mission.exe（无 MCP 时） | `workflows/local-exec.md` |
-| 了解开发历程与已知坑 | `开发情况说明.md` |
 
 ---
 
