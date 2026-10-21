@@ -19,7 +19,7 @@ metadata:
 ## 目录结构（4 层）
 
 ```
-afsim-forge/
+afsim-forge-skill/
 ├── SKILL.md · config.yaml · README.md   ← ① 入口层：本文件是唯一入口，知识一律外链
 ├── workflows/                            ← ② 流程层：1_intake / 2_blueprint / 3_generate / 4_validate / 5_deliver / debug / local-exec
 ├── blueprints/                           ← ③ 骨架层：要"照抄/填空"的东西

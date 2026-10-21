@@ -80,6 +80,6 @@
 1. **`scenariosTime` 必须与入口文件的 `start_date` / `start_time` / `end_time` 保持一致**（若来自 JSON，两处都要按 JSON 改）。
    - 例：入口 `start_date sep 15 2026` / `start_time 19:44:46` → `"startDate": "2026-09-15"` / `"startTime": "19:44:46"`。
    - 入口 `end_time 140 m` → `continueTime` 建议同量级（分钟）。
-2. **`scenariosId` 一律置 `0`**，afsim-forge **不自行编造**，由业务侧填充。
+2. **`scenariosId` 一律置 `0`**，afsim-forge-skill **不自行编造**，由业务侧填充。
 3. `recordAer` / `recordEvent` / `recordLog` 缺省取 `1 / 0 / 1`；若用户明确要 `.evt` 事件文件，把 `recordEvent` 置 `1`。
 4. 日期/时间格式固定：日期 `YYYY-MM-DD`，时间 `HH:MM:SS`。

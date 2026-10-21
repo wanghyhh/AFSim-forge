@@ -1,7 +1,7 @@
 # 测试想定案例（5 个合成想定）
 
 > **本文档定位**：与同目录下 5 个**真实案例**（`ad_hoc` / `launcher` / `outer_air_battle` / `ship_ad` / `space_operations`）并列。
-> **区别**：5 个真实案例对应**已有工程**（含完整脚本全文）；本文档 5 个测试想定是**仅自然语言描述**的实验筹划，无对应工程，可作为 `afsim-forge` 的回归测试输入。
+> **区别**：5 个真实案例对应**已有工程**（含完整脚本全文）；本文档 5 个测试想定是**仅自然语言描述**的实验筹划，无对应工程，可作为 `afsim-forge-skill` 的回归测试输入。
 > **用途**：喂入 `workflows/1_intake.md` 解析 → 走 `workflows/2_blueprint.md` + `workflows/3_generate.md` 全流程 → 验证生成工程的语法正确性与自检规则触发。
 
 ---
@@ -66,4 +66,4 @@
 | 4 | `radar_network_detect` | 探测 / 组网 | 3 × 雷达 + 融合中心 | 1 × 隐身无人机 | 20 m |
 | 5 | `ship_saturation_attack` | 反舰 / 饱和攻击 | 护卫舰 + 预警直升机 | 4 × 反舰导弹 | 10 m |
 
-> **使用建议**：作为 `afsim-forge` 的回归测试集，每次 skill 升级后逐一喂入 `intake.md`，验证 6 项解析结论的完整性与生成工程的 `data.valid=true`。
+> **使用建议**：作为 `afsim-forge-skill` 的回归测试集，每次 skill 升级后逐一喂入 `intake.md`，验证 6 项解析结论的完整性与生成工程的 `data.valid=true`。
