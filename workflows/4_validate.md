@@ -93,7 +93,8 @@ mcp__afsim__validate_scenario({ "zip_path": "<ZIP 绝对路径>", "full_output":
 4. **查教训库**：
    - `knowledge/lessons/errors.md` —— 按报错关键字匹配 `[Exxx]` 条目
    - 命中后 → `knowledge/lessons/index.md` → `knowledge/lessons/root-causes.md`（见 `workflows/debug.md`）
-5. 修复 → **重新打包** → 再校验。
+5. **教训库没命中 → 查摘抄库**：按报错里出现的命令 / 参数名，走 `knowledge/corpus/00-index.md` §六 检索官方 demo 原文，看**正确写法长什么样**，再改。**同一错误不得连试 3 次仍靠猜**——3 次未过必须转查库或手册。
+6. 修复 → **重新打包** → 再校验。
 
 > **修改铁律（贯穿全 skill，按蓝图 §4 状态分层）**：
 > - **§4 仍含全文**（生成期 / T1·T2 阶段）：脚本改动**先改蓝图 §4**（§6 记一条），**再改工程**——Step 5 一致性自检要求二者逐字符一致。

@@ -149,10 +149,11 @@ afsim-forge/
     ├── language/            语言与脚本：语法 · 脚本语法 · API · 类型 · 消息
     ├── blocks/              块与参数：命令 · mover · sensor · 常见坑
     ├── system-of-systems/   体系方法论：概念 · 指挥链 · 杀伤链 · 传感器组网 · 任务分类 · 效能指标
-    └── lessons/             教训库：报错现象 → 归类 → 根因与修法
+    ├── lessons/             教训库：报错现象 → 归类 → 根因与修法
+    └── corpus/              语法摘抄库：官方 demo 原文 3,408 条 / 449 类块（按需检索，勿通读）
 ```
 
-**一句话分工**：`blueprints/` 回答"**该长什么样**"（可复制），`knowledge/` 回答"**为什么这样写**"（可查阅）。
+**一句话分工**：`blueprints/` 回答"**该长什么样**"（可复制），`knowledge/` 回答"**为什么这样写**"（可查阅），`knowledge/corpus/` 回答"**官方到底怎么写的**"（可检索）。
 
 ---
 
@@ -321,6 +322,7 @@ afsim-forge/
 | 找同类完整工程照结构 | `blueprints/cases/` |
 | 查语法 / 参数 / 体系设计 | `knowledge/README.md`（总索引） |
 | 查报错什么意思 | `knowledge/lessons/errors.md` |
+| 拿不准某命令 / 参数官方怎么写 | `knowledge/corpus/00-index.md` §六（3,408 条 demo 原文，按需检索） |
 | 本地直调 mission.exe（无 MCP 时） | `workflows/local-exec.md` |
 | 了解开发历程与已知坑 | `开发情况说明.md` |
 
@@ -331,6 +333,7 @@ afsim-forge/
 - **第三方移植内容**：`knowledge/language/`（5 篇）与 `knowledge/blocks/`（4 篇）整体移植自开源项目 **AFSIM Script Generator**（作者 **lookingforfeng**，声明许可 **MIT**）。本项目仅做重命名与目录重排，正文未改写。
 - **本项目自研部分**（`workflows/`、`blueprints/`、`knowledge/system-of-systems/`、`knowledge/lessons/`、`SKILL.md`、`config.yaml`）同样采用 **MIT License**；详见根目录 [`LICENSE`](LICENSE)。
 - 案例素材来自 AFSIM 官方示例工程，仅做结构归位与路径改写（内容零增删）。
+- **`knowledge/corpus/`** 摘抄自 AFSIM 2.9.0 官方 demo 集（4,751 个 `.txt`），为**原文片段**（未改写），按公开信息处理；源文件头的受控标记横幅位于块之外故未带入，另有 3 行注释中的标记片段已在生成时移除（规则见 `99-coverage.md` §三）。生成器不随库分发。
 
 ---
 
